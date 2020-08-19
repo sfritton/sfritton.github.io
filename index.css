@@ -50,6 +50,16 @@ h1 {
   font-size: var(--text-h1);
 }
 
+.screen-reader-only {
+  position: absolute;
+  display: inline-block;
+  width: 1px;
+  height: 1px;
+  clip: rect(0px, 0px, 0px, 0px);
+  margin: -1px;
+  overflow: hidden;
+}
+
 .wave-wrapper {
   --n: 0;
   --size: calc(100vw - 20px * 2);
