@@ -1,0 +1,23 @@
+.container {
+  border: 2px solid var(--color-klingon-red-default);
+  border-left-width: 8px;
+  border-right-width: 8px;
+  flex-grow: 1;
+}
+
+.input {
+  width: 100%;
+  display: block;
+  background: var(--color-neutral);
+  border: none;
+  color: var(--color-klingon-red-light);
+  padding: var(--space-sm);
+  font-size: var(--text-lg);
+  font-family: var(--font-klingon);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.input:hover {
+  background: var(--color-neutral-light);
+}

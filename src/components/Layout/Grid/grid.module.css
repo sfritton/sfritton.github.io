@@ -1,0 +1,10 @@
+.grid {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-gap: var(--space-md);
+  grid-template-areas:
+    'header'
+    'content';
+
+  padding: var(--space-md);
+}

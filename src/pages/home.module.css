@@ -1,0 +1,28 @@
+.buttonWrapper {
+  margin-top: var(--space-md);
+}
+
+.buttonWrapper > a {
+  margin-right: var(--space-md);
+}
+
+.wrapper {
+  max-width: 700px;
+}
+
+.sectionWithButton,
+.section {
+  margin: var(--space-md) 0;
+}
+
+.sectionWithButton {
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-gap: var(--space-md);
+}
+
+@media (min-width: 992px) {
+  .sectionWithButton {
+    grid-template-columns: 1fr 200px;
+  }
+}

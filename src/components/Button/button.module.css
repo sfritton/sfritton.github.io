@@ -1,0 +1,50 @@
+.button[data-color='orange'] {
+  --button-color: var(--color-orange-primary);
+  --button-hover-color: var(--color-orange-lighter);
+  --button-active-color: var(--color-orange-dark);
+}
+
+.button[data-color='orange-light'] {
+  --button-color: var(--color-orange-light);
+  --button-hover-color: var(--color-orange-lighter);
+  --button-active-color: var(--color-orange-dark);
+}
+
+.button[data-color='blue'] {
+  --button-color: var(--color-blue-primary);
+  --button-hover-color: var(--color-blue-light);
+  --button-active-color: #7878b3;
+}
+
+.button {
+  display: inline-block;
+  text-decoration: none;
+  min-width: 200px;
+  text-align: right;
+  background: var(--button-color);
+  color: var(--color-neutral);
+  border: none;
+  padding: var(--space-lg) var(--space-sm) var(--space-sm) var(--space-lg);
+  font-family: var(--font-title);
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: var(--text-md);
+}
+
+.button[data-is-round='true'] {
+  border-radius: var(--space-lg);
+  padding-right: var(--space-lg);
+}
+
+.button:not([disabled]):hover {
+  background: var(--button-hover-color);
+  cursor: pointer;
+}
+
+.button:active {
+  background: var(--button-active-color);
+}
+
+.button:focus {
+  text-decoration: underline;
+}

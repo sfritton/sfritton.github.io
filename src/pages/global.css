@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shojumaru&display=swap');
+
+:root {
+  --color-neutral: #000;
+  --color-neutral-light: #222;
+  --color-neutral-lighter: #333;
+  --color-orange-primary: #ff9900;
+  --color-orange-dark: #cc6666;
+  --color-orange-light: #ff9966;
+  --color-orange-lighter: #ffcc99;
+  --color-orange-lightest: #f8fbdb;
+  --color-blue-primary: #9999ff;
+  --color-blue-light: #cc99cc;
+
+  --color-klingon-red-default: #ea280e;
+  --color-klingon-red-light: #eb5b10;
+  --color-klingon-red-dark: #351910;
+  --color-klingon-yellow: #e9a72e;
+
+  --text-sm: 14px;
+  --text-md: 16px;
+  --text-lg: 20px;
+  --text-xl: 30px;
+  --text-title: 60px;
+
+  --font-text: Arial, sans-serif;
+  --font-title: Oswald, Arial, sans-serif;
+  --font-klingon: 'Shojumaru', Arial, sans-serif;
+
+  --space-xs: 4px;
+  --space-sm: calc(var(--space-xs) * 2);
+  --space-md: calc(var(--space-sm) * 2);
+  --space-lg: calc(var(--space-md) * 2);
+  --space-xl: calc(var(--space-lg) * 2);
+
+  --nav-width: 200px;
+}
+
+body {
+  background: var(--color-neutral);
+  color: var(--color-orange-primary);
+  font-family: var(--font-text);
+  font-size: var(--text-md);
+  margin: 0;
+  line-height: 1.42;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-title);
+  margin: 0;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--color-orange-lighter);
+}
+
+h1 {
+  font-size: var(--text-xl);
+  color: var(--color-orange-primary);
+}
+
+@media (min-width: 668px) {
+  h1 {
+    font-size: var(--text-title);
+  }
+}
+
+h2 {
+  margin-top: var(--space-lg);
+  font-size: var(--text-xl);
+}
+
+h3 {
+  margin-top: var(--space-lg);
+  font-size: var(--text-lg);
+}
+
+h4 {
+  margin-top: var(--space-md);
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+*:focus {
+  outline: none;
+}

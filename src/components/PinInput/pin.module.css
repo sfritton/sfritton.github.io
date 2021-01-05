@@ -1,0 +1,64 @@
+.container {
+  position: relative;
+  display: flex;
+  margin: var(--space-md) 0;
+  width: 300px;
+}
+
+.input {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+}
+
+.digit {
+  text-align: center;
+  width: 44px;
+  height: 44px;
+  font-size: var(--text-lg);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-neutral-light);
+  color: var(--color-orange-lighter);
+}
+
+.digit + .digit {
+  margin-left: var(--space-sm);
+}
+
+.digit[data-wide='true'] {
+  width: 100px;
+  padding: var(--space-sm);
+}
+
+@keyframes flash {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  51% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.container:hover > .digit {
+  background: var(--color-neutral-lighter);
+}
+
+.container:focus-within .digit[data-has-focus='true']:after {
+  content: '|';
+  width: 0;
+  display: inline-block;
+  animation-name: flash;
+  animation-duration: 800ms;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}

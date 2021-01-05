@@ -1,0 +1,99 @@
+.headerBorder {
+  position: relative;
+  text-align: right;
+  background: var(--color-blue-primary);
+  grid-area: header;
+  padding-left: var(--space-sm);
+  padding-bottom: var(--space-lg);
+  border-bottom-left-radius: calc(var(--space-lg) * 1.5);
+}
+
+@media (min-width: 668px) {
+  .headerBorder {
+    border-bottom-left-radius: calc(var(--nav-width) / 2);
+    padding-left: var(--nav-width);
+  }
+}
+.header {
+  background: var(--color-neutral);
+  height: 100%;
+  min-height: 84px;
+  border-bottom-left-radius: var(--space-lg);
+}
+
+.header h1 {
+  margin-left: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+@media (min-width: 668px) {
+  .header {
+    min-height: 168px;
+    border-bottom-left-radius: var(--space-xl);
+  }
+}
+
+.borderBlockLeft {
+  display: none;
+}
+
+@media (min-width: 668px) {
+  .borderBlockLeft {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100px;
+    width: var(--nav-width);
+    padding-top: var(--space-sm);
+    padding-right: var(--space-sm);
+    background: var(--color-blue-light);
+    color: var(--color-neutral);
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: var(--text-lg);
+    border-bottom-width: var(--space-md);
+    border-bottom-color: var(--color-neutral);
+    border-bottom-style: solid;
+  }
+}
+
+.borderBlock {
+  position: absolute;
+  bottom: 0;
+  border-left-style: solid;
+  border-left-color: var(--color-neutral);
+  border-left-width: var(--space-md);
+  height: var(--space-lg);
+}
+
+.borderBlock1 {
+  width: var(--space-xl);
+  background: var(--color-orange-dark);
+  right: 0;
+}
+
+.borderBlock2 {
+  width: 30%;
+  background: var(--color-blue-light);
+  right: var(--space-xl);
+}
+
+.borderBlock3 {
+  width: 15%;
+  background: var(--color-blue-light);
+  right: calc(30% + var(--space-xl));
+}
+
+.borderBlock4 {
+  display: none;
+}
+
+@media (min-width: 992px) {
+  .borderBlock4 {
+    display: block;
+    width: var(--space-xl);
+    background: var(--color-orange-primary);
+    right: calc(45% + var(--space-xl));
+  }
+}

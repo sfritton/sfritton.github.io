@@ -1,0 +1,30 @@
+@media (min-width: 668px) {
+  .container {
+    display: block;
+    position: absolute;
+    top: 120px;
+    left: 0;
+    width: var(--nav-width);
+    border-bottom-width: var(--space-md);
+    border-bottom-style: solid;
+    border-bottom-color: var(--color-neutral);
+  }
+}
+
+.navButton {
+  border-radius: var(--space-lg);
+  padding-right: var(--space-lg);
+  width: 100%;
+  margin-bottom: var(--space-md);
+}
+
+@media (min-width: 668px) {
+  .navButton {
+    margin: 0;
+    padding-right: var(--space-sm);
+    border-radius: 0;
+    border-top-width: var(--space-md);
+    border-top-style: solid;
+    border-top-color: var(--color-neutral);
+  }
+}
