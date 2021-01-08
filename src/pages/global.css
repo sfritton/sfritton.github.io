@@ -48,13 +48,10 @@ html {
 
 body {
   margin: 0;
-  min-height: 100vh;
   font-size: var(--type-base);
   font-family: Helvetica, Arial, sans-serif;
   line-height: 1.6;
-  background: var(--color-neutral-gradient);
-  color: var(--color-neutral-light);
-  padding: var(--space-md);
+  background: var(--color-neutral-darker);
 }
 
 h1,
@@ -83,4 +80,14 @@ h4 {
 
 ul {
   margin: 0;
+}
+
+.sr-only {
+  position: absolute;
+  display: inline-block;
+  width: 1px;
+  height: 1px;
+  clip: rect(0px, 0px, 0px, 0px);
+  margin: -1px;
+  overflow: hidden;
 }

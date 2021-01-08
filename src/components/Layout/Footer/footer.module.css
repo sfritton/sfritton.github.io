@@ -1,0 +1,16 @@
+.footer {
+  flex-shrink: 0;
+  margin-top: var(--space-lg);
+  padding: var(--space-sm);
+  background: var(--color-neutral-darker);
+}
+
+.address {
+  text-align: center;
+  font-style: normal;
+  font-size: 14px;
+}
+
+.address a {
+  margin: var(--space-sm);
+}

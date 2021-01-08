@@ -1,16 +1,12 @@
 import React from 'react';
 import { PageProps } from 'gatsby';
-import { Helmet } from 'react-helmet';
 import styles from './home.module.css';
 import { cssCustomProperties } from '../util';
+import Layout from '../components/Layout';
 
 const Home: React.FC<PageProps> = () => {
   return (
-    <>
-      <Helmet>
-        <link rel="shortcut icon" type="image/svg" href="/images/logo2.svg" />
-        <title>Sam Fritton</title>
-      </Helmet>
+    <Layout>
       <h1>Sam Fritton</h1>
 
       <div style={{ color: '#ccc' }}>
@@ -18,13 +14,13 @@ const Home: React.FC<PageProps> = () => {
         whatever this is.
       </div>
       <div className={styles.waveWrapper}>
-        <div className={styles.screenReaderOnly}>(A pulsating orb made with pure CSS)</div>
+        <div className="sr-only">(A pulsating orb made with pure CSS)</div>
         <div className={styles.wave}></div>
         <div className={styles.wave} style={cssCustomProperties({ '--n': 1 })}></div>
         <div className={styles.wave} style={cssCustomProperties({ '--n': 2 })}></div>
         <div className={styles.wave} style={cssCustomProperties({ '--n': 3 })}></div>
       </div>
-    </>
+    </Layout>
   );
 };
 
