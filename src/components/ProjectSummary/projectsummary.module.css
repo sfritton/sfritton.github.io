@@ -8,6 +8,7 @@
   background: var(--color-neutral-dark);
   padding: var(--space-md);
   z-index: 1;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.25);
 }
 
 .projectSummary[href]::before,

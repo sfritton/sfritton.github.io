@@ -9,7 +9,7 @@ const ProjectsPage: React.FC<PageProps> = () => {
       <h1>Projects</h1>
       <h2>Web Dev</h2>
       <ProjectSummary
-        title="Star Trek Geocache Puzzle"
+        title="Star Trek Puzzle"
         href="https://sfritton.github.io/picard-geocache/"
         image="/images/picard-geocache.png"
       >
