@@ -2,6 +2,7 @@ import React from 'react';
 import { PageProps } from 'gatsby';
 import { Helmet } from 'react-helmet';
 import styles from './home.module.css';
+import { cssCustomProperties } from '../util';
 
 const Home: React.FC<PageProps> = () => {
   return (
@@ -19,9 +20,9 @@ const Home: React.FC<PageProps> = () => {
       <div className={styles.waveWrapper}>
         <div className={styles.screenReaderOnly}>(A pulsating orb made with pure CSS)</div>
         <div className={styles.wave}></div>
-        <div className={styles.wave} style={{ '--n': 1 }}></div>
-        <div className={styles.wave} style={{ '--n': 2 }}></div>
-        <div className={styles.wave} style={{ '--n': 3 }}></div>
+        <div className={styles.wave} style={cssCustomProperties({ '--n': 1 })}></div>
+        <div className={styles.wave} style={cssCustomProperties({ '--n': 2 })}></div>
+        <div className={styles.wave} style={cssCustomProperties({ '--n': 3 })}></div>
       </div>
     </>
   );

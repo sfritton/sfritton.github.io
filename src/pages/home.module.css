@@ -25,7 +25,7 @@
   }
 
   50% {
-    transform: scale(.25);
+    transform: scale(0.25);
     opacity: 0;
   }
 
