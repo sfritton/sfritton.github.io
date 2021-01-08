@@ -1,0 +1,48 @@
+.header {
+  flex-shrink: 0;
+  background: var(--color-neutral-darker);
+}
+
+.nav ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav li > a,
+.nav li > a:visited {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  height: 60px;
+  color: var(--color-neutral-lighter);
+}
+
+.nav a::before {
+  content: none;
+}
+
+.nav a::after {
+  top: auto;
+  bottom: 0;
+}
+
+.nav a:focus,
+.nav a:hover {
+  background: var(--color-neutral-dark);
+}
+
+.homeLink .icon {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  height: 100%;
+  display: block;
+  min-width: 47px;
+}
+
+.homeLink a {
+  display: flex;
+  justify-content: center;
+}

@@ -1,0 +1,47 @@
+.waveWrapper {
+  --n: 0;
+  --size: calc(100vw - 20px * 2);
+  --max-size: 600px;
+  position: relative;
+  width: 100%;
+  max-width: var(--max-size);
+  margin: 50px auto;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.25;
+  }
+
+  50% {
+    transform: scale(0.25);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0.25;
+  }
+}
+
+.wave {
+  /* color */
+  --red: 0;
+  --blue: calc(255 - var(--n) * 55);
+  --green: calc(150 + var(--n) * var(--n) * 55);
+  background: rgb(var(--red), var(--green), var(--blue));
+
+  /* animation */
+  animation: pulse 8000ms infinite ease;
+  animation-delay: calc(var(--n) * 600ms);
+
+  /* size, shape, & position */
+  position: absolute;
+  opacity: 0.25;
+  width: var(--size);
+  height: var(--size);
+  max-width: 600px;
+  max-height: 600px;
+  border-radius: 50%;
+}

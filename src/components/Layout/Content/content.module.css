@@ -1,0 +1,4 @@
+.main {
+  padding: var(--space-md);
+  flex-grow: 1;
+}
