@@ -2,6 +2,12 @@ import React from 'react';
 import styles from './nav.module.css';
 import { InternalLink } from '../../Link';
 
+const NavLink: React.FC<{ to: string }> = ({ to, children }) => (
+  <li>
+    <InternalLink to={to}>{children}</InternalLink>
+  </li>
+);
+
 const Nav: React.FC = () => {
   return (
     <header className={styles.header}>
@@ -13,9 +19,8 @@ const Nav: React.FC = () => {
               <span className="sr-only">Home</span>
             </InternalLink>
           </li>
-          <li>
-            <InternalLink to="/about">About</InternalLink>
-          </li>
+          <NavLink to="/about">About</NavLink>
+          <NavLink to="/projects">Projects</NavLink>
         </ul>
       </nav>
     </header>
