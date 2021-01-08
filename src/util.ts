@@ -1,4 +1,4 @@
-import React from 'react';
+import { CSSProperties } from 'react';
 
 export const cssCustomProperties = (style: Record<string, string | number>) =>
-  style as React.CSSProperties;
+  style as CSSProperties;

@@ -1,0 +1,25 @@
+.image {
+  display: block;
+  width: 100%;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 1024px) {
+  .image {
+    width: 50%;
+    margin-right: var(--space-md);
+  }
+
+  .layout {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.findMe {
+  margin-top: var(--space-md);
+}
