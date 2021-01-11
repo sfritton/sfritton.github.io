@@ -1,7 +1,11 @@
+.projectSummaries {
+  display: grid;
+  grid-gap: var(--space-md);
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
 .projectSummary {
   position: relative;
-  display: inline-block;
-  width: 100%;
   color: var(--color-neutral-light);
   text-decoration: none;
   border-radius: 8px;
@@ -40,11 +44,9 @@
   transform: scaleX(1);
 }
 
-@media (min-width: 998px) {
-  .projectSummary {
-    width: 50%;
-    max-width: 600px;
-  }
+.projectSummary[href]:hover::after,
+.projectSummary[href]:focus::after {
+  background: #222;
 }
 
 .title {
