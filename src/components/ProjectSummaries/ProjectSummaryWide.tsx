@@ -8,10 +8,6 @@ interface Props {
   href?: string;
 }
 
-export const ProjectSummaries: React.FC = ({ children }) => (
-  <div className={styles.projectSummaries}>{children}</div>
-);
-
 const ImageWrapper: React.FC<{ href?: string }> = ({ href, children }) => {
   if (href)
     return (
