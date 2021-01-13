@@ -1,12 +1,32 @@
 .projectSummaries {
+  margin: var(--space-lg) 0;
   display: grid;
   grid-gap: var(--space-lg);
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
 }
 
-.projectSummary {
+.projectSummary,
+.projectSummaryWide {
   color: var(--color-neutral-light);
   text-decoration: none;
+}
+
+@media (min-width: 779px) {
+  .projectSummaryWide {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .projectSummaryWide .aspectRatio {
+    grid-row: 1 / 3;
+    grid-column: 1;
+    margin-right: var(--space-md);
+  }
+
+  .projectSummaryWide .title {
+    margin: 0;
+  }
 }
 
 .title {
@@ -38,5 +58,9 @@
 }
 
 .description {
-  margin: var(--space-md) 0 var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.link {
+  margin-top: var(--space-sm);
 }
