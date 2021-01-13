@@ -1,4 +1,5 @@
 import React from 'react';
+import { ExternalLink } from '../Link';
 import styles from './projectsummary.module.css';
 
 interface Props {
@@ -11,30 +12,27 @@ export const ProjectSummaries: React.FC = ({ children }) => (
   <div className={styles.projectSummaries}>{children}</div>
 );
 
-const Wrapper: React.FC<{ href?: string; className?: string }> = ({
-  href,
-  className = '',
-  children,
-}) => {
+const ImageWrapper: React.FC<{ href?: string }> = ({ href, children }) => {
   if (href)
     return (
-      <a href={href} className={className}>
+      <a href={href} className={styles.aspectRatio}>
         {children}
       </a>
     );
 
-  return <div className={className}>{children}</div>;
+  return <div className={styles.aspectRatio}>{children}</div>;
 };
 
 const ProjectSummary: React.FC<Props> = ({ title, image, children, href }) => {
   return (
-    <Wrapper href={href} className={styles.projectSummary}>
+    <div className={styles.projectSummary}>
       <h3 className={styles.title}>{title}</h3>
-      <div className={styles.aspectRatio}>
+      <ImageWrapper href={href}>
         <img className={styles.image} src={image} />
-      </div>
+      </ImageWrapper>
       {children && <div className={styles.description}>{children}</div>}
-    </Wrapper>
+      {href && <ExternalLink href={href}>Check it out</ExternalLink>}
+    </div>
   );
 };
 
