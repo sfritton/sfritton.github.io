@@ -24,28 +24,28 @@ const ProjectsPage: React.FC<PageProps> = () => {
         <ProjectSummary
           title="Light Switch"
           image="/images/light_switch.png"
-          href="https://codepen.io/sfritton/pen/MWyYPKK"
+          href="https://codepen.io/sfritton/full/MWyYPKK"
         >
           A functioning light switch.
         </ProjectSummary>
         <ProjectSummary
           title="Keyboard"
           image="/images/keyboard.png"
-          href="https://codepen.io/sfritton/pen/yLemgqB"
+          href="https://codepen.io/sfritton/full/yLemgqB"
         >
           An interactive keyboard.
         </ProjectSummary>
         <ProjectSummary
           title="Wave"
           image="/images/wave.png"
-          href="https://codepen.io/sfritton/pen/WNvxMMX"
+          href="https://codepen.io/sfritton/full/WNvxMMX"
         >
           A calming pile of circles.
         </ProjectSummary>
         <ProjectSummary
           title="Pinwheel"
           image="/images/pinwheel.png"
-          href="https://codepen.io/sfritton/pen/wvadJdr"
+          href="https://codepen.io/sfritton/full/wvadJdr"
         >
           A beautiful spinning mess of curves.
         </ProjectSummary>
