@@ -1,4 +1,5 @@
 import React from 'react';
+import Heading from '../Heading';
 import { ExternalLink } from '../Link';
 import styles from './projectsummary.module.css';
 
@@ -6,6 +7,7 @@ interface Props {
   title: string;
   image: string;
   href?: string;
+  headingLevel?: 3 | 4;
 }
 
 const ImageWrapper: React.FC<{ href?: string }> = ({ href, children }) => {
@@ -19,10 +21,18 @@ const ImageWrapper: React.FC<{ href?: string }> = ({ href, children }) => {
   return <div className={styles.aspectRatio}>{children}</div>;
 };
 
-const ProjectSummaryWide: React.FC<Props> = ({ title, image, children, href }) => {
+const ProjectSummaryWide: React.FC<Props> = ({
+  title,
+  image,
+  children,
+  href,
+  headingLevel = 3,
+}) => {
   return (
     <div className={styles.projectSummaryWide}>
-      <h3 className={styles.title}>{title}</h3>
+      <Heading level={headingLevel} className={styles.title}>
+        {title}
+      </Heading>
       <ImageWrapper href={href}>
         <img className={styles.image} src={image} />
       </ImageWrapper>
