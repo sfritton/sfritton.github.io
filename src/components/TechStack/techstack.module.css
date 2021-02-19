@@ -48,10 +48,32 @@
   background: #222 !important;
 }
 
+.tsImage {
+  background: #3178c6 !important;
+}
+
+[data-theme='windows-95'] .techStack {
+  border-width: 2px;
+  border-color: var(--ms-border-sunken);
+  border-style: solid;
+}
+
+[data-theme='windows-95'] .tech {
+  border-width: 2px;
+  border-color: var(--ms-border-raised);
+  border-style: solid;
+  margin: 0;
+  padding: var(--space-md);
+}
+
 [data-theme='windows-95'] .htmlBox,
 [data-theme='windows-95'] .cssBox {
   border-width: 2px;
-  border-color: #808080 #ffffff #ffffff #808080;
+  border-color: var(--ms-border-sunken);
   border-style: solid;
   border-radius: 0;
+}
+
+[data-theme='windows-95'] .blenderImage {
+  padding: 15px 5px;
 }

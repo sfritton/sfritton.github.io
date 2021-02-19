@@ -8,6 +8,6 @@
 
 [data-theme='windows-95'] .layout {
   border-width: 2px;
-  border-color: #ffffff #808080 #808080 #ffffff;
+  border-color: var(--ms-border-raised);
   border-style: solid;
 }

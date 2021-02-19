@@ -17,3 +17,7 @@
 .address a::before {
   content: none;
 }
+
+[data-theme='windows-95'] .footer {
+  padding: 0;
+}
