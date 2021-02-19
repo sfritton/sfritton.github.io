@@ -44,7 +44,7 @@
   color: var(--color-fg-title);
   border-width: 2px;
   border-style: solid;
-  border-color: var(--ms-border-raised);
+  border-color: #ffffff #808080 #808080 #ffffff;
   padding: var(--space-xs) var(--space-sm);
   outline: 1px solid #000;
   outline-offset: 0;
@@ -65,7 +65,7 @@
   font-weight: bold;
   background: #dcd9dc;
   color: var(--color-fg-title);
-  border-color: var(--ms-border-sunken);
+  border-color: #808080 #ffffff #ffffff #808080;
 }
 
 [data-theme='windows-95'] .link::before,

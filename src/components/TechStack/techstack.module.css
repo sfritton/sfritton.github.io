@@ -54,13 +54,13 @@
 
 [data-theme='windows-95'] .techStack {
   border-width: 2px;
-  border-color: var(--ms-border-sunken);
+  border-color: #808080 #ffffff #ffffff #808080;
   border-style: solid;
 }
 
 [data-theme='windows-95'] .tech {
   border-width: 2px;
-  border-color: var(--ms-border-raised);
+  border-color: #ffffff #808080 #808080 #ffffff;
   border-style: solid;
   margin: 0;
   padding: var(--space-md);
@@ -71,7 +71,7 @@
 [data-theme='windows-95'] .htmlBox,
 [data-theme='windows-95'] .cssBox {
   border-width: 2px;
-  border-color: var(--ms-border-sunken);
+  border-color: #808080 #ffffff #ffffff #808080;
   border-style: solid;
   border-radius: 0;
 }

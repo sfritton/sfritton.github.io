@@ -7,7 +7,7 @@
   margin: var(--space-lg) var(--space-xs) 0;
   border-width: 2px;
   border-style: solid;
-  border-color: var(--ms-border-sunken);
+  border-color: #808080 #ffffff #ffffff #808080;
 }
 
 @media (min-width: 662px) {

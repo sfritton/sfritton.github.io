@@ -52,7 +52,7 @@
   margin-top: var(--space-md);
   border-width: 2px;
   border-style: solid;
-  border-color: var(--ms-border-sunken);
+  border-color: #808080 #ffffff #ffffff #808080;
   background: #fff;
   padding: var(--space-md);
 }

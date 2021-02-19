@@ -48,9 +48,7 @@
   --color-pop: #006149;
   --color-pop-hover: #008060;
   --color-pop-active: #00523f;
-  --font-family: 'MS Sans Serif', Tahoma, sans-serif;
-  --ms-border-sunken: #808080 #ffffff #ffffff #808080;
-  --ms-border-raised: #ffffff #808080 #808080 #ffffff;
+  --font-family: Tahoma, sans-serif;
 }
 
 html {
@@ -115,7 +113,7 @@ ul {
 
 [data-theme='windows-95'] img {
   border-width: 2px;
-  border-color: var(--ms-border-sunken);
+  border-color: #808080 #ffffff #ffffff #808080;
   border-style: solid;
   border-radius: 0;
   background: #fff;
