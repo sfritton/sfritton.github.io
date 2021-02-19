@@ -9,8 +9,8 @@
 
   --color-fg-title: #fff;
   --color-fg-text: #ccc;
-  --color-bg-primary: #222;
-  --color-bg-secondary: #000;
+  --color-bg-body: #222;
+  --color-bg-menu: #000;
   --color-pop: #65ffda;
   --color-pop-hover: #9effe8;
   --color-pop-active: #4cbda2;
@@ -25,8 +25,8 @@
 [data-theme='modern-light'] {
   --color-fg-title: #000;
   --color-fg-text: #333;
-  --color-bg-primary: #fff;
-  --color-bg-secondary: #f7f7f7;
+  --color-bg-body: #fff;
+  --color-bg-menu: #f7f7f7;
   --color-pop: #006149;
   --color-pop-hover: #008060;
   --color-pop-active: #00523f;
@@ -57,7 +57,7 @@ body {
   font-size: var(--type-base);
   font-family: Helvetica, Arial, sans-serif;
   line-height: 1.6;
-  background: var(--color-bg-secondary);
+  background: var(--color-bg-menu);
 }
 
 h1,

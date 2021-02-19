@@ -24,7 +24,7 @@
 
 .themeToggle:hover,
 .themeToggle:focus-within {
-  background: var(--color-bg-primary);
+  background: var(--color-bg-body);
 }
 
 .themeToggle::after {

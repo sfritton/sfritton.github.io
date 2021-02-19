@@ -1,7 +1,7 @@
 .footer {
   flex-shrink: 0;
   padding: var(--space-sm);
-  background: var(--color-bg-secondary);
+  background: var(--color-bg-menu);
 }
 
 .address {
