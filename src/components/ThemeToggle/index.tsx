@@ -4,10 +4,16 @@ import styles from './themeToggle.module.css';
 export type Theme = 'modern-dark' | 'modern-light' | 'windows-95';
 
 export const ThemeToggle: React.FC = () => {
+  const [theme, setTheme] = useState<Theme>('modern-dark');
+
   // default to local storage
-  const [theme, setTheme] = useState<Theme>(
-    (localStorage.getItem('theme') as Theme) ?? 'modern-dark',
-  );
+  useEffect(() => {
+    const rememberedTheme = localStorage.getItem('theme');
+
+    if (!rememberedTheme) return;
+
+    setTheme(rememberedTheme as Theme);
+  }, []);
 
   // whenever the theme updates, store it in local storage
   useEffect(() => {
