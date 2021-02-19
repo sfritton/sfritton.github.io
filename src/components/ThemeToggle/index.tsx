@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import styles from './themeToggle.module.css';
 
-export type Theme = 'modern-dark' | 'modern-light';
+export type Theme = 'modern-dark' | 'modern-light' | 'windows-95';
 
 export const ThemeToggle: React.FC = () => {
   // default to local storage
@@ -26,6 +26,7 @@ export const ThemeToggle: React.FC = () => {
       <select value={theme} onChange={handleChange}>
         <option value="modern-dark">Modern Dark</option>
         <option value="modern-light">Modern Light</option>
+        <option value="windows-95">Windows 95</option>
       </select>
     </label>
   );

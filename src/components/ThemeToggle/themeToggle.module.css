@@ -44,3 +44,26 @@
 .themeToggle:focus-within::after {
   transform: scaleX(1);
 }
+
+[data-theme='windows-95'] .themeToggle select {
+  color: #fff;
+  height: 28px;
+  padding: 4px 8px;
+  margin-right: 8px;
+}
+
+[data-theme='windows-95'] .themeToggle::after {
+  content: none;
+}
+
+[data-theme='windows-95'] .themeToggle:focus-within,
+[data-theme='windows-95'] .themeToggle:hover {
+  background: #fff3;
+}
+
+[data-theme='windows-95'] .label {
+  color: #d6d6d6;
+  padding-left: 8px;
+  vertical-align: text-top;
+  position: static;
+}

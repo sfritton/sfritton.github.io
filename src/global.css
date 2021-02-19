@@ -6,6 +6,7 @@
   --text-h3: calc(var(--text-h4) * var(--text-scale));
   --text-h2: calc(var(--text-h3) * var(--text-scale));
   --text-h1: calc(var(--text-h2) * var(--text-scale));
+  --font-family: Helvetica, Arial, sans-serif;
 
   --color-fg-title: #fff;
   --color-fg-text: #ccc;
@@ -22,6 +23,12 @@
   --space-xl: calc(var(--space-lg) * 2);
 }
 
+@media (min-width: 668px) {
+  :root {
+    --text-scale: 1.2;
+  }
+}
+
 [data-theme='modern-light'] {
   --color-fg-title: #000;
   --color-fg-text: #333;
@@ -32,10 +39,16 @@
   --color-pop-active: #00523f;
 }
 
-@media (min-width: 668px) {
-  :root {
-    --text-scale: 1.2;
-  }
+[data-theme='windows-95'] {
+  --text-scale: 1;
+  --color-fg-title: #000;
+  --color-fg-text: #333;
+  --color-bg-body: #c0c0c0;
+  --color-bg-menu: #c0c0c0;
+  --color-pop: #006149;
+  --color-pop-hover: #008060;
+  --color-pop-active: #00523f;
+  --font-family: 'MS Sans Serif', Tahoma, sans-serif;
 }
 
 html {
@@ -55,7 +68,7 @@ html {
 body {
   margin: 0;
   font-size: var(--type-base);
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: var(--font-family);
   line-height: 1.6;
   background: var(--color-bg-menu);
 }
@@ -96,4 +109,19 @@ ul {
   clip: rect(0px, 0px, 0px, 0px);
   margin: -1px;
   overflow: hidden;
+}
+
+[data-theme='windows-95'] img {
+  border-width: 2px;
+  border-color: #808080 #ffffff #ffffff #808080;
+  border-style: solid;
+  border-radius: 0;
+  background: #fff;
+}
+
+[data-theme='windows-95'] h1,
+[data-theme='windows-95'] h2,
+[data-theme='windows-95'] h3,
+[data-theme='windows-95'] h4 {
+  margin: var(--space-md) 0 var(--space-sm);
 }

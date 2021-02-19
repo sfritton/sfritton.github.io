@@ -51,3 +51,28 @@
   display: flex;
   justify-content: center;
 }
+
+[data-theme='windows-95'] .header {
+  background: #000080;
+}
+
+[data-theme='windows-95'] .nav li > a,
+[data-theme='windows-95'] .nav li > a:visited {
+  color: #fff;
+  height: 28px;
+  padding: 4px 8px;
+}
+
+[data-theme='windows-95'] .nav a::after {
+  content: none;
+}
+
+[data-theme='windows-95'] .nav a:focus,
+[data-theme='windows-95'] .nav a:hover {
+  background: #fff3;
+}
+
+[data-theme='windows-95'] .homeLink .icon {
+  min-width: 27px;
+  background: transparent;
+}

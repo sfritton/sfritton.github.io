@@ -5,3 +5,9 @@
   background: var(--color-bg-body);
   color: var(--color-fg-text);
 }
+
+[data-theme='windows-95'] .layout {
+  border-width: 2px;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  border-style: solid;
+}

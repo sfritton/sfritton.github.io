@@ -45,5 +45,13 @@
 }
 
 .nodeImage {
-  background: #222;
+  background: #222 !important;
+}
+
+[data-theme='windows-95'] .htmlBox,
+[data-theme='windows-95'] .cssBox {
+  border-width: 2px;
+  border-color: #808080 #ffffff #ffffff #808080;
+  border-style: solid;
+  border-radius: 0;
 }
