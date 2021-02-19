@@ -7,7 +7,7 @@
 
 .projectSummary,
 .projectSummaryWide {
-  color: var(--color-neutral-light);
+  color: var(--color-fg-text);
   text-decoration: none;
 }
 

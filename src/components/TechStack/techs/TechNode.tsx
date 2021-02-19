@@ -1,6 +1,13 @@
 import React from 'react';
-import { Tech } from '..';
+import styles from '../techstack.module.css';
 
-const TechNode: React.FC = () => <Tech src="/images/nodejs.png">NodeJS</Tech>;
+const TechNode: React.FC = () => {
+  return (
+    <li className={styles.tech}>
+      <img src="/images/nodejs.png" className={`${styles.techImage} ${styles.nodeImage}`} alt="" />
+      NodeJS
+    </li>
+  );
+};
 
 export default TechNode;

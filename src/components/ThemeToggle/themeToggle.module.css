@@ -1,0 +1,46 @@
+.themeToggle {
+  position: relative;
+}
+
+.label {
+  position: absolute;
+  top: 4px;
+  left: 20px;
+  font-size: var(--text-sm);
+}
+
+.themeToggle select {
+  padding: var(--space-md);
+  height: 60px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  font-size: var(--text-base);
+  color: var(--color-fg-title);
+  cursor: pointer;
+  padding-right: var(--space-sm);
+  margin-right: var(--space-md);
+}
+
+.themeToggle:hover,
+.themeToggle:focus-within {
+  background: var(--color-bg-primary);
+}
+
+.themeToggle::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% - 4px);
+  background: var(--color-pop-hover);
+  transform: scaleX(0);
+  transition: transform 300ms;
+  height: 2px;
+}
+
+.themeToggle:hover::after,
+.themeToggle:focus-within::after {
+  transform: scaleX(1);
+}

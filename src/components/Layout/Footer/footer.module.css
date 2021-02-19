@@ -1,7 +1,7 @@
 .footer {
   flex-shrink: 0;
   padding: var(--space-sm);
-  background: var(--color-neutral-darker);
+  background: var(--color-bg-secondary);
 }
 
 .address {
@@ -12,4 +12,8 @@
 
 .address a {
   margin: var(--space-sm);
+}
+
+.address a::before {
+  display: none;
 }

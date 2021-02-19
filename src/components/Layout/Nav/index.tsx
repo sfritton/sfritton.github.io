@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './nav.module.css';
 import { InternalLink } from '../../Link';
+import { ThemeToggle } from '../../ThemeToggle';
 
 const NavLink: React.FC<{ to: string }> = ({ to, children }) => (
   <li>
@@ -22,6 +23,7 @@ const Nav: React.FC = () => {
           <NavLink to="/about">About</NavLink>
           <NavLink to="/projects">Projects</NavLink>
         </ul>
+        <ThemeToggle />
       </nav>
     </header>
   );
