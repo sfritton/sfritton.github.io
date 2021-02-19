@@ -10,16 +10,18 @@ const ProjectsView: React.FC<ViewProps> = ({ isStandalone = false }) => {
     <>
       <Heading level={isStandalone ? 1 : 2}>Projects</Heading>
       <Heading level={isStandalone ? 2 : 3}>Websites</Heading>
-      <ProjectSummaryWide
-        title="Star Trek Puzzle"
-        href="https://sfritton.github.io/picard-geocache/"
-        image="/images/picard-geocache.png"
-        headingLevel={isStandalone ? 3 : 4}
-      >
-        Step into the world of Star Trek as Captain Jean-Luc Picard in command of the USS
-        Enterprise. Help your crew decipher a mysterious distress signal that will eventually lead
-        you to a real-world geocache.
-      </ProjectSummaryWide>
+      <ProjectSummaries>
+        <ProjectSummaryWide
+          title="Star Trek Puzzle"
+          href="https://sfritton.github.io/picard-geocache/"
+          image="/images/picard-geocache.png"
+          headingLevel={isStandalone ? 3 : 4}
+        >
+          Step into the world of Star Trek as Captain Jean-Luc Picard in command of the USS
+          Enterprise. Help your crew decipher a mysterious distress signal that will eventually lead
+          you to a real-world geocache.
+        </ProjectSummaryWide>
+      </ProjectSummaries>
       <Heading level={isStandalone ? 2 : 3}>CSS Fun</Heading>
       <ProjectSummaries>
         <ProjectSummary

@@ -4,9 +4,14 @@
 }
 
 [data-theme='windows-95'] .main {
-  padding: var(--space-lg);
   margin: var(--space-lg) var(--space-xs) 0;
   border-width: 2px;
   border-style: solid;
   border-color: var(--ms-border-sunken);
+}
+
+@media (min-width: 662px) {
+  [data-theme='windows-95'] .main {
+    padding: var(--space-lg);
+  }
 }

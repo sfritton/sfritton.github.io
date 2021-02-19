@@ -24,13 +24,15 @@
   padding-bottom: var(--space-xs);
 }
 
-[data-theme='windows-95'] .address {
-  text-align: left;
-}
-
 [data-theme='windows-95'] .address a {
   margin: 0;
   margin-right: var(--space-xs);
   margin-top: var(--space-xs);
   min-width: auto;
+}
+
+@media (min-width: 662px) {
+  [data-theme='windows-95'] .address {
+    text-align: left;
+  }
 }

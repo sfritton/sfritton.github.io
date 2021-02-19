@@ -1,5 +1,5 @@
 .projectSummaries {
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-xl);
   display: grid;
   grid-gap: var(--space-lg);
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -17,7 +17,6 @@
     grid-gap: 0 var(--space-md);
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto 1fr;
-    margin-bottom: var(--space-xl);
   }
 
   .projectSummaryWide .aspectRatio {
@@ -68,4 +67,21 @@
 
 .link {
   margin-top: var(--space-sm);
+}
+
+[data-theme='windows-95'] .projectSummaries {
+  border-width: 2px;
+  border-style: solid;
+  border-color: var(--ms-border-sunken);
+  grid-gap: 0;
+}
+
+[data-theme='windows-95'] .projectSummaryWide,
+[data-theme='windows-95'] .projectSummary {
+  border-width: 2px;
+  border-style: solid;
+  border-color: var(--ms-border-raised);
+  padding: var(--space-md);
+  outline: 1px solid #000;
+  outline-offset: 0;
 }
