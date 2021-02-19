@@ -38,3 +38,37 @@
 .link:active {
   --link-color: var(--color-pop-active);
 }
+
+[data-theme='windows-95'] .link {
+  display: inline-block;
+  color: var(--color-fg-title);
+  border-width: 2px;
+  border-style: solid;
+  border-color: var(--ms-border-raised);
+  padding: var(--space-xs) var(--space-sm);
+  outline: 1px solid #000;
+  outline-offset: 0;
+  min-width: 150px;
+  text-align: center;
+}
+
+[data-theme='windows-95'] .link:hover {
+  background: #000080;
+  color: #fff;
+}
+
+[data-theme='windows-95'] .link:focus {
+  text-decoration: underline;
+}
+
+[data-theme='windows-95'] .link:active {
+  font-weight: bold;
+  background: #dcd9dc;
+  color: var(--color-fg-title);
+  border-color: var(--ms-border-sunken);
+}
+
+[data-theme='windows-95'] .link::before,
+[data-theme='windows-95'] .link::after {
+  content: none;
+}

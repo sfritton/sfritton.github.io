@@ -64,6 +64,8 @@
   border-style: solid;
   margin: 0;
   padding: var(--space-md);
+  outline: 1px solid #000;
+  outline-offset: 0;
 }
 
 [data-theme='windows-95'] .htmlBox,
