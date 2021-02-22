@@ -5,7 +5,14 @@
 
 .nav {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+}
+
+@media (min-width: 662px) {
+  .nav {
+    flex-direction: row;
+  }
 }
 
 .nav ul {

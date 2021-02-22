@@ -1,17 +1,17 @@
 .themeToggle {
   position: relative;
+  align-self: center;
+  width: 100%;
+  text-align: center;
+  background: var(--color-bg-body);
 }
 
 .label {
-  position: absolute;
-  top: 4px;
-  left: 20px;
   font-size: var(--text-sm);
 }
 
 .themeToggle select {
-  padding: var(--space-md);
-  height: 60px;
+  padding: var(--space-sm);
   border: none;
   border-radius: 0;
   background: transparent;
@@ -20,6 +20,25 @@
   cursor: pointer;
   padding-right: var(--space-sm);
   margin-right: var(--space-md);
+}
+
+@media (min-width: 662px) {
+  .themeToggle {
+    width: auto;
+    text-align: left;
+    background: transparent;
+  }
+
+  .label {
+    position: absolute;
+    top: 4px;
+    left: 20px;
+  }
+
+  .themeToggle select {
+    padding: var(--space-md);
+    height: 60px;
+  }
 }
 
 .themeToggle:hover,
@@ -45,25 +64,32 @@
   transform: scaleX(1);
 }
 
-[data-theme='windows-95'] .themeToggle select {
-  color: #fff;
-  height: 28px;
-  padding: 4px 8px;
-  margin-right: 8px;
+[data-theme='windows-95'] .themeToggle:focus-within,
+[data-theme='windows-95'] .themeToggle:hover {
+  background: #dcd9dc;
+}
+
+@media (min-width: 662px) {
+  [data-theme='windows-95'] .themeToggle select {
+    color: #fff;
+    height: 28px;
+    padding: 4px 8px;
+    margin-right: 8px;
+  }
+
+  [data-theme='windows-95'] .label {
+    color: #d6d6d6;
+    padding-left: 8px;
+    vertical-align: text-top;
+    position: static;
+  }
+
+  [data-theme='windows-95'] .themeToggle:focus-within,
+  [data-theme='windows-95'] .themeToggle:hover {
+    background: #fff3;
+  }
 }
 
 [data-theme='windows-95'] .themeToggle::after {
   content: none;
-}
-
-[data-theme='windows-95'] .themeToggle:focus-within,
-[data-theme='windows-95'] .themeToggle:hover {
-  background: #fff3;
-}
-
-[data-theme='windows-95'] .label {
-  color: #d6d6d6;
-  padding-left: 8px;
-  vertical-align: text-top;
-  position: static;
 }

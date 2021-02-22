@@ -1,8 +1,13 @@
 .projectSummaries {
   margin-bottom: var(--space-xl);
-  display: grid;
-  grid-gap: var(--space-lg);
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+@media (min-width: 450px) {
+  .projectSummaries {
+    display: grid;
+    grid-gap: var(--space-lg);
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
 }
 
 .projectSummary,
