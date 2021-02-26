@@ -3,6 +3,7 @@ import { PageProps } from 'gatsby';
 import P5 from 'p5';
 import Layout from '../components/Layout';
 import { Simulation } from '../components/Simulation';
+import { proceduralDungeon } from '../simulations/procedural-dungeon';
 
 const sketch = (p5: P5) => {
   let x = 100;
@@ -22,7 +23,7 @@ const sketch = (p5: P5) => {
 const SimulationsPage: React.FC<PageProps> = () => {
   return (
     <Layout title="Simulations">
-      <Simulation sketch={sketch} />
+      <Simulation sketch={proceduralDungeon} />
     </Layout>
   );
 };
