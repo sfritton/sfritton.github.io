@@ -1,7 +1,5 @@
 import P5 from 'p5';
 import {
-  COLOR_DOOR,
-  COLOR_DOOR_LOCKED,
   COLOR_ENTRANCE,
   COLOR_EXIT,
   COLOR_PATH,
@@ -13,7 +11,7 @@ import {
   SHOW_PATH,
   UNIT,
 } from './constants';
-import { Direction, Coordinates } from './types';
+import { Direction } from './types';
 import { randomFromTo } from './util';
 
 export class Room {
