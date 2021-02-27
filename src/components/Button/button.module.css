@@ -1,0 +1,68 @@
+.button {
+  position: relative;
+  background: var(--color-pop);
+  color: var(--color-bg-body);
+  cursor: pointer;
+  border: none;
+  padding: var(--space-md) var(--space-lg);
+  font-size: var(--text-base);
+}
+
+.button::after {
+  display: block;
+  content: '';
+  background: var(--color-pop-active);
+  height: 4px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  transform: scaleX(0);
+  transition: transform 300ms;
+}
+
+.button:hover {
+  background: var(--color-pop-hover);
+}
+
+.button:active {
+  background: var(--color-pop-active);
+}
+
+.button:focus {
+  text-decoration: underline;
+}
+
+.button:hover::after {
+  transform: scaleX(1);
+}
+
+[data-theme='windows-95'] .button {
+  background: var(--color-bg-body);
+  color: var(--color-fg-title);
+  border-width: 2px;
+  border-style: solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  padding: var(--space-xs) var(--space-sm);
+  outline: 1px solid #000;
+  outline-offset: 0;
+  min-width: 150px;
+  text-align: center;
+}
+
+[data-theme='windows-95'] .button:hover {
+  background: #000080;
+  color: #fff;
+}
+
+[data-theme='windows-95'] .button:active {
+  font-weight: bold;
+  background: #dcd9dc;
+  color: var(--color-fg-title);
+  border-color: #808080 #ffffff #ffffff #808080;
+}
+
+[data-theme='windows-95'] .button::after {
+  content: none;
+}

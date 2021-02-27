@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { PageProps } from 'gatsby';
 import Layout from '../../../components/Layout';
 import { Simulation } from '../../../components/Simulation';
 import { proceduralDungeon } from '../../../simulations/procedural-dungeon';
 import { COLOR_ENTRANCE, COLOR_EXIT } from '../../../simulations/procedural-dungeon/constants';
 import styles from './dungeon.module.css';
+import { Button } from '../../../components/Button';
 
 const ProceduralDungeonPage: React.FC<PageProps> = () => {
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
   return (
     <Layout title="Procedural Dungeon">
       <div className={styles.content}>
@@ -28,9 +31,8 @@ const ProceduralDungeonPage: React.FC<PageProps> = () => {
           </div>
         </div>
         <h2>Demo</h2>
-        <Simulation sketch={proceduralDungeon} />
-        {/* TODO: add a button for this */}
-        Press <b>Space</b> to generate a new dungeon.
+        <Simulation sketch={proceduralDungeon(buttonRef)} />
+        <Button ref={buttonRef}>Generate a new dungeon</Button>
         <h2>How it works</h2>
         <h3>Generating rooms</h3>
         The algorithm starts with a single large room. It chooses a random point and adds a wall to

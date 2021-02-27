@@ -1,7 +1,8 @@
+import { RefObject } from 'react';
 import P5 from 'p5';
 import { ProceduralDungeon } from './ProceduralDungeon';
 
-export const proceduralDungeon = (p5: P5) => {
+export const proceduralDungeon = (buttonRef: RefObject<HTMLButtonElement>) => (p5: P5) => {
   const dungeon = new ProceduralDungeon(p5);
   const width = Math.min(document.body.clientWidth - 100, 700);
   // if the width is less than 662, assume we're on a vertical screen
@@ -15,15 +16,11 @@ export const proceduralDungeon = (p5: P5) => {
     dungeon.renderDungeon();
   };
 
-  p5.keyPressed = function () {
-    switch (p5.key) {
-      case ' ':
-        dungeon.generateDungeon();
-        break;
-      default:
-        return;
-    }
+  // TODO: there's got to be a better way to do this
+  buttonRef.current?.addEventListener('click', (e) => {
+    e.preventDefault();
 
+    dungeon.generateDungeon();
     dungeon.renderDungeon();
-  };
+  });
 };
