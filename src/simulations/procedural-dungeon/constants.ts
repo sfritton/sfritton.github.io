@@ -4,7 +4,7 @@ export const MULTIPLIER = 0.25 as const;
 export const MIN_WALL_LENGTH = 50 as const;
 export const DOOR_HALF_WIDTH = 10 as const;
 export const SHOW_PATH = true as const;
-export const SHOW_LEVELS = true as const;
+export const SHOW_LEVELS = false as const;
 
 export const COLOR_DOOR = '#d6d6d6' as const;
 export const COLOR_ROOM = '#fff' as const;

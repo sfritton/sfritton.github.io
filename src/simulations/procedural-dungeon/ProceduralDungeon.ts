@@ -1,11 +1,12 @@
 import P5 from 'p5';
 import { MARGIN, MIN_WALL_LENGTH, DEPTH } from './constants';
-import { randomMiddle } from './util';
+import { randomFromTo, randomMiddle } from './util';
 import { Room } from './Room';
 
 export class ProceduralDungeon {
   p5: P5;
-  rooms: Room[] = [];
+  dungeonEntrance?: Room;
+  dungeonExit?: Room;
   maxLevel = 0;
 
   constructor(p5: P5) {
@@ -14,18 +15,31 @@ export class ProceduralDungeon {
 
   generateDungeon() {
     // divide the canvas into rooms
-    this.rooms = this.divide(DEPTH);
+    const rooms = this.divide(DEPTH);
+
+    this.dungeonEntrance = rooms[0];
+    this.dungeonEntrance.isDungeonEntrance = true;
 
     // connect those rooms with doors, storing the longest path
-    this.maxLevel = this.rooms[0].findExits(this.rooms.slice(1));
+    this.maxLevel = this.dungeonEntrance.findExits(rooms.slice(1));
 
-    // label the path from the start to the end
-    this.rooms[0].findPath(this.maxLevel);
+    // choose an exit
+    this.dungeonExit = this.dungeonEntrance.findDungeonExit();
+
+    // find the path from the entrance to the exit
+    this.dungeonExit?.findPath();
+
+    const numKeys = Math.floor(randomFromTo(1, 4));
+
+    // place locks on doors along the path
+    for (let i = 0; i < numKeys; i++) {
+      this.dungeonExit?.placeKey();
+    }
   }
 
   renderDungeon() {
     this.p5.background(0);
-    this.rooms[0].render();
+    this.dungeonEntrance?.render();
   }
 
   divide(depth: number, room?: Room, results?: Room[]): Room[] {

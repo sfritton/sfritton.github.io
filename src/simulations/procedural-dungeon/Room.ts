@@ -26,6 +26,8 @@ export class Room {
   maxLevel = 0;
   onPath = false;
   hasKey = false;
+  isDungeonEntrance = false;
+  isDungeonExit = false;
   p5: P5;
 
   constructor(p5: P5, x1: number, x2: number, y1: number, y2: number) {
@@ -34,13 +36,12 @@ export class Room {
     this.x2 = x2;
     this.y1 = y1;
     this.y2 = y2;
-    this.hasKey = Math.random() > 0.85;
   }
 
   render() {
     if (this.level === 0) {
       this.p5.fill(COLOR_ENTRANCE);
-    } else if (this.onPath && this.exits.length === 0) {
+    } else if (this.isDungeonExit) {
       this.p5.fill(COLOR_EXIT);
     } else if (SHOW_PATH && this.onPath) {
       this.p5.fill(COLOR_PATH);
@@ -67,11 +68,20 @@ export class Room {
 
     this.p5.textSize(19);
     this.p5.textAlign(this.p5.CENTER, this.p5.CENTER);
-    this.p5.text(
-      this.hasKey ? 'key' : this.level + '',
-      this.x1 + (this.x2 - this.x1) / 2,
-      this.y1 + (this.y2 - this.y1) / 2,
-    );
+
+    if (this.hasKey) {
+      this.p5.translate(this.x1 + (this.x2 - this.x1) / 2, this.y1 + (this.y2 - this.y1) / 2);
+      this.p5.rotate((this.p5.PI * 3) / 4);
+      this.p5.text('F', 1, -5);
+      this.p5.text('O', -1, 7);
+      this.p5.resetMatrix();
+    } else {
+      this.p5.text(
+        this.level,
+        this.x1 + (this.x2 - this.x1) / 2,
+        this.y1 + (this.y2 - this.y1) / 2,
+      );
+    }
   }
 
   isNeighbor(other: Room): Direction | undefined {
@@ -137,14 +147,98 @@ export class Room {
     return this.maxLevel;
   }
 
-  findPath(maxLevel: number) {
-    if (this.maxLevel !== maxLevel) return;
+  findDungeonExit() {
+    if (!this.isDungeonEntrance) return;
 
-    this.onPath = true;
+    const exit = this.findMaxLevelDescendent();
+    exit.isDungeonExit = true;
+    return exit;
+  }
 
-    if (this.entrance) this.entrance.onPath = true;
+  findMaxLevelDescendent(): Room {
+    if (this.exits.length === 0) return this;
 
-    this.exits.forEach((exit) => exit.to.findPath(this.maxLevel));
+    let maxChild = this.exits[0].to;
+
+    this.exits.forEach((exit) => {
+      const candidate = exit.to;
+
+      if (candidate.maxLevel > maxChild.maxLevel) maxChild = candidate;
+    });
+
+    return maxChild.findMaxLevelDescendent();
+  }
+
+  findPath() {
+    if (!this.isDungeonExit) return;
+
+    let nextEntrance = this.entrance;
+
+    while (nextEntrance) {
+      nextEntrance.onPath = true;
+      nextEntrance.from.onPath = true;
+
+      nextEntrance = nextEntrance.from.entrance;
+    }
+  }
+
+  findNonPathExit() {
+    let maxLevelExit: Door | undefined;
+
+    this.exits.forEach((exit) => {
+      if (exit.onPath) return;
+
+      if (!maxLevelExit || exit.to.maxLevel > maxLevelExit.to.maxLevel) {
+        maxLevelExit = exit;
+      }
+    });
+
+    return maxLevelExit;
+  }
+
+  findPathExit() {
+    return this.exits.find((exit) => exit.onPath);
+  }
+
+  /** Returns `true` if a key was successfully placed, `false` otherwise. */
+  placeKey() {
+    if (!this.isDungeonExit) return false;
+
+    const distance = Math.floor(randomFromTo(1, this.level));
+
+    let room: Room | undefined = this;
+
+    // walk up the tree for distance levels
+    for (let i = distance; i > 0; i--) {
+      room = room?.entrance?.from;
+    }
+
+    let nonPathExit: Door | undefined = undefined;
+
+    while (!nonPathExit) {
+      nonPathExit = room?.findNonPathExit();
+
+      if (!nonPathExit) {
+        if (!room?.entrance) return false;
+
+        // walk up another level
+        room = room.entrance.from;
+      }
+    }
+
+    // place the lock
+    const pathExit = room?.findPathExit();
+
+    if (!pathExit) return false;
+
+    pathExit.isLocked = true;
+
+    const keyRoom = nonPathExit.to.findMaxLevelDescendent();
+
+    // place the key
+    keyRoom.hasKey = true;
+
+    return true;
   }
 }
 
@@ -154,14 +248,13 @@ export class Door {
   from: Room;
   to: Room;
   onPath = false;
-  locked = false;
+  isLocked = false;
   p5: P5;
 
   constructor(p5: P5, from: Room, to: Room) {
     this.p5 = p5;
     this.from = from;
     this.to = to;
-    this.locked = Math.random() > 0.85;
 
     const direction = from.isNeighbor(to);
     let b = 0;
@@ -200,7 +293,7 @@ export class Door {
   }
 
   render() {
-    if (this.locked) {
+    if (this.isLocked) {
       this.p5.fill(COLOR_DOOR_LOCKED);
     } else if (SHOW_PATH && this.onPath) {
       this.p5.fill(COLOR_PATH);
