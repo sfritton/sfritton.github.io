@@ -253,6 +253,7 @@ export class Door {
   to: Room;
   onPath = false;
   isLocked = false;
+  isVertical = false;
   p5: P5;
   x1!: number;
   x2!: number;
@@ -265,33 +266,32 @@ export class Door {
     this.to = to;
 
     const direction = from.isNeighbor(to);
-    let isVertical = false;
 
     // use the direction to set isVertical and the secondary axis
     switch (direction) {
       case 'north':
-        isVertical = false;
+        this.isVertical = false;
         this.y1 = from.y1 - UNIT;
         this.y2 = from.y1;
         break;
       case 'east':
-        isVertical = true;
+        this.isVertical = true;
         this.x1 = from.x2;
         this.x2 = from.x2 + UNIT;
         break;
       case 'south':
-        isVertical = false;
+        this.isVertical = false;
         this.y1 = from.y2;
         this.y2 = from.y2 + UNIT;
         break;
       case 'west':
-        isVertical = true;
+        this.isVertical = true;
         this.x1 = from.x1 - UNIT;
         this.x2 = from.x1;
         break;
     }
 
-    if (isVertical) {
+    if (this.isVertical) {
       const a1 = Math.max(from.y1, to.y1);
       const a2 = Math.min(from.y2, to.y2);
       const a =
@@ -312,21 +312,50 @@ export class Door {
   }
 
   render() {
-    if (this.isLocked) {
-      this.p5.fill(COLOR_DOOR_LOCKED);
-    } else if (SHOW_PATH && this.onPath) {
-      this.p5.fill(COLOR_PATH);
+    // render rooms before doors
+    this.to.render();
+
+    // render a break in the wall
+    this.p5.noStroke();
+    this.p5.fill(COLOR_ROOM);
+    if (this.isVertical) {
+      this.p5.beginShape();
+      this.p5.vertex(this.x1 - 2, this.y1);
+      this.p5.vertex(this.x2 + 2, this.y1);
+      this.p5.vertex(this.x2 + 2, this.y2);
+      this.p5.vertex(this.x1 - 2, this.y2);
+      this.p5.endShape();
     } else {
-      this.p5.fill(COLOR_DOOR);
+      this.p5.beginShape();
+      this.p5.vertex(this.x1, this.y1 - 2);
+      this.p5.vertex(this.x2, this.y1 - 2);
+      this.p5.vertex(this.x2, this.y2 + 2);
+      this.p5.vertex(this.x1, this.y2 + 2);
+      this.p5.endShape();
     }
 
-    this.p5.beginShape();
-    this.p5.vertex(this.x1, this.y1);
-    this.p5.vertex(this.x2, this.y1);
-    this.p5.vertex(this.x2, this.y2);
-    this.p5.vertex(this.x1, this.y2);
-    this.p5.endShape();
+    // render the edges of the wall
+    this.p5.stroke(COLOR_WALL);
+    this.p5.strokeWeight(1.5);
+    if (this.isVertical) {
+      this.p5.line(this.x1, this.y1, this.x2, this.y1);
+      this.p5.line(this.x1, this.y2, this.x2, this.y2);
+    } else {
+      this.p5.line(this.x1, this.y1, this.x1, this.y2);
+      this.p5.line(this.x2, this.y1, this.x2, this.y2);
+    }
 
-    this.to.render();
+    if (!this.isLocked) return;
+
+    // render the locked door
+    this.p5.stroke(COLOR_WALL);
+    this.p5.strokeWeight(UNIT / 2);
+    if (this.isVertical) {
+      const x = (this.x1 + this.x2) / 2;
+      this.p5.line(x, this.y1 + 2, x, this.y2 - 2);
+    } else {
+      const y = (this.y1 + this.y2) / 2;
+      this.p5.line(this.x1 + 2, y, this.x2 - 2, y);
+    }
   }
 }
