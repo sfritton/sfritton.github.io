@@ -1,5 +1,6 @@
 import P5 from 'p5';
 import {
+  COLOR_DOOR,
   COLOR_DOOR_LOCKED,
   COLOR_ENTRANCE,
   COLOR_EXIT,
@@ -7,10 +8,10 @@ import {
   COLOR_ROOM,
   COLOR_WALL,
   DOOR_HALF_WIDTH,
-  MARGIN,
   MIN_WALL_LENGTH,
   SHOW_LEVELS,
   SHOW_PATH,
+  UNIT,
 } from './constants';
 import { Direction, Coordinates } from './types';
 import { randomFromTo } from './util';
@@ -39,7 +40,9 @@ export class Room {
   }
 
   render() {
-    if (this.level === 0) {
+    this.p5.strokeWeight(1.5);
+    this.p5.stroke(COLOR_WALL);
+    if (this.isDungeonEntrance) {
       this.p5.fill(COLOR_ENTRANCE);
     } else if (this.isDungeonExit) {
       this.p5.fill(COLOR_EXIT);
@@ -50,10 +53,11 @@ export class Room {
     }
 
     this.p5.beginShape();
-    this.p5.vertex(this.x1 + MARGIN, this.y1 + MARGIN);
-    this.p5.vertex(this.x2 - MARGIN, this.y1 + MARGIN);
-    this.p5.vertex(this.x2 - MARGIN, this.y2 - MARGIN);
-    this.p5.vertex(this.x1 + MARGIN, this.y2 - MARGIN);
+    this.p5.vertex(this.x1, this.y1);
+    this.p5.vertex(this.x2, this.y1);
+    this.p5.vertex(this.x2, this.y2);
+    this.p5.vertex(this.x1, this.y2);
+    this.p5.vertex(this.x1, this.y1);
     this.p5.endShape();
 
     this.renderText();
@@ -62,6 +66,7 @@ export class Room {
   }
 
   renderText() {
+    this.p5.noStroke();
     if (!SHOW_LEVELS && !this.hasKey) return;
 
     this.p5.fill(COLOR_WALL);
@@ -87,7 +92,7 @@ export class Room {
   isNeighbor(other: Room): Direction | undefined {
     // north
     if (
-      this.y1 === other.y2 &&
+      this.y1 === other.y2 + UNIT &&
       other.x2 - this.x1 > MIN_WALL_LENGTH &&
       this.x2 - other.x1 > MIN_WALL_LENGTH
     )
@@ -95,7 +100,7 @@ export class Room {
 
     // east
     if (
-      this.x2 === other.x1 &&
+      this.x2 === other.x1 - UNIT &&
       other.y2 - this.y1 > MIN_WALL_LENGTH &&
       this.y2 - other.y1 > MIN_WALL_LENGTH
     )
@@ -103,7 +108,7 @@ export class Room {
 
     // south
     if (
-      this.y2 === other.y1 &&
+      this.y2 === other.y1 - UNIT &&
       other.x2 - this.x1 > MIN_WALL_LENGTH &&
       this.x2 - other.x1 > MIN_WALL_LENGTH
     )
@@ -111,7 +116,7 @@ export class Room {
 
     // west
     if (
-      this.x1 === other.x2 &&
+      this.x1 === other.x2 + UNIT &&
       other.y2 - this.y1 > MIN_WALL_LENGTH &&
       this.y2 - other.y1 > MIN_WALL_LENGTH
     )
@@ -127,7 +132,8 @@ export class Room {
       const direction = this.isNeighbor(candidate);
 
       // ignore non-neighbors and rooms that have already been claimed
-      if (!direction || candidate.entrance) {
+      // ignore 15% of valid connections
+      if (!direction || candidate.entrance || Math.random() > 0.85) {
         return;
       }
 
@@ -209,7 +215,7 @@ export class Room {
     let room: Room | undefined = this;
 
     // walk up the tree for distance levels
-    for (let i = distance; i > 0; i--) {
+    for (let i = distance; i > 0 && room?.entrance; i--) {
       room = room?.entrance?.from;
     }
 
@@ -243,13 +249,15 @@ export class Room {
 }
 
 export class Door {
-  isVertical = false;
-  position: Coordinates;
   from: Room;
   to: Room;
   onPath = false;
   isLocked = false;
   p5: P5;
+  x1!: number;
+  x2!: number;
+  y1!: number;
+  y2!: number;
 
   constructor(p5: P5, from: Room, to: Room) {
     this.p5 = p5;
@@ -257,38 +265,49 @@ export class Door {
     this.to = to;
 
     const direction = from.isNeighbor(to);
-    let b = 0;
+    let isVertical = false;
 
     // use the direction to set isVertical and the secondary axis
     switch (direction) {
       case 'north':
-        this.isVertical = false;
-        b = from.y1;
+        isVertical = false;
+        this.y1 = from.y1 - UNIT;
+        this.y2 = from.y1;
         break;
       case 'east':
-        this.isVertical = true;
-        b = from.x2;
+        isVertical = true;
+        this.x1 = from.x2;
+        this.x2 = from.x2 + UNIT;
         break;
       case 'south':
-        this.isVertical = false;
-        b = from.y2;
+        isVertical = false;
+        this.y1 = from.y2;
+        this.y2 = from.y2 + UNIT;
         break;
       case 'west':
-        this.isVertical = true;
-        b = from.x1;
+        isVertical = true;
+        this.x1 = from.x1 - UNIT;
+        this.x2 = from.x1;
         break;
     }
 
-    if (this.isVertical) {
+    if (isVertical) {
       const a1 = Math.max(from.y1, to.y1);
       const a2 = Math.min(from.y2, to.y2);
-      const a = randomFromTo(a1 + DOOR_HALF_WIDTH + MARGIN, a2 - DOOR_HALF_WIDTH - MARGIN);
-      this.position = { x: b, y: a };
+      const a =
+        Math.floor(randomFromTo(a1 + DOOR_HALF_WIDTH + UNIT, a2 - DOOR_HALF_WIDTH - UNIT) / UNIT) *
+        UNIT;
+
+      this.y1 = a - DOOR_HALF_WIDTH;
+      this.y2 = a + DOOR_HALF_WIDTH;
     } else {
       const a1 = Math.max(from.x1, to.x1);
       const a2 = Math.min(from.x2, to.x2);
-      const a = randomFromTo(a1 + DOOR_HALF_WIDTH + MARGIN, a2 - DOOR_HALF_WIDTH - MARGIN);
-      this.position = { x: a, y: b };
+      const a =
+        Math.floor(randomFromTo(a1 + DOOR_HALF_WIDTH + UNIT, a2 - DOOR_HALF_WIDTH - UNIT) / UNIT) *
+        UNIT;
+      this.x1 = a - DOOR_HALF_WIDTH;
+      this.x2 = a + DOOR_HALF_WIDTH;
     }
   }
 
@@ -298,24 +317,15 @@ export class Door {
     } else if (SHOW_PATH && this.onPath) {
       this.p5.fill(COLOR_PATH);
     } else {
-      this.p5.fill(COLOR_ROOM);
+      this.p5.fill(COLOR_DOOR);
     }
 
-    if (this.isVertical) {
-      this.p5.beginShape();
-      this.p5.vertex(this.position.x - MARGIN * 2, this.position.y - DOOR_HALF_WIDTH);
-      this.p5.vertex(this.position.x + MARGIN * 2, this.position.y - DOOR_HALF_WIDTH);
-      this.p5.vertex(this.position.x + MARGIN * 2, this.position.y + DOOR_HALF_WIDTH);
-      this.p5.vertex(this.position.x - MARGIN * 2, this.position.y + DOOR_HALF_WIDTH);
-      this.p5.endShape();
-    } else {
-      this.p5.beginShape();
-      this.p5.vertex(this.position.x - DOOR_HALF_WIDTH, this.position.y - MARGIN * 2);
-      this.p5.vertex(this.position.x + DOOR_HALF_WIDTH, this.position.y - MARGIN * 2);
-      this.p5.vertex(this.position.x + DOOR_HALF_WIDTH, this.position.y + MARGIN * 2);
-      this.p5.vertex(this.position.x - DOOR_HALF_WIDTH, this.position.y + MARGIN * 2);
-      this.p5.endShape();
-    }
+    this.p5.beginShape();
+    this.p5.vertex(this.x1, this.y1);
+    this.p5.vertex(this.x2, this.y1);
+    this.p5.vertex(this.x2, this.y2);
+    this.p5.vertex(this.x1, this.y2);
+    this.p5.endShape();
 
     this.to.render();
   }

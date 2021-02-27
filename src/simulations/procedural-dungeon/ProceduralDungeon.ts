@@ -1,5 +1,5 @@
 import P5 from 'p5';
-import { MARGIN, MIN_WALL_LENGTH, DEPTH } from './constants';
+import { UNIT, MIN_WALL_LENGTH, DEPTH } from './constants';
 import { randomFromTo, randomMiddle } from './util';
 import { Room } from './Room';
 
@@ -46,7 +46,7 @@ export class ProceduralDungeon {
     if (!room || !results) {
       return this.divide(
         depth,
-        new Room(this.p5, MARGIN, this.p5.width - MARGIN, MARGIN, this.p5.height - MARGIN),
+        new Room(this.p5, UNIT, this.p5.width - UNIT, UNIT, this.p5.height - UNIT),
         [],
       );
     }
@@ -62,25 +62,33 @@ export class ProceduralDungeon {
     if (isVertical) {
       const middleX = randomMiddle(room.x1, room.x2);
 
-      if (room.x2 - middleX < MIN_WALL_LENGTH || middleX - room.x1 < MIN_WALL_LENGTH) {
+      if (room.x2 - (middleX + UNIT) < MIN_WALL_LENGTH || middleX - room.x1 < MIN_WALL_LENGTH) {
         return this.divide(depth - 1, room, results);
       }
 
       return [
         ...this.divide(depth - 1, new Room(this.p5, room.x1, middleX, room.y1, room.y2), results),
-        ...this.divide(depth - 1, new Room(this.p5, middleX, room.x2, room.y1, room.y2), results),
+        ...this.divide(
+          depth - 1,
+          new Room(this.p5, middleX + UNIT, room.x2, room.y1, room.y2),
+          results,
+        ),
       ];
     }
 
     const middleY = randomMiddle(room.y1, room.y2);
 
-    if (room.y2 - middleY < MIN_WALL_LENGTH || middleY - room.y1 < MIN_WALL_LENGTH) {
+    if (room.y2 - (middleY + UNIT) < MIN_WALL_LENGTH || middleY - room.y1 < MIN_WALL_LENGTH) {
       return this.divide(depth - 1, room, results);
     }
 
     return [
       ...this.divide(depth - 1, new Room(this.p5, room.x1, room.x2, room.y1, middleY), results),
-      ...this.divide(depth - 1, new Room(this.p5, room.x1, room.x2, middleY, room.y2), results),
+      ...this.divide(
+        depth - 1,
+        new Room(this.p5, room.x1, room.x2, middleY + UNIT, room.y2),
+        results,
+      ),
     ];
   }
 }
