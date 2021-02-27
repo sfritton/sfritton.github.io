@@ -34,8 +34,14 @@ const ProceduralDungeonPage: React.FC<PageProps> = () => {
         <h2>How it works</h2>
         <h3>Generating rooms</h3>
         The algorithm starts with a single large room. It chooses a random point and adds a wall to
-        split the room into two new rooms. It repeats this process until the dungeon is sufficiently
-        complex.
+        split the room into two new rooms. It repeats this process with each room until the dungeon
+        is sufficiently complex.
+        <div className={styles.rooms}>
+          <img src="/images/dungeon_0.png" />
+          <img src="/images/dungeon_1.png" />
+          <img src="/images/dungeon_2.png" />
+          <img src="/images/dungeon_3.png" />
+        </div>
         <h3>Adding doors</h3>
         Next, the algorithm chooses a room to be the entrance. It creates a door to each neighbor at
         a random point along the shared wall. For each newly connected room, the process is

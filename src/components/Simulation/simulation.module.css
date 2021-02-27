@@ -3,3 +3,9 @@
   overflow-x: auto;
   text-align: center;
 }
+
+[data-theme='windows-95'] .simulation > canvas {
+  border-width: 2px;
+  border-color: #808080 #ffffff #ffffff #808080;
+  border-style: solid;
+}
