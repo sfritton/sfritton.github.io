@@ -5,7 +5,7 @@ import ProjectsView from '../../views/projects';
 
 const ProjectsPage: React.FC<PageProps> = () => {
   return (
-    <Layout title="Projects">
+    <Layout title="Projects" isFullWidth>
       <ProjectsView isStandalone />
     </Layout>
   );

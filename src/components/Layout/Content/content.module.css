@@ -3,6 +3,15 @@
   flex-grow: 1;
 }
 
+.maxWidthDiv {
+  margin: 0 auto var(--space-lg);
+  max-width: 700px;
+}
+
+.maxWidthDiv[data-is-full-width='true'] {
+  max-width: none;
+}
+
 [data-theme='windows-95'] .main {
   margin: var(--space-lg) var(--space-xs) 0;
   border-width: 2px;

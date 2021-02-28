@@ -9,7 +9,7 @@ import { ButtonLink } from '../components/Button/ButtonLink';
 
 const Home: React.FC<PageProps> = () => {
   return (
-    <Layout>
+    <Layout isFullWidth>
       <h1>Sam Fritton</h1>
       Hi there! I&#39;m a web developer from Minneapolis, MN. I built this site to show off some of
       the cool stuff I&#39;ve made.

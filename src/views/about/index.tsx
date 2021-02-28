@@ -5,8 +5,10 @@ import styles from './about.module.css';
 
 const AboutView: React.FC<ViewProps> = ({ isStandalone = false }) => {
   return (
-    <div className={styles.layout}>
-      <img className={styles.image} src="/images/me.jpg" alt="" />
+    <div>
+      <div className={styles.aspectRatio}>
+        <img className={styles.image} src="/images/me.jpg" alt="" />
+      </div>
       <div>
         <Heading level={isStandalone ? 1 : 2}>About Me</Heading>
         I&#39;m a front-end web developer from Minneapolis, MN. I&#39;m currently working full-time

@@ -7,9 +7,11 @@ import styles from './layout.module.css';
 
 interface Props {
   title?: string;
+  /** If true, the content will span the whole screen. */
+  isFullWidth?: boolean;
 }
 
-const Layout: React.FC<Props> = ({ children, title }) => {
+const Layout: React.FC<Props> = ({ children, title, isFullWidth = false }) => {
   const pageTitle = title ? `Sam Fritton | ${title}` : 'Sam Fritton';
 
   return (
@@ -19,7 +21,7 @@ const Layout: React.FC<Props> = ({ children, title }) => {
         <title>{pageTitle}</title>
       </Helmet>
       <Nav />
-      <Content>{children}</Content>
+      <Content isFullWidth={isFullWidth}>{children}</Content>
       <Footer />
     </div>
   );
