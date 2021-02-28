@@ -1,0 +1,15 @@
+.simulation {
+  overflow-x: auto;
+  text-align: center;
+}
+
+.simulation > canvas {
+  display: block;
+  margin: 0 auto;
+}
+
+[data-theme='windows-95'] .simulation > canvas {
+  border-width: 2px;
+  border-color: #808080 #ffffff #ffffff #808080;
+  border-style: solid;
+}
