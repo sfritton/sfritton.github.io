@@ -1,14 +1,8 @@
 import React from 'react';
+import { Project } from '../../projects/types';
 import Heading from '../Heading';
-import { ExternalLink } from '../Link';
+import { ExternalLink, InternalLink } from '../Link';
 import styles from './projectsummary.module.css';
-
-interface Props {
-  title: string;
-  image: string;
-  href?: string;
-  headingLevel?: 3 | 4;
-}
 
 const ImageWrapper: React.FC<{ href?: string }> = ({ href, children }) => {
   if (href)
@@ -21,11 +15,12 @@ const ImageWrapper: React.FC<{ href?: string }> = ({ href, children }) => {
   return <div className={styles.aspectRatio}>{children}</div>;
 };
 
-const ProjectSummaryWide: React.FC<Props> = ({
+const ProjectSummaryWide: React.FC<Project & { headingLevel?: 3 | 4 }> = ({
   title,
   image,
   children,
   href,
+  isInternalHref = false,
   headingLevel = 3,
 }) => {
   return (
@@ -40,7 +35,11 @@ const ProjectSummaryWide: React.FC<Props> = ({
         {children}
         {href && (
           <div className={styles.link}>
-            <ExternalLink href={href}>Check it out</ExternalLink>
+            {isInternalHref ? (
+              <InternalLink to={href}>Check it out</InternalLink>
+            ) : (
+              <ExternalLink href={href}>Check it out</ExternalLink>
+            )}
           </div>
         )}
       </div>

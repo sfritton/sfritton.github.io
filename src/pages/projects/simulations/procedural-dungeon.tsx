@@ -11,9 +11,9 @@ const ProceduralDungeonPage: React.FC<PageProps> = () => {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   return (
-    <Layout title="Procedural Dungeon">
+    <Layout title="Dungeon Generator">
       <div className={styles.content}>
-        <h1>Procedural Dungeon</h1>A dungeon created using procedural generation. Start from the
+        <h1>Dungeon Generator</h1>A dungeon created using procedural generation. Start from the
         light blue room and try to navigate to the dark blue room. If a locked door blocks your
         path, find a key to open it.
         <div className={styles.legend}>
