@@ -60,3 +60,15 @@
   border-color: #808080 #ffffff #ffffff #808080;
   border-style: solid;
 }
+
+.simulation {
+  margin: var(--space-lg) 0;
+  --width: min(calc(100vw - 100px), 700px);
+  min-height: calc(var(--width) * 4 / 3);
+}
+
+@media (min-width: 662px) {
+  .simulation {
+    min-height: calc(var(--width) * 3 / 4);
+  }
+}

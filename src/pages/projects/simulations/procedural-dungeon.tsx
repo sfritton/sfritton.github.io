@@ -31,7 +31,9 @@ const ProceduralDungeonPage: React.FC<PageProps> = () => {
           </div>
         </div>
         <h2>Demo</h2>
-        <Simulation sketch={proceduralDungeon(buttonRef)} />
+        <div className={styles.simulation}>
+          <Simulation sketch={proceduralDungeon(buttonRef)} />
+        </div>
         <Button ref={buttonRef}>Generate a new dungeon</Button>
         <h2>How it works</h2>
         <h3>Generating rooms</h3>

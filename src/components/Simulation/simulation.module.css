@@ -1,7 +1,11 @@
 .simulation {
-  margin: var(--space-md) 0;
   overflow-x: auto;
   text-align: center;
+}
+
+.simulation > canvas {
+  display: block;
+  margin: 0 auto;
 }
 
 [data-theme='windows-95'] .simulation > canvas {
