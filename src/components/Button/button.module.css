@@ -6,6 +6,7 @@
   border: none;
   padding: var(--space-md) var(--space-lg);
   font-size: var(--text-base);
+  text-decoration: none;
 }
 
 .button::after {
