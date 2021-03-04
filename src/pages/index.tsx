@@ -11,8 +11,8 @@ const Home: React.FC<PageProps> = () => {
   return (
     <Layout isFullWidth>
       <h1>Sam Fritton</h1>
-      Hi there! I&#39;m a web developer from Minneapolis, MN. I built this site to show off some of
-      the cool stuff I&#39;ve made.
+      Hi there! I'm a web developer from Minneapolis, MN. I built this site to show off some of the
+      cool stuff I've made.
       <h2>My latest projects</h2>
       <ProjectSummaries>
         <ProjectSummaryWide {...picardGeocache} headingLevel={3} />

@@ -5,8 +5,10 @@ import { Coordinates } from './types';
 export class BouncingBall {
   position: Coordinates = { x: 0, y: 0 };
   velocity: Coordinates = { x: 0, y: 0 };
+  startMS: number = 0;
   currMS: number = 0;
   prevMS: number = 0;
+  frames: number = 0;
   p5: P5;
 
   constructor(p5: P5) {
@@ -22,10 +24,12 @@ export class BouncingBall {
 
     // Initialize the timing
     this.currMS = this.p5.millis();
+    this.startMS = this.currMS;
     this.prevMS = this.currMS;
   }
 
   simulateFrame() {
+    this.frames++;
     const deltaT = this.calculateTime();
     this.bounce();
     this.updatePosition(deltaT);
@@ -33,8 +37,9 @@ export class BouncingBall {
   }
 
   render() {
-    this.p5.background(0);
-    this.p5.color(255);
+    this.p5.noStroke();
+    this.p5.background('#008060');
+    this.p5.fill('#65ffda');
     this.p5.ellipse(this.position.x, this.position.y, RADIUS * 2, RADIUS * 2);
   }
 
@@ -87,15 +92,25 @@ export class BouncingBall {
 
   /** Let the user pick up and throw the ball */
   handleUserInput(deltaT: number) {
-    if (this.p5.mouseIsPressed && this.p5.mouseButton === this.p5.LEFT) {
-      this.p5.cursor(this.p5.MOVE);
-      this.position.x = this.p5.mouseX;
-      this.position.y = this.p5.mouseY;
+    this.p5.cursor(this.p5.HAND);
 
-      this.velocity.x = (this.p5.mouseX - this.p5.pmouseX) / deltaT;
-      this.velocity.y = (this.p5.mouseY - this.p5.pmouseY) / deltaT;
-    } else {
-      this.p5.cursor(this.p5.HAND);
-    }
+    // do nothing if the mouse is not pressed
+    if (!this.p5.mouseIsPressed || this.p5.mouseButton !== this.p5.LEFT) return;
+
+    // do nothing if the mouse is outside the canvas
+    if (
+      this.p5.mouseX < 0 ||
+      this.p5.mouseX > this.p5.width ||
+      this.p5.mouseY < 0 ||
+      this.p5.mouseY > this.p5.height
+    )
+      return;
+
+    this.p5.cursor(this.p5.MOVE);
+    this.position.x = this.p5.mouseX;
+    this.position.y = this.p5.mouseY;
+
+    this.velocity.x = (this.p5.mouseX - this.p5.pmouseX) / deltaT;
+    this.velocity.y = (this.p5.mouseY - this.p5.pmouseY) / deltaT;
   }
 }

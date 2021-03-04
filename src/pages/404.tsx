@@ -10,7 +10,7 @@ const FourOhFourPage: React.FC<PageProps> = () => {
       <h1>Page not found</h1>
 
       <div>
-        Whoops, that&#39;s not a real page. Try checking out my{' '}
+        Whoops, that's not a real page. Try checking out my{' '}
         <InternalLink to="/projects">projects</InternalLink> or head back to the{' '}
         <InternalLink to="/">home page</InternalLink>.
         <div style={{ marginTop: 'var(--space-md)' }}>
