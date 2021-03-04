@@ -10,6 +10,10 @@
   }
 }
 
+.projectSummary {
+  max-width: 450px;
+}
+
 .projectSummary,
 .projectSummaryWide {
   color: var(--color-fg-text);
@@ -43,7 +47,6 @@
 }
 
 .image {
-  border-radius: 4px;
   object-fit: cover;
   position: absolute;
   width: 100%;

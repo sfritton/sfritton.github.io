@@ -6,9 +6,9 @@
 
 module.exports = {
   /* Your site config here */
-  plugins: [],
   siteMetadata: {
     title: 'Sam Fritton',
   },
+  flags: { PRESERVE_WEBPACK_CACHE: true },
   plugins: ['gatsby-plugin-react-helmet'],
 };

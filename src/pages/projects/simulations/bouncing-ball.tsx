@@ -4,7 +4,7 @@ import Layout from '../../../components/Layout';
 import { Simulation } from '../../../components/Simulation';
 import { bouncingBall } from '../../../simulations/bouncing-ball';
 
-const ProceduralDungeonPage: React.FC<PageProps> = () => {
+const BouncingBallPage: React.FC<PageProps> = () => {
   return (
     <Layout title="Bouncing Ball">
       <h1>Bouncing Ball</h1>
@@ -17,4 +17,4 @@ const ProceduralDungeonPage: React.FC<PageProps> = () => {
   );
 };
 
-export default ProceduralDungeonPage;
+export default BouncingBallPage;
