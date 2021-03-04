@@ -2,16 +2,12 @@ import P5 from 'p5';
 import { UNIT, MIN_WALL_LENGTH, DEPTH } from './constants';
 import { randomFromTo, randomMiddle } from './util';
 import { Room } from './Room';
+import { Simulation } from '../util/Simulation';
 
-export class ProceduralDungeon {
-  p5: P5;
+export class ProceduralDungeon extends Simulation {
   dungeonEntrance?: Room;
   dungeonExit?: Room;
   maxLevel = 0;
-
-  constructor(p5: P5) {
-    this.p5 = p5;
-  }
 
   generateDungeon() {
     // divide the canvas into rooms
@@ -38,6 +34,7 @@ export class ProceduralDungeon {
   }
 
   renderDungeon() {
+    this.p5.noStroke();
     this.p5.background(0);
     this.dungeonEntrance?.render();
   }

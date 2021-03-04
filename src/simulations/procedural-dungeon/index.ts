@@ -1,15 +1,12 @@
 import { RefObject } from 'react';
 import P5 from 'p5';
 import { ProceduralDungeon } from './ProceduralDungeon';
-import { canvasDimensions } from '../util';
 
 export const proceduralDungeon = (buttonRef: RefObject<HTMLButtonElement>) => (p5: P5) => {
   const dungeon = new ProceduralDungeon(p5);
 
   p5.setup = function () {
-    p5.createCanvas(...canvasDimensions());
-    p5.noStroke();
-
+    dungeon.setup();
     dungeon.generateDungeon();
     dungeon.renderDungeon();
   };

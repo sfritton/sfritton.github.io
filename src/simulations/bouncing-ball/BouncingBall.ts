@@ -1,35 +1,22 @@
-import P5 from 'p5';
+import { PhysicsSimulation } from '../util/PhysicsSimulation';
 import { COR, COF, GRAVITY, RADIUS } from './constants';
-import { Coordinates } from './types';
+import { Coordinates } from '../util/types';
 
-export class BouncingBall {
+export class BouncingBall extends PhysicsSimulation {
   position: Coordinates = { x: 0, y: 0 };
   velocity: Coordinates = { x: 0, y: 0 };
-  startMS: number = 0;
-  currMS: number = 0;
-  prevMS: number = 0;
-  frames: number = 0;
-  p5: P5;
-
-  constructor(p5: P5) {
-    this.p5 = p5;
-  }
 
   setup() {
+    super.setup();
+
     // Place the ball in the center of the canvas
     this.position = {
       x: this.p5.width / 2,
       y: this.p5.height / 2,
     };
-
-    // Initialize the timing
-    this.currMS = this.p5.millis();
-    this.startMS = this.currMS;
-    this.prevMS = this.currMS;
   }
 
   simulateFrame() {
-    this.frames++;
     const deltaT = this.calculateTime();
     this.bounce();
     this.updatePosition(deltaT);
@@ -41,14 +28,6 @@ export class BouncingBall {
     this.p5.background('#008060');
     this.p5.fill('#65ffda');
     this.p5.ellipse(this.position.x, this.position.y, RADIUS * 2, RADIUS * 2);
-  }
-
-  /** Determine how many seconds have passed since the previous frame. */
-  calculateTime() {
-    this.prevMS = this.currMS;
-    this.currMS = this.p5.millis();
-
-    return (this.currMS - this.prevMS) / 1000;
   }
 
   /** If the ball is too close to an edge, reset it and reverse its velocity. */
@@ -94,17 +73,8 @@ export class BouncingBall {
   handleUserInput(deltaT: number) {
     this.p5.cursor(this.p5.HAND);
 
-    // do nothing if the mouse is not pressed
-    if (!this.p5.mouseIsPressed || this.p5.mouseButton !== this.p5.LEFT) return;
-
-    // do nothing if the mouse is outside the canvas
-    if (
-      this.p5.mouseX < 0 ||
-      this.p5.mouseX > this.p5.width ||
-      this.p5.mouseY < 0 ||
-      this.p5.mouseY > this.p5.height
-    )
-      return;
+    // Do nothing if the mouse is not pressed
+    if (!this.isMousePressed()) return;
 
     this.p5.cursor(this.p5.MOVE);
     this.position.x = this.p5.mouseX;
