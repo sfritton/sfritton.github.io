@@ -1,5 +1,15 @@
+import P5 from 'p5';
 import { randomFromTo } from '../util/helpers';
 import { Coordinates3D } from '../util/types';
+import {
+  PARTICLE_MIN_LIFE,
+  PARTICLE_MAX_LIFE,
+  PARTICLE_DIAMETER,
+  EMIT_RADIUS,
+  PARTICLE_SPEED,
+  COLOR_SPEED,
+  GRAVITY,
+} from './constants';
 
 interface Color {
   r: number;
@@ -8,6 +18,7 @@ interface Color {
 }
 
 export class Particle {
+  p5: P5;
   position: Coordinates3D;
   velocity: Coordinates3D;
   remainingLife: number;
@@ -17,12 +28,20 @@ export class Particle {
     b: 255,
   };
 
-  constructor(center: Coordinates3D) {
+  constructor(p5: P5, center: Coordinates3D) {
+    this.p5 = p5;
     this.position = this.randomPosition(center);
     this.velocity = this.randomVelocity();
     this.remainingLife = randomFromTo(PARTICLE_MIN_LIFE, PARTICLE_MAX_LIFE);
   }
 
+  render() {
+    this.p5.strokeWeight(PARTICLE_DIAMETER * this.remainingLife);
+    this.p5.stroke(this.color.r, this.color.g, this.color.b);
+    this.p5.point(this.position.x, this.position.y, this.position.z);
+  }
+
+  /** Choose a random position on the surface of a sphere */
   randomPosition(center: Coordinates3D): Coordinates3D {
     const randomDirection: Coordinates3D = {
       x: randomFromTo(-1, 1),
