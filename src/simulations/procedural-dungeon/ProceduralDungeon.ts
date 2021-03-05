@@ -1,6 +1,7 @@
 import P5 from 'p5';
 import { UNIT, MIN_WALL_LENGTH, DEPTH } from './constants';
-import { randomFromTo, randomMiddle } from './util';
+import { randomFromTo } from '../util/helpers';
+import { randomMiddle } from './util';
 import { Room } from './Room';
 import { Simulation } from '../util/Simulation';
 

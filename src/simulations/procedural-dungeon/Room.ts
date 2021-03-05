@@ -12,7 +12,7 @@ import {
   UNIT,
 } from './constants';
 import { Direction } from './types';
-import { randomFromTo } from './util';
+import { randomFromTo } from '../util/helpers';
 
 export class Room {
   x1 = 0;
