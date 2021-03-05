@@ -1,6 +1,5 @@
 import P5 from 'p5';
 import { randomFromTo } from '../util/helpers';
-import { Coordinates3D } from '../util/types';
 import {
   PARTICLE_MIN_LIFE,
   PARTICLE_MAX_LIFE,
@@ -9,6 +8,7 @@ import {
   PARTICLE_SPEED,
   COLOR_SPEED,
   GRAVITY,
+  SPIRAL_STRENGTH,
 } from './constants';
 
 interface Color {
@@ -19,8 +19,9 @@ interface Color {
 
 export class Particle {
   p5: P5;
-  position: Coordinates3D;
-  velocity: Coordinates3D;
+  center: P5.Vector;
+  position: P5.Vector;
+  velocity: P5.Vector;
   remainingLife: number;
   color: Color = {
     r: 255,
@@ -28,9 +29,10 @@ export class Particle {
     b: 255,
   };
 
-  constructor(p5: P5, center: Coordinates3D) {
+  constructor(p5: P5, center: P5.Vector) {
     this.p5 = p5;
-    this.position = this.randomPosition(center);
+    this.center = center.copy();
+    this.position = this.randomPosition();
     this.velocity = this.randomVelocity();
     this.remainingLife = randomFromTo(PARTICLE_MIN_LIFE, PARTICLE_MAX_LIFE);
   }
@@ -42,52 +44,44 @@ export class Particle {
   }
 
   /** Choose a random position on the surface of a sphere */
-  randomPosition(center: Coordinates3D): Coordinates3D {
-    const randomDirection: Coordinates3D = {
-      x: randomFromTo(-1, 1),
-      y: randomFromTo(-1, 1),
-      z: randomFromTo(-1, 1),
-    };
+  randomPosition(): P5.Vector {
+    const randomDirection = P5.Vector.random3D();
 
-    const denom = Math.sqrt(
-      randomDirection.x * randomDirection.x +
-        randomDirection.y * randomDirection.y +
-        randomDirection.z * randomDirection.z,
-    );
-
-    return {
-      x: center.x + (EMIT_RADIUS * randomDirection.x) / denom,
-      y: center.y + (EMIT_RADIUS * randomDirection.y) / denom,
-      z: center.z + (EMIT_RADIUS * randomDirection.z) / denom,
-    };
+    return P5.Vector.add(this.center, randomDirection.mult(EMIT_RADIUS));
   }
 
-  randomVelocity(): Coordinates3D {
-    const randomDirection: Coordinates3D = {
-      x: randomFromTo(-1, 1),
-      y: randomFromTo(-1, 0), // only let particles move up
-      z: randomFromTo(-1, 1),
-    };
+  randomVelocity(): P5.Vector {
+    const randomDirection = this.p5
+      .createVector(
+        randomFromTo(-1, 1),
+        randomFromTo(-1, 0), // only let particles move up
+        randomFromTo(-1, 1),
+      )
+      .normalize();
 
     const randomSpeed = Math.random();
 
-    const denom = Math.sqrt(
-      randomDirection.x * randomDirection.x +
-        randomDirection.y * randomDirection.y +
-        randomDirection.z * randomDirection.z,
+    return this.p5.createVector(
+      (randomDirection.x * randomSpeed * PARTICLE_SPEED) / 4,
+      randomDirection.y * randomSpeed * PARTICLE_SPEED, // particles should move faster in the y direction
+      (randomDirection.z * randomSpeed * PARTICLE_SPEED) / 4,
     );
-
-    return {
-      x: ((randomDirection.x / denom) * randomSpeed * PARTICLE_SPEED) / 4,
-      y: (randomDirection.y / denom) * randomSpeed * PARTICLE_SPEED, // particles should move faster in the y direction
-      z: ((randomDirection.z / denom) * randomSpeed * PARTICLE_SPEED) / 4,
-    };
   }
 
   update(deltaT: number) {
     this.updatePosition(deltaT);
     this.updateColor(deltaT);
     this.updateLife(deltaT);
+  }
+
+  computeSpiralForce() {
+    const fromCenter = P5.Vector.sub(this.position, this.center);
+    const centerDirection = this.p5.createVector(fromCenter.x, 0, fromCenter.z).normalize();
+
+    // A handy trick to get a perpendicular vector
+    const spiralDirection = this.p5.createVector(fromCenter.z, 0, -fromCenter.x).normalize();
+
+    return spiralDirection.sub(centerDirection.mult(2)).mult(SPIRAL_STRENGTH);
   }
 
   get isDead() {
@@ -99,17 +93,19 @@ export class Particle {
   }
 
   updatePosition(deltaT: number) {
-    this.velocity.y += GRAVITY * deltaT;
+    // compute forces
+    const gravityForce = this.p5.createVector(0, -1, 0).mult(GRAVITY * deltaT);
+    const spiralForce = this.computeSpiralForce();
 
-    this.position = {
-      x: this.position.x + this.velocity.x * deltaT,
-      y: this.position.y + this.velocity.y * deltaT,
-      z: this.position.z + this.velocity.z * deltaT,
-    };
+    // update velocity
+    this.velocity.add(gravityForce).add(spiralForce.mult(deltaT));
+
+    // update position
+    this.position.add(P5.Vector.mult(this.velocity, deltaT));
   }
 
   updateColor(deltaT: number) {
     this.color.g = Math.floor(this.color.g - COLOR_SPEED * deltaT);
-    this.color.b = Math.floor(this.color.b - COLOR_SPEED * deltaT);
+    this.color.b = Math.floor(this.color.b - 10 * COLOR_SPEED * deltaT);
   }
 }
