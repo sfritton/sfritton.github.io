@@ -42,4 +42,10 @@ const binarySolarSystem = new GravityScenario('Binary Solar System', (p5) => [
   new Planet(p5, 0.01, 0.5, { x: 0, y: -16 }, { x: 11, y: 0 }, '#c4cf9f'),
 ]);
 
-export const allScenarios = [ourSolarSystem, binarySolarSystem];
+const starPlanetMoon = new GravityScenario('Star, Planet, & Moon', (p5) => [
+  new StationaryPlanet(p5, 5000, 1.1, { x: 0, y: 0 }), // Sun
+  new Planet(p5, 1000, 0.6, { x: 0, y: -16 }, { x: 8, y: 0 }, '#5dacdb'), // Planet
+  new Planet(p5, 1, 0.1, { x: 0, y: -18 }, { x: 4, y: 0 }, '#d6d6d6'), // Moon
+]);
+
+export const allScenarios = [ourSolarSystem, binarySolarSystem, starPlanetMoon];
