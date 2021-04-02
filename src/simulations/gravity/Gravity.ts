@@ -1,20 +1,24 @@
 import { PhysicsSimulation } from '../util/PhysicsSimulation';
 import { Planet } from './Planet';
-import { StationaryPlanet } from './StationaryPlanet';
 import { screenUtils } from '../util/ScreenUtils';
+import { binarySolarSystem, ourSolarSystem } from './scenarios';
 
 const GRAVITY = 0.02;
 
 export class Gravity extends PhysicsSimulation {
   planets: Planet[] = [];
+  simulationTitle: string = '';
 
   setup() {
     super.setup();
     screenUtils.init(this.p5.height / 35, this.p5.height, this.p5.width);
 
     // add some planets
-    this.planets.push(new StationaryPlanet(this.p5, 5000, 1, { x: 0, y: 0 }));
-    this.planets.push(new Planet(this.p5, 50, 0.3, { x: 0, y: -8 }, { x: 7.5, y: 0 }));
+    const { name, planets } = binarySolarSystem(this.p5);
+    this.planets = planets;
+    this.simulationTitle = name;
+
+    this.p5.background(0);
   }
 
   simulateFrame() {
@@ -23,8 +27,17 @@ export class Gravity extends PhysicsSimulation {
   }
 
   render() {
-    this.p5.background(0);
+    this.p5.background(0, 5);
     this.planets.forEach((planet) => planet.render());
+    this.renderSimulationTitle();
+  }
+
+  renderSimulationTitle() {
+    this.p5.textSize(16);
+    this.p5.textFont('monospace');
+    this.p5.fill(255);
+    this.p5.stroke(0);
+    this.p5.text(this.simulationTitle, 15, 25);
   }
 
   calculateForces() {
@@ -36,7 +49,6 @@ export class Gravity extends PhysicsSimulation {
       for (let j = i + 1; j < this.planets.length; j++) {
         const planet2 = this.planets[j];
         const force = this.calculateGravity(planet1, planet2);
-        console.log(force);
         planet1.addForce(force);
         planet2.addForce({ x: -force.x, y: -force.y });
       }
@@ -50,7 +62,6 @@ export class Gravity extends PhysicsSimulation {
     };
 
     const magnitude = Math.sqrt(norm.x * norm.x + norm.y * norm.y);
-    console.log({ magnitude });
 
     if (magnitude === 0) return { x: 0, y: 0 };
 

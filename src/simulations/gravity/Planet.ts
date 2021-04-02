@@ -9,13 +9,22 @@ export class Planet {
   position: Coordinates;
   velocity: Coordinates;
   netForces: Coordinates = { x: 0, y: 0 };
+  customColor?: string;
 
-  constructor(p5: P5, mass: number, radius: number, position: Coordinates, velocity: Coordinates) {
+  constructor(
+    p5: P5,
+    mass: number,
+    radius: number,
+    position: Coordinates,
+    velocity: Coordinates,
+    customColor?: string,
+  ) {
     this.p5 = p5;
     this.mass = mass;
     this.radius = radius;
     this.position = position;
     this.velocity = velocity;
+    this.customColor = customColor;
   }
 
   clearForces() {
@@ -30,13 +39,6 @@ export class Planet {
   }
 
   updatePosition(deltaT: number) {
-    console.log(
-      `planet #${this.mass}
-  position: (${this.position.x}, ${this.position.y})
-  velocity: (${this.velocity.x}, ${this.velocity.y})
-  forces: (${this.netForces.x}, ${this.netForces.y})
-`,
-    );
     const acceleration = {
       x: this.netForces.x / this.mass,
       y: this.netForces.y / this.mass,
@@ -72,7 +74,7 @@ export class Planet {
 
   render() {
     this.setColor();
-    const renderedDiameter = screenUtils.transformScalar(this.radius * 2);
+    const renderedDiameter = Math.max(5, screenUtils.transformScalar(this.radius * 2));
     const renderedPosition = screenUtils.transformCoordinates(this.position);
 
     this.p5.strokeWeight(renderedDiameter);
@@ -80,9 +82,15 @@ export class Planet {
   }
 
   setColor() {
+    if (this.customColor) {
+      this.p5.stroke(this.customColor);
+      return;
+    }
+
     const maxMass = 500;
     const cappedMass = Math.min(this.mass, maxMass);
-    const green = (1 - cappedMass / maxMass) * 255;
-    this.p5.stroke(100, green, 255);
+    const color = (cappedMass / maxMass) * 255;
+
+    this.p5.stroke(color, 200, 255 - color);
   }
 }

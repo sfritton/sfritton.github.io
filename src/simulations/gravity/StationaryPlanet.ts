@@ -10,8 +10,4 @@ export class StationaryPlanet extends Planet {
   updatePosition(deltaT: number) {
     return;
   }
-
-  setColor() {
-    this.p5.stroke(255, 220, 50);
-  }
 }
