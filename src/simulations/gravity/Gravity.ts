@@ -1,23 +1,29 @@
 import { PhysicsSimulation } from '../util/PhysicsSimulation';
 import { Planet } from './Planet';
 import { screenUtils } from '../util/ScreenUtils';
-import { binarySolarSystem, ourSolarSystem } from './scenarios';
+import { GravityScenario, allScenarios } from './scenarios';
 
 const GRAVITY = 0.02;
 
 export class Gravity extends PhysicsSimulation {
   planets: Planet[] = [];
   simulationTitle: string = '';
+  scenario!: GravityScenario;
 
   setup() {
     super.setup();
     screenUtils.init(this.p5.height / 35, this.p5.height, this.p5.width);
 
-    // add some planets
-    const { name, planets } = binarySolarSystem(this.p5);
-    this.planets = planets;
-    this.simulationTitle = name;
+    this.loadScenario(allScenarios[0].name);
+  }
 
+  loadScenario(scenarioName: string) {
+    const newScenario = allScenarios.find((s) => s.name === scenarioName);
+    if (!newScenario) return;
+
+    this.scenario = newScenario;
+    this.planets = this.scenario.generatePlanets(this.p5);
+    this.simulationTitle = this.scenario.name;
     this.p5.background(0);
   }
 

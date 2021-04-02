@@ -60,7 +60,7 @@ export class Planet {
         x: this.position.x - otherPlanet.position.x,
         y: this.position.y - otherPlanet.position.y,
       };
-      const magnitude = Math.sqrt(norm.x + norm.y);
+      const magnitude = Math.sqrt(norm.x * norm.x + norm.y * norm.y);
 
       // The planets are not touching
       if (magnitude >= this.radius + otherPlanet.radius) return;
@@ -68,6 +68,12 @@ export class Planet {
       this.position = {
         x: otherPlanet.position.x + (norm.x / magnitude) * this.radius + otherPlanet.radius,
         y: otherPlanet.position.y + (norm.y / magnitude) * this.radius + otherPlanet.radius,
+      };
+
+      // TODO - need a dot product here
+      this.velocity = {
+        x: this.velocity.x,
+        y: this.velocity.y,
       };
     });
   }
