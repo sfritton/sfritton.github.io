@@ -11,6 +11,8 @@ import { keyboard } from '../../projects/keyboard';
 import { wave } from '../../projects/wave';
 import { pinwheel } from '../../projects/pinwheel';
 import { bouncingBall } from '../../projects/bouncing-ball';
+import { gravity } from '../../projects/gravity';
+import { fire } from '../../projects/fire';
 
 const ProjectsView: React.FC<ViewProps> = ({ isStandalone = false }) => {
   return (
@@ -25,6 +27,8 @@ const ProjectsView: React.FC<ViewProps> = ({ isStandalone = false }) => {
         <ProjectSummaryWide {...dungeonGenerator} headingLevel={isStandalone ? 3 : 4} />
       </ProjectSummaries>
       <ProjectSummaries>
+        <ProjectSummary {...gravity} headingLevel={isStandalone ? 3 : 4} />
+        <ProjectSummary {...fire} headingLevel={isStandalone ? 3 : 4} />
         <ProjectSummary {...bouncingBall} headingLevel={isStandalone ? 3 : 4} />
       </ProjectSummaries>
       <Heading level={isStandalone ? 2 : 3}>CSS Fun</Heading>
