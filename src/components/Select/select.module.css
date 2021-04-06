@@ -1,0 +1,98 @@
+.select {
+  --select-color: var(--color-pop);
+  display: inline-block;
+  position: relative;
+}
+
+.label {
+  position: absolute;
+  top: calc(var(--space-xs) * -1);
+  left: var(--space-sm);
+  pointer-events: none;
+  font-size: var(--text-sm);
+}
+
+.select select {
+  padding: var(--space-md) var(--space-xs) var(--space-sm);
+  border: none;
+  border-radius: none;
+  background: transparent;
+  font-size: var(--text-base);
+  color: var(--color-fg-title);
+  cursor: pointer;
+  padding-right: var(--space-md);
+  margin-right: var(--space-sm);
+}
+
+.select::before,
+.select::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 1px;
+  background: var(--select-color);
+}
+
+.select::after {
+  transform: scaleX(0);
+  transition: transform 300ms;
+  height: 2px;
+}
+
+.select:hover,
+.select:focus-within {
+  --select-color: var(--color-pop-hover);
+}
+
+.select:hover::after,
+.select:focus-within::after {
+  transform: scaleX(1);
+}
+
+[data-theme='windows-95'] .select {
+  display: inline-block;
+  color: var(--color-fg-title);
+  border-width: 2px;
+  border-style: solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  outline: 1px solid #000;
+  outline-offset: 0;
+  min-width: 150px;
+  text-align: center;
+}
+
+[data-theme='windows-95'] .select select {
+  padding-top: calc(var(--space-md) + var(--space-xs));
+}
+
+[data-theme='windows-95'] .label {
+  top: 0;
+}
+
+[data-theme='windows-95'] .select:hover {
+  background: #000080;
+  color: #fff;
+}
+
+[data-theme='windows-95'] .select:hover select {
+  color: #fff;
+}
+
+[data-theme='windows-95'] .select select:focus {
+  text-decoration: underline;
+}
+
+[data-theme='windows-95'] .select:active {
+  font-weight: bold;
+  background: #dcd9dc;
+  color: var(--color-fg-title);
+  border-color: #808080 #ffffff #ffffff #808080;
+}
+
+[data-theme='windows-95'] .select::before,
+[data-theme='windows-95'] .select::after {
+  content: none;
+}
