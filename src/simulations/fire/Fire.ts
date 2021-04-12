@@ -1,28 +1,20 @@
-import { PhysicsSimulation } from '../util/PhysicsSimulation';
+import { PhysicsSimulation3D } from '../util/PhysicsSimulation3D';
 import { Particle } from './Particle';
-import { EMIT_CENTER, PARTICLES_PER_SECOND } from './constants';
-import { Coordinates } from '../util/types';
+import { EMIT_RADIUS, PARTICLES_PER_SECOND } from './constants';
+import P5 from 'p5';
 
-export class Fire extends PhysicsSimulation {
+export class Fire extends PhysicsSimulation3D {
   particles: Particle[] = [];
-
-  /**
-   * A place to store partial particles between frames.
-   * After this reaches a value of 1,
-   * an extra particle will be added, and this counter will be reset.
-   */
-  particleFraction = 0;
-  center: Coordinates = { x: 0, y: 0 };
+  emitCenter: P5.Vector = new P5.Vector();
 
   setup() {
     super.setup();
-    this.center = {
-      x: this.p5.width * EMIT_CENTER.x,
-      y: this.p5.height * EMIT_CENTER.y,
-    };
 
-    // start out with a few particles
-    this.emitParticles(1);
+    this.emitCenter = this.p5.createVector(
+      this.cameraTarget.x,
+      this.cameraTarget.y + this.p5.height / 8,
+      this.cameraTarget.z,
+    );
   }
 
   simulate() {
@@ -43,24 +35,26 @@ export class Fire extends PhysicsSimulation {
 
   render() {
     this.p5.background(0);
+    this.renderCore();
 
     for (let i = 0; i < this.particles.length; i++) {
       this.particles[i].render();
     }
   }
 
+  renderCore() {
+    this.p5.fill(255);
+    this.p5.noStroke();
+    this.p5.translate(this.emitCenter);
+    this.p5.sphere(EMIT_RADIUS);
+    this.p5.translate(P5.Vector.mult(this.emitCenter, -1));
+  }
+
   emitParticles(deltaT: number) {
-    const numNewParticles = PARTICLES_PER_SECOND * deltaT;
-    let numWholeParticles = Math.floor(numNewParticles);
-    this.particleFraction += numNewParticles - numWholeParticles;
+    const numNewParticles = Math.floor(PARTICLES_PER_SECOND * deltaT);
 
-    if (this.particleFraction >= 1) {
-      this.particleFraction--;
-      numWholeParticles++;
-    }
-
-    for (let i = 0; i < numWholeParticles; i++) {
-      this.particles.push(new Particle(this.p5, this.center));
+    for (let i = 0; i < numNewParticles; i++) {
+      this.particles.push(new Particle(this.p5, this.emitCenter));
     }
   }
 

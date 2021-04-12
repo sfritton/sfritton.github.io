@@ -11,5 +11,4 @@ const ProjectsPage: React.FC<PageProps> = () => {
   );
 };
 
-// ts-unused-exports:disable-next-line
 export default ProjectsPage;

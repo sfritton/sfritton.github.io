@@ -12,8 +12,7 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
-    "find-unused-exports": "ts-unused-exports ./tsconfig.json"
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "dependencies": {
     "@loadable/component": "^5.14.1",
@@ -30,8 +29,7 @@
     "@types/p5": "^0.9.1",
     "@types/react-helmet": "^6.1.0",
     "gh-pages": "^3.1.0",
-    "prettier": "2.1.2",
-    "ts-unused-exports": "^7.0.3"
+    "prettier": "2.1.2"
   },
   "repository": {
     "type": "git",

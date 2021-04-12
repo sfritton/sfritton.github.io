@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import styles from './themeToggle.module.css';
 
-type Theme = 'modern-dark' | 'modern-light' | 'windows-95';
+export type Theme = 'modern-dark' | 'modern-light' | 'windows-95';
 
 export const ThemeToggle: React.FC = () => {
   const [theme, setTheme] = useState<Theme>('modern-dark');

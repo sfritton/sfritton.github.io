@@ -27,5 +27,4 @@ const Home: React.FC<PageProps> = () => {
   );
 };
 
-// ts-unused-exports:disable-next-line
 export default Home;
