@@ -246,7 +246,7 @@ export class Room {
   }
 }
 
-export class Door {
+class Door {
   from: Room;
   to: Room;
   onPath = false;

@@ -9,7 +9,6 @@ export const fire = (p5: P5) => {
   };
 
   p5.draw = function () {
-    fire.moveCamera();
     fire.simulate();
     fire.render();
   };
