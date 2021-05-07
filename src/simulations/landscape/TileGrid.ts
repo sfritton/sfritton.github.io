@@ -14,6 +14,7 @@ import {
 import { step } from './util';
 import { NoiseWaveStack } from './NoiseWave';
 import { randomFromTo } from '../util/helpers';
+import { getBiome } from './Biome';
 
 export class TileGrid {
   rows: number;
@@ -84,6 +85,10 @@ export class TileGrid {
         break;
       case 'precipitation':
         this.p5.fill(step(this.p5, 15, tile.precipitation, PRECIPITATION_COLORS));
+        break;
+      case 'biome':
+        const biome = getBiome(tile.temperature, tile.precipitation);
+        this.p5.fill(biome.color);
         break;
     }
   }
