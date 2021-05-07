@@ -2,6 +2,7 @@ import P5 from 'p5';
 import { Tile, MapType } from './types';
 import {
   ELEVATION_COLORS,
+  ELEVATION_SCALE,
   PRECIPITATION_COLORS,
   SEA_LEVEL,
   TEMPERATURE_COLORS,
@@ -9,6 +10,7 @@ import {
   WATER_COLOR,
 } from './constants';
 import { step } from './util';
+import { NoiseWaveStack } from './NoiseWave';
 
 export class TileGrid {
   p5: P5;
@@ -18,6 +20,7 @@ export class TileGrid {
     this.p5 = p5;
     const rows = Math.floor(this.p5.height / TILE_SIZE);
     const columns = Math.floor(this.p5.width / TILE_SIZE);
+    const elevationNoiseStack = new NoiseWaveStack(this.p5, { x: 0, y: 0 }, ELEVATION_SCALE, 4);
 
     this.tiles = new Array(rows);
 
@@ -25,12 +28,17 @@ export class TileGrid {
       this.tiles[r] = new Array(columns);
       for (let c = 0; c < columns; c++) {
         this.tiles[r][c] = {
-          elevation: (r + c) / (rows + columns),
+          elevation: elevationNoiseStack.getValueAt(r, c),
           precipitation: (r + c) / (rows + columns),
           temperature: (r + c) / (rows + columns),
         };
       }
     }
+
+    const elevations = this.tiles
+      .reduce((allTiles, tileRow) => [...allTiles, ...tileRow], [])
+      .map(({ elevation }) => elevation);
+    console.log({ max: Math.max(...elevations), min: Math.min(...elevations) });
   }
 
   render(mapType: MapType) {

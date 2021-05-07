@@ -1,4 +1,4 @@
-export const ELEVATION_SCALE = 0.07;
+export const ELEVATION_SCALE = 0.7;
 export const CLIMATE_SCALE = 0.007;
 export const PRECIPITATION_SCALE = 0.007;
 /** The elevation below which to render water. Elevation ranges from 0 to 1. */
