@@ -1,8 +1,10 @@
 import { Simulation } from '../util/Simulation';
 import { TileGrid } from './TileGrid';
+import { MapType } from './types';
 
 export class Landscape extends Simulation {
   tileGrid!: TileGrid;
+  mapType: MapType = 'elevation';
 
   setup() {
     super.setup();
@@ -15,6 +17,11 @@ export class Landscape extends Simulation {
   }
 
   render() {
-    this.tileGrid.render('elevation');
+    this.tileGrid.render(this.mapType);
+  }
+
+  updateMapType(newMapType: MapType) {
+    this.mapType = newMapType;
+    this.render();
   }
 }

@@ -1,10 +1,12 @@
+import { MapType } from './types';
+
 export const ELEVATION_SCALE = 0.7;
-export const CLIMATE_SCALE = 0.007;
-export const PRECIPITATION_SCALE = 0.007;
+export const CLIMATE_SCALE = 0.07;
+export const PRECIPITATION_SCALE = 0.02;
 /** The elevation below which to render water. Elevation ranges from 0 to 1. */
 export const SEA_LEVEL = 0.4;
 /** Width/height of each tile in pixels */
-export const TILE_SIZE = 25;
+export const TILE_SIZE = 10;
 
 // Colors
 export const WATER_COLOR = '#6485dc';
@@ -19,3 +21,5 @@ export const PRECIPITATION_COLORS = [
   '#00ffff',
   '#00ffff',
 ];
+
+export const allMapTypes: MapType[] = ['elevation', 'temperature', 'precipitation', 'biome'];

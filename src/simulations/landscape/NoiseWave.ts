@@ -2,7 +2,7 @@ import P5 from 'p5';
 import { randomFromTo } from '../util/helpers';
 import { Coordinates } from '../util/types';
 
-/**  */
+/** A wrapper around the P5 noise function to allow for the use of wave-like parameters. */
 export class NoiseWave {
   p5: P5;
   seed: Coordinates;

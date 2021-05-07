@@ -1,9 +1,11 @@
 import P5 from 'p5';
 import { Tile, MapType } from './types';
 import {
+  CLIMATE_SCALE,
   ELEVATION_COLORS,
   ELEVATION_SCALE,
   PRECIPITATION_COLORS,
+  PRECIPITATION_SCALE,
   SEA_LEVEL,
   TEMPERATURE_COLORS,
   TILE_SIZE,
@@ -11,34 +13,50 @@ import {
 } from './constants';
 import { step } from './util';
 import { NoiseWaveStack } from './NoiseWave';
+import { randomFromTo } from '../util/helpers';
 
 export class TileGrid {
+  rows: number;
+  columns: number;
   p5: P5;
   tiles: Tile[][];
 
   constructor(p5: P5) {
     this.p5 = p5;
-    const rows = Math.floor(this.p5.height / TILE_SIZE);
-    const columns = Math.floor(this.p5.width / TILE_SIZE);
-    const elevationNoiseStack = new NoiseWaveStack(this.p5, { x: 0, y: 0 }, ELEVATION_SCALE, 4);
+    this.rows = Math.floor(this.p5.height / TILE_SIZE);
+    this.columns = Math.floor(this.p5.width / TILE_SIZE);
+    const elevationNoiseStack = new NoiseWaveStack(
+      this.p5,
+      this.randomSeed(400),
+      ELEVATION_SCALE,
+      4,
+    );
+    const precipitationNoiseStack = new NoiseWaveStack(
+      this.p5,
+      this.randomSeed(800),
+      PRECIPITATION_SCALE,
+      2,
+    );
+    const climateNoiseStack = new NoiseWaveStack(this.p5, this.randomSeed(800), CLIMATE_SCALE, 2);
+    const multiplier = 0.75;
 
-    this.tiles = new Array(rows);
+    this.tiles = new Array(this.rows);
 
-    for (let r = 0; r < rows; r++) {
-      this.tiles[r] = new Array(columns);
-      for (let c = 0; c < columns; c++) {
+    for (let r = 0; r < this.rows; r++) {
+      this.tiles[r] = new Array(this.columns);
+      for (let c = 0; c < this.columns; c++) {
+        const elevation = elevationNoiseStack.getValueAt(r, c);
         this.tiles[r][c] = {
-          elevation: elevationNoiseStack.getValueAt(r, c),
-          precipitation: (r + c) / (rows + columns),
-          temperature: (r + c) / (rows + columns),
+          elevation,
+          precipitation: precipitationNoiseStack.getValueAt(r, c),
+          temperature: this.p5.norm(
+            climateNoiseStack.getValueAt(r, c) - multiplier * (elevation - 0.5),
+            multiplier * -0.5,
+            1 + multiplier * 0.5,
+          ),
         };
       }
     }
-
-    const elevations = this.tiles
-      .reduce((allTiles, tileRow) => [...allTiles, ...tileRow], [])
-      .map(({ elevation }) => elevation);
-    console.log({ max: Math.max(...elevations), min: Math.min(...elevations) });
   }
 
   render(mapType: MapType) {
@@ -68,5 +86,12 @@ export class TileGrid {
         this.p5.fill(step(this.p5, 15, tile.precipitation, PRECIPITATION_COLORS));
         break;
     }
+  }
+
+  randomSeed(scale = 1) {
+    return {
+      x: randomFromTo(0, this.columns) * scale,
+      y: randomFromTo(0, this.rows) * scale,
+    };
   }
 }
