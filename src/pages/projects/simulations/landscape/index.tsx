@@ -9,7 +9,7 @@ import { Button } from '../../../../components/Button';
 import styles from './landscape.module.css';
 import { MapType } from '../../../../simulations/landscape/types';
 import { MapLegend } from '../../../../simulations/landscape/MapLegend';
-import { ExternalLink } from '../../../../components/Link';
+import { ExternalLink, InternalLink } from '../../../../components/Link';
 
 const LandscapePage: React.FC<PageProps> = ({ location }) => {
   const [mapType, setMapType] = useState<MapType>('elevation');

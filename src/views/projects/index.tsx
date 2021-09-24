@@ -13,6 +13,7 @@ import { pinwheel } from '../../projects/pinwheel';
 import { bouncingBall } from '../../projects/bouncing-ball';
 import { gravity } from '../../projects/gravity';
 import { fire } from '../../projects/fire';
+import { landscapeGenerator } from '../../projects/landscape';
 
 const ProjectsView: React.FC<ViewProps> = ({ isStandalone = false }) => {
   return (
@@ -25,6 +26,9 @@ const ProjectsView: React.FC<ViewProps> = ({ isStandalone = false }) => {
       <Heading level={isStandalone ? 2 : 3}>Simulations</Heading>
       <ProjectSummaries>
         <ProjectSummaryWide {...dungeonGenerator} headingLevel={isStandalone ? 3 : 4} />
+      </ProjectSummaries>
+      <ProjectSummaries>
+        <ProjectSummaryWide {...landscapeGenerator} headingLevel={isStandalone ? 3 : 4} />
       </ProjectSummaries>
       <ProjectSummaries>
         <ProjectSummary {...gravity} headingLevel={isStandalone ? 3 : 4} />
