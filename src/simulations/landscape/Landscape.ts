@@ -1,3 +1,4 @@
+import P5 from 'p5';
 import { Simulation } from '../util/Simulation';
 import { TileGrid } from './TileGrid';
 import { MapType } from './types';
@@ -5,6 +6,12 @@ import { MapType } from './types';
 export class Landscape extends Simulation {
   tileGrid!: TileGrid;
   mapType: MapType = 'elevation';
+  tileSize: number;
+
+  constructor(p5: P5, tileSize: number) {
+    super(p5);
+    this.tileSize = tileSize;
+  }
 
   setup() {
     super.setup();
@@ -13,7 +20,7 @@ export class Landscape extends Simulation {
   }
 
   createWorld() {
-    this.tileGrid = new TileGrid(this.p5);
+    this.tileGrid = new TileGrid(this.p5, this.tileSize);
   }
 
   render() {

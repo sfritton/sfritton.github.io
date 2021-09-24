@@ -8,7 +8,6 @@ import {
   PRECIPITATION_SCALE,
   SEA_LEVEL,
   TEMPERATURE_COLORS,
-  TILE_SIZE,
   WATER_COLOR,
 } from './constants';
 import { step } from './util';
@@ -21,24 +20,31 @@ export class TileGrid {
   columns: number;
   p5: P5;
   tiles: Tile[][];
+  tileSize: number;
 
-  constructor(p5: P5) {
+  constructor(p5: P5, tileSize: number) {
     this.p5 = p5;
-    this.rows = Math.floor(this.p5.height / TILE_SIZE);
-    this.columns = Math.floor(this.p5.width / TILE_SIZE);
+    this.tileSize = tileSize;
+    this.rows = Math.floor(this.p5.height / this.tileSize);
+    this.columns = Math.floor(this.p5.width / this.tileSize);
     const elevationNoiseStack = new NoiseWaveStack(
       this.p5,
       this.randomSeed(400),
-      ELEVATION_SCALE,
+      ELEVATION_SCALE * this.tileSize,
       4,
     );
     const precipitationNoiseStack = new NoiseWaveStack(
       this.p5,
       this.randomSeed(800),
-      PRECIPITATION_SCALE,
+      PRECIPITATION_SCALE * this.tileSize,
       2,
     );
-    const climateNoiseStack = new NoiseWaveStack(this.p5, this.randomSeed(800), CLIMATE_SCALE, 2);
+    const climateNoiseStack = new NoiseWaveStack(
+      this.p5,
+      this.randomSeed(800),
+      CLIMATE_SCALE * this.tileSize,
+      2,
+    );
     const multiplier = 0.75;
 
     this.tiles = new Array(this.rows);
@@ -65,7 +71,7 @@ export class TileGrid {
     this.tiles.forEach((row, r) =>
       row.forEach((tile, c) => {
         this.setTileFill(mapType, tile);
-        this.p5.rect(c * TILE_SIZE, r * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+        this.p5.rect(c * this.tileSize, r * this.tileSize, this.tileSize, this.tileSize);
       }),
     );
   }

@@ -1,8 +1,8 @@
 import { MapType } from './types';
 
-export const ELEVATION_SCALE = 0.7;
-export const CLIMATE_SCALE = 0.07;
-export const PRECIPITATION_SCALE = 0.02;
+export const ELEVATION_SCALE = 0.07;
+export const CLIMATE_SCALE = 0.007;
+export const PRECIPITATION_SCALE = 0.002;
 /** The elevation below which to render water. Elevation ranges from 0 to 1. */
 export const SEA_LEVEL = 0.4;
 /** Width/height of each tile in pixels */
