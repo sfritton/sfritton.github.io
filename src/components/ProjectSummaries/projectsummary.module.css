@@ -93,3 +93,11 @@
   outline: 1px solid #000;
   outline-offset: 0;
 }
+
+[data-theme='neon'] .projectSummaryWide,
+[data-theme='neon'] .projectSummary {
+  padding: var(--space-md);
+  border: 1px solid #fff;
+  border-radius: var(--space-sm);
+  box-shadow: 0 0 4px 2px #0f0, inset 0 0 4px 2px #0f0;
+}

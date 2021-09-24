@@ -51,6 +51,16 @@
   --font-family: Tahoma, sans-serif;
 }
 
+[data-theme='neon'] {
+  --color-fg-title: #fff;
+  --color-fg-text: #aff;
+  --color-bg-body: #000;
+  --color-bg-menu: #000;
+  --color-pop: #ff0;
+  --color-pop-hover: #ff8;
+  --color-pop-active: #ee0;
+}
+
 html {
   box-sizing: border-box;
 }
@@ -130,4 +140,12 @@ option {
 [data-theme='windows-95'] h3,
 [data-theme='windows-95'] h4 {
   margin: var(--space-md) 0 var(--space-sm);
+}
+
+[data-theme='neon'] h1,
+[data-theme='neon'] h2 {
+  padding: var(--space-xs) var(--space-md);
+  border: 1px solid #fff;
+  border-radius: var(--space-sm);
+  box-shadow: 0 0 4px 2px #f0f, inset 0 0 4px 2px #f0f;
 }
