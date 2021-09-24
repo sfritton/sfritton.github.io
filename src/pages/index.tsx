@@ -6,6 +6,7 @@ import ProjectSummaryWide from '../components/ProjectSummaries/ProjectSummaryWid
 import { picardGeocache } from '../projects/picard-geocache';
 import { dungeonGenerator } from '../projects/dungeon-generator';
 import { ButtonLink } from '../components/Button/ButtonLink';
+import { landscapeGenerator } from '../projects/landscape';
 
 const Home: React.FC<PageProps> = () => {
   return (
@@ -19,6 +20,9 @@ const Home: React.FC<PageProps> = () => {
       </ProjectSummaries>
       <ProjectSummaries>
         <ProjectSummaryWide {...dungeonGenerator} headingLevel={3} />
+      </ProjectSummaries>
+      <ProjectSummaries>
+        <ProjectSummaryWide {...landscapeGenerator} headingLevel={3} />
       </ProjectSummaries>
       <div style={{ textAlign: 'center', marginBottom: 'var(--space-xl)' }}>
         <ButtonLink to="/projects">See all my projects</ButtonLink>
