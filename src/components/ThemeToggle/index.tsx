@@ -34,6 +34,7 @@ export const ThemeToggle: React.FC = () => {
         <option value="modern-light">Modern Light</option>
         <option value="windows-95">Windows 95</option>
         <option value="neon">Neon</option>
+        <option value="rainbow">Rainbow</option>
       </select>
     </label>
   );

@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Gilbert";
+  src: url("/fonts/Gilbert-Color-Bold-Preview5.otf") format("opentype");
+}
+
 :root {
   --text-sm: 12px;
   --text-base: 16px;
@@ -7,6 +12,7 @@
   --text-h2: calc(var(--text-h3) * var(--text-scale));
   --text-h1: calc(var(--text-h2) * var(--text-scale));
   --font-family: Helvetica, Arial, sans-serif;
+  --heading-font-family: Helvetica, Arial, sans-serif;
 
   --color-fg-title: #fff;
   --color-fg-text: #ccc;
@@ -61,6 +67,18 @@
   --color-pop-active: #ee0;
 }
 
+[data-theme="rainbow"] {
+  --heading-font-family: Gilbert, Helvetica, Arial, sans-serif;
+  --text-scale: 1.5;
+  --color-fg-title: #000;
+  --color-fg-text: #333;
+  --color-bg-body: #fff;
+  --color-bg-menu: #f7f7f7;
+  --color-pop: #006149;
+  --color-pop-hover: #008060;
+  --color-pop-active: #00523f;
+}
+
 html {
   box-sizing: border-box;
 }
@@ -89,6 +107,7 @@ h3,
 h4 {
   color: var(--color-fg-title);
   margin: var(--space-lg) 0 var(--space-md);
+  font-family: var(--heading-font-family);
 }
 
 h1 {
