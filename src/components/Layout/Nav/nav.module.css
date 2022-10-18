@@ -114,3 +114,29 @@
 [data-theme='neon'] .nav label:hover {
   background: #222;
 }
+
+[data-theme='rainbow'] .nav {
+  background-image:
+    linear-gradient(to bottom, var(--magenta) 0, var(--magenta) 100%),
+    linear-gradient(to bottom, var(--blue) 0, var(--blue) 100%),
+    linear-gradient(to bottom, var(--yellow) 0, var(--yellow) 100%),
+    linear-gradient(to bottom, var(--orange) 0, var(--orange) 100%),
+    linear-gradient(to bottom, var(--green) 0, var(--green) 100%),
+    linear-gradient(to bottom, var(--red) 0, var(--red) 100%);
+  background-size: calc(100% / 4.5) 100%;
+  background-repeat: no-repeat;
+  background-position-x: 0, calc(100% / 5), calc(200% / 5), calc(300% / 5), calc(400% / 5), calc(500% / 5);
+  background-blend-mode: multiply;
+}
+
+[data-theme='rainbow'] .nav a,
+[data-theme='rainbow'] .nav label {
+  background: var(--color-bg-menu);
+}
+
+[data-theme='rainbow'] .nav a:focus,
+[data-theme='rainbow'] .nav a:hover,
+[data-theme='rainbow'] .nav label:focus-within,
+[data-theme='rainbow'] .nav label:hover {
+  background: var(--color-bg-body);
+}

@@ -68,15 +68,23 @@
 }
 
 [data-theme="rainbow"] {
+  /* Save the colors of the Gilbert font for reuse */
+  --orange: rgb(255, 107, 0); /* #ff6b00 */
+  --red: rgb(255, 67, 56); /* #ff4338 */
+  --green: rgb(5, 206, 124); /* #05ce7c */
+  --blue: rgb(0, 179, 227); /* #00b3e3 */
+  --magenta: rgb(218, 58, 179); /* #da3ab3 */
+  --yellow: rgb(255, 200, 67); /* #ffc843 */
+
   --heading-font-family: Gilbert, Helvetica, Arial, sans-serif;
   --text-scale: 1.5;
   --color-fg-title: #000;
   --color-fg-text: #333;
   --color-bg-body: #fff;
   --color-bg-menu: #f7f7f7;
-  --color-pop: #006149;
-  --color-pop-hover: #008060;
-  --color-pop-active: #00523f;
+  --color-pop: #d1281f;
+  --color-pop-hover: #c436a1;
+  --color-pop-active: #bf2018;
 }
 
 html {
@@ -167,4 +175,21 @@ option {
   border: 1px solid #fff;
   border-radius: var(--space-sm);
   box-shadow: 0 0 4px 2px #f0f, inset 0 0 4px 2px #f0f;
+}
+
+[data-theme='rainbow'] h1,
+[data-theme='rainbow'] h2 {
+  background-image:
+    linear-gradient(to bottom, var(--magenta) 0, var(--magenta) 100%),
+    linear-gradient(to bottom, var(--blue) 0, var(--blue) 100%),
+    linear-gradient(to bottom, var(--yellow) 0, var(--yellow) 100%),
+    linear-gradient(to bottom, var(--orange) 0, var(--orange) 100%),
+    linear-gradient(to bottom, var(--green) 0, var(--green) 100%),
+    linear-gradient(to bottom, var(--red) 0, var(--red) 100%);
+  background-size: calc(100% / 4.5) 8px, calc(100% / 4.5) 12px;
+  background-repeat: no-repeat;
+  background-position-x: 0, calc(100% / 5), calc(200% / 5), calc(300% / 5), calc(400% / 5), calc(500% / 5);
+  background-position-y: calc(100% - 4px), 100%, calc(100% - 8px);
+  background-blend-mode: multiply;
+  padding-bottom: 8px;
 }
