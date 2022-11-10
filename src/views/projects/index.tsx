@@ -14,6 +14,7 @@ import { bouncingBall } from '../../projects/bouncing-ball';
 import { gravity } from '../../projects/gravity';
 import { fire } from '../../projects/fire';
 import { landscapeGenerator } from '../../projects/landscape';
+import { rollingBackground } from '../../projects/rolling-background';
 
 const ProjectsView: React.FC<ViewProps> = ({ isStandalone = false }) => {
   return (
@@ -38,6 +39,7 @@ const ProjectsView: React.FC<ViewProps> = ({ isStandalone = false }) => {
       <Heading level={isStandalone ? 2 : 3}>CSS Fun</Heading>
       <ProjectSummaries>
         <ProjectSummary {...lightSwitch} headingLevel={isStandalone ? 3 : 4} />
+        <ProjectSummary {...rollingBackground} headingLevel={isStandalone ? 3 : 4} />
         <ProjectSummary {...keyboard} headingLevel={isStandalone ? 3 : 4} />
         <ProjectSummary {...wave} headingLevel={isStandalone ? 3 : 4} />
         <ProjectSummary {...pinwheel} headingLevel={isStandalone ? 3 : 4} />

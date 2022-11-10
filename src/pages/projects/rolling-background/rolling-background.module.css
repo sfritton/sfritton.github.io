@@ -1,0 +1,61 @@
+.title.title {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.area {
+  position: relative;
+  height: 200px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.bg,
+.mid,
+.fore {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.bg {
+  background-image: url("/images/rolling-background/back.png");
+  animation: roll 20s -5s linear infinite;
+}
+
+.mid {
+  background-image: url("/images/rolling-background/mid.png");
+  animation: roll 15s -5s linear infinite;
+}
+
+.fore {
+  background-image: url("/images/rolling-background/fore.png");
+  animation: roll 7s -5s linear infinite;
+}
+
+.subject {
+  position: absolute;
+  background-image: url("/images/rolling-background/subject.png");
+  width: 205px;
+  height: 87px;
+  bottom: 0;
+  left: 30%;
+}
+
+@keyframes roll {
+  100% {
+    background-position: -1600px 0;
+  }
+}
+
+[data-theme='windows-95'] .area {
+  box-sizing: content-box;
+  border-width: 2px;
+  border-color: #808080 #ffffff #ffffff #808080;
+  border-style: solid;
+  border-radius: 0;
+  background: #fff;
+}
