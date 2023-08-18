@@ -1,0 +1,62 @@
+#star-trek-puzzle {
+  background: #ffd1a0;
+  padding: 0;
+
+  & a {
+    display: flex;
+    position: relative;
+    padding: 40px 20px;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+    color: inherit;
+    cursor: pointer;
+    gap: 20px;
+    min-height: 300px;
+
+    & .logo {
+      width: 200px;
+      height: 200px;
+      flex-shrink: 0;
+      transition: transform 500ms ease-out;
+    }
+
+    & .preview {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      height: 370px;
+      transition: clip-path 500ms ease-out;
+      clip-path: inset(100% 0 0 100% round 0 0 0 0);
+    }
+
+    & .info {
+      max-width: 430px;
+      transition: transform 500ms ease-out;
+    }
+
+    & .call-to-action {
+      background: #ff9900;
+      padding: 13px 32px 11px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &:hover {
+      & .logo,
+      & .info {
+        transform: translateX(-300px);
+      }
+
+      & .preview {
+        clip-path: inset(27.5% 0 0 0 round 52px 0 0 0);
+      }
+
+      & .call-to-action {
+        text-decoration: underline;
+      }
+
+    }
+  }
+}

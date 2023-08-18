@@ -1,4 +1,5 @@
 @import 'header.css';
+@import 'star-trek-puzzle.css';
 
 :root {
   --link-color: #155b98;
@@ -27,7 +28,10 @@ body {
 
 main {
   scroll-snap-align: start;
-  padding: 40px 0;
+}
+
+section {
+  padding: 40px 16px;
 }
 
 h1, h2, h3, h4, h5 {
