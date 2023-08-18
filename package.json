@@ -2,7 +2,7 @@
   "name": "parcel-portfolio",
   "version": "1.0.0",
   "description": "A portfolio site to show of my favorite projects.",
-  "source": "src/pages/index.html",
+  "source": "src/index.html",
   "scripts": {
     "start": "parcel",
     "build": "parcel build"
