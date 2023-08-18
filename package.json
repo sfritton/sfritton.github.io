@@ -1,38 +1,40 @@
 {
-  "name": "sfritton.github.io",
-  "private": true,
-  "description": "Portfolio site",
-  "version": "0.1.0",
-  "license": "0BSD",
+  "name": "parcel-portfolio",
+  "version": "1.0.0",
+  "description": "A portfolio site to show of my favorite projects.",
+  "source": "src/pages/index.html",
   "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
-    "deploy": "gatsby build --prefix-paths && gh-pages -d public",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "start": "npm run develop",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
-  },
-  "dependencies": {
-    "@loadable/component": "^5.14.1",
-    "gatsby": "^2.32.4",
-    "gatsby-plugin-react-helmet": "^3.6.0",
-    "p5": "^1.2.0",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-helmet": "^6.1.0",
-    "typescript": "^4.1.5"
-  },
-  "devDependencies": {
-    "@types/loadable__component": "^5.13.3",
-    "@types/p5": "^0.9.1",
-    "@types/react-helmet": "^6.1.0",
-    "gh-pages": "^3.1.0",
-    "prettier": "2.1.2"
+    "start": "parcel",
+    "build": "parcel build"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/sfritton/sfritton.github.io"
+    "url": "git+https://github.com/sfritton/sfritton.github.io.git"
+  },
+  "author": "Sam Fritton",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sfritton/sfritton.github.io/issues"
+  },
+  "homepage": "https://github.com/sfritton/sfritton.github.io#readme",
+  "devDependencies": {
+    "parcel": "^2.9.3",
+    "posthtml-doctype": "^1.1.1",
+    "posthtml-include": "^1.7.4",
+    "typescript": "^5.1.6"
+  },
+  "browserslist": "> 0.15% in US and not dead and supports es6-module, safari > 11, last 12 firefox versions, last 12 chrome versions, last 12 edge versions",
+  "targets": {
+    "default": {
+      "distDir": "./docs",
+      "publicUrl": "./",
+      "optimize": false,
+      "outputFormat": "esmodule"
+    }
+  },
+  "@parcel/transformer-css": {
+    "drafts": {
+      "nesting": true
+    }
   }
 }
