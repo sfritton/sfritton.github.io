@@ -1,11 +1,12 @@
 #star-trek-puzzle {
-  background: #ffd1a0;
+  background: #ffcc99;
   padding: 0;
 
   & a {
     display: flex;
+    flex-direction: column;
     position: relative;
-    padding: 40px 20px;
+    padding: 40px 20px 0;
     text-decoration: none;
     justify-content: center;
     align-items: center;
@@ -14,49 +15,83 @@
     gap: 20px;
     min-height: 300px;
 
-    & .logo {
-      width: 200px;
-      height: 200px;
-      flex-shrink: 0;
-      transition: transform 500ms ease-out;
-    }
-
     & .preview {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      height: 370px;
-      transition: clip-path 500ms ease-out;
-      clip-path: inset(100% 0 0 100% round 0 0 0 0);
+      --offset-left: max(20px, calc(calc(100vw - 430px) / 2));
+      --corner: min(8vw, 48px);
+
+      display: block;
+      max-width: calc(calc(100vw) - var(--offset-left));
+      align-self: flex-end;
+      margin-top: -16vw;
+      margin-right: -20px;
+      clip-path: inset(27.5% 0 0 0 round var(--corner) 0 0 0);
+      object-fit: cover;
+      object-position: left bottom;
     }
 
     & .info {
       max-width: 430px;
-      transition: transform 500ms ease-out;
+      flex-shrink: 0;
     }
 
     & .call-to-action {
-      background: #ff9900;
       padding: 13px 32px 11px;
       display: inline-flex;
       justify-content: center;
       align-items: center;
+      background: #99f;
     }
 
-    &:hover {
-      & .logo,
+    @media (min-width: 470px) {
+      & .preview {
+        margin-top: -10vw;
+      }
+    }
+
+    @media (min-width: 668px) {
+      padding-left: max(20px, calc(50vw - 500px));
+
+      flex-direction: row;
+      justify-content: space-between;
+      padding-right: 0;
+      padding-top: 0;
+      height: 300px;
+
       & .info {
-        transform: translateX(-300px);
+        margin-top: 40px;
       }
 
       & .preview {
-        clip-path: inset(27.5% 0 0 0 round 52px 0 0 0);
-      }
+        --corner: 52px;
 
+        height: 370px;
+        margin-top: -70px;
+        margin-right: 0;
+        width: calc(100% - 450px);
+        max-width: 594px;
+      }
+    }
+
+    @media (min-width: 992px) {
+      height: 600px;
+      padding-left: calc(calc(50vw - 430px) / 2);
+
+      & .preview {
+        --corner: 104px;
+
+        height: 740px;
+        margin-top: -140px;
+        margin-right: 0;
+        width: calc(100% - 450px);
+        max-width: min(50vw, 1188px);
+      }
+    }
+
+    &:hover {
       & .call-to-action {
         text-decoration: underline;
+          background: #b4b4ff;
       }
-
     }
   }
 }
