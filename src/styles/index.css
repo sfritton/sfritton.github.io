@@ -1,5 +1,7 @@
 @import 'header.css';
 @import 'star-trek-puzzle.css';
+@import 'css-exploration.css';
+@import 'procedural-generation.css';
 
 :root {
   --link-color: #155b98;
@@ -26,11 +28,8 @@ body {
   min-height: 200vh;
 }
 
-main {
-  scroll-snap-align: start;
-}
-
 section {
+  scroll-snap-align: start;
   padding: 40px 16px;
 }
 

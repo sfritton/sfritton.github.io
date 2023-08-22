@@ -40,6 +40,20 @@
       justify-content: center;
       align-items: center;
       background: #99f;
+
+      &:hover {
+        text-decoration: underline;
+        background: #b4b4ff;
+      }
+    }
+
+    &:focus {
+      outline: none;
+
+      & .call-to-action {
+        text-decoration: underline;
+        background: #b4b4ff;
+      }
     }
 
     @media (min-width: 470px) {
@@ -87,11 +101,5 @@
       }
     }
 
-    &:hover {
-      & .call-to-action {
-        text-decoration: underline;
-          background: #b4b4ff;
-      }
-    }
   }
 }

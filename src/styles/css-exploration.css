@@ -1,0 +1,102 @@
+#css-exploration {
+  --demo-height: 600px;
+
+  scroll-snap-align: none;
+  padding: 0;
+
+  & .tablist {
+    display: none;
+  }
+
+  & .demo > * {
+    min-height: var(--demo-height);
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media (min-width: 668px) {
+    display: flex;
+    gap: 16px;
+
+    & .tablist {
+      display: block;
+      width: 33vw;
+      flex-shrink: 0;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      
+      & li {
+        height: var(--demo-height);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: right;
+        padding: 0 20px;
+        margin: 0;
+        opacity: 0.6;
+        transform-origin: center right;
+        position: relative;
+        transition: opacity 300ms;
+        scroll-snap-align: start;
+        cursor: pointer;
+        
+        & h3 {
+          margin: 0;
+          margin-bottom: 8px;
+        }
+        
+        & p {
+          margin: 0;
+        }
+        
+          &::after {
+            position: absolute;
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 300ms;
+            top: calc(50% - 32px);
+            right: 0;
+            background: #58e;
+            content: '';
+            height: 64px;
+            width: 8px;
+            border-radius: 4px;
+            display: inline-block;
+            
+          }
+        
+        &.selected {
+          opacity: 1;
+          
+          &::after {
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    & .demo {
+      position: sticky;
+      top: var(--header-height);
+      background: #f7f7f7;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: var(--demo-height);
+
+      & > * {
+        scroll-snap-align: none;
+      }
+      
+      & > *:not(.selected) {
+        display: none;
+      }
+    }
+  }
+}
