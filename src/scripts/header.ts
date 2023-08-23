@@ -1,4 +1,4 @@
-const header = document.querySelector('header') as HTMLElement | undefined;
+const header = document.querySelector<HTMLElement>('header');
 
 const setHeaderHeight = (height: number) => (header ? (header.style.height = `${height}vh`) : '');
 
