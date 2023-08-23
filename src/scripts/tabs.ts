@@ -19,8 +19,9 @@ export const updateSelectedTabBasedOnScrollPosition = (scrollPosition: number) =
 
   if (selectedTab && !selectedTab.classList.contains(SELECTED_CLASS_NAME)) {
     Array.from(tabList.children).forEach((tab) => tab.classList.remove(SELECTED_CLASS_NAME));
-    Array.from(demo.children).forEach((child) => child.classList.remove(SELECTED_CLASS_NAME));
     selectedTab.classList.add(SELECTED_CLASS_NAME);
+
+    Array.from(demo.children).forEach((child) => child.classList.remove(SELECTED_CLASS_NAME));
     selectedDemo?.classList.add(SELECTED_CLASS_NAME);
   }
 };

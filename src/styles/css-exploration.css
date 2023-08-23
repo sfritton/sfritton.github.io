@@ -1,3 +1,6 @@
+@import 'css-explorations/folded-note.css';
+@import 'css-explorations/bouncing-block.css';
+
 #css-exploration {
   --demo-height: 600px;
 
@@ -98,5 +101,11 @@
         display: none;
       }
     }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
 }
