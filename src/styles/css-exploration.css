@@ -1,6 +1,8 @@
 @import 'css-explorations/folded-note.css';
 @import 'css-explorations/bouncing-block.css';
 @import 'css-explorations/slot-machine.css';
+@import 'css-explorations/theme-toggle.css';
+@import 'css-explorations/keyboard.css';
 
 #css-exploration {
   --demo-height: 600px;
@@ -14,9 +16,6 @@
 
   & .demo > * {
     scroll-snap-align: start;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
   @media (min-width: 668px) {

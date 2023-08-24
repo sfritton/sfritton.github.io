@@ -24,8 +24,6 @@ body {
   font-family: var(--sans);
   color: #333;
   margin: 0;
-  /* TODO: temporary */
-  min-height: 200vh;
 }
 
 section {
@@ -60,4 +58,14 @@ a:visited {
 
 a:hover {
   color: var(--link-color-hover);
+}
+
+.hidden {
+  position: absolute;
+  display: inline-block;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0px, 0px, 0px, 0px);
 }

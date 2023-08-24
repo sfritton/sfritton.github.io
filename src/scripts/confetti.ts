@@ -6,11 +6,7 @@ const GRAVITY = 1000;
 const EXPLOSION_RADIUS = 65;
 const EXPLOSION_CENTER = { x: 200, y: 150 };
 
-const CONFETTI_COLORS = [
-  '#5AC0EC', // Blue
-  '#665FA9', // Purple
-  '#FACE0B', // Yellow
-];
+const CONFETTI_COLORS = ['#e75d5d', '#eb8a47', '#eec42e', '#84cda0', '#8aaad8', '#a98bc7'];
 
 interface Coordinates {
   x: number;
