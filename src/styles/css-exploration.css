@@ -3,6 +3,7 @@
 @import 'css-explorations/slot-machine.css';
 @import 'css-explorations/theme-toggle.css';
 @import 'css-explorations/keyboard.css';
+@import 'css-explorations/parallax.css';
 
 #css-exploration {
   --demo-height: 600px;
