@@ -1,5 +1,6 @@
 @import 'css-explorations/folded-note.css';
 @import 'css-explorations/bouncing-block.css';
+@import 'css-explorations/slot-machine.css';
 
 #css-exploration {
   --demo-height: 600px;
@@ -12,10 +13,8 @@
   }
 
   & .demo > * {
-    min-height: var(--demo-height);
     scroll-snap-align: start;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
   }
@@ -99,6 +98,10 @@
       
       & > *:not(.selected) {
         display: none;
+      }
+
+      & > .selected {
+        animation: fadeIn 600ms;
       }
     }
   }
