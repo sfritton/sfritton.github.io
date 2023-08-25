@@ -2,6 +2,7 @@
 @import 'star-trek-puzzle.css';
 @import 'css-exploration.css';
 @import 'procedural-generation.css';
+@import 'footer.css';
 
 :root {
   --link-color: #155b98;
@@ -23,6 +24,7 @@ html {
 body {
   font-family: var(--sans);
   color: #333;
+  background: #000;
   margin: 0;
 }
 
