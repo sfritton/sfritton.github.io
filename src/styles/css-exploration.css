@@ -6,103 +6,84 @@
 @import 'css-explorations/parallax.css';
 
 #css-exploration {
-  --demo-height: 600px;
+  --content-height: 400px;
 
   scroll-snap-align: none;
   padding: 0;
   background: #fff;
 
-  & .tablist {
-    display: none;
+  & .tab-title {
+    scroll-snap-align: start;
+    padding: 40px 20px 20px;
+
+    & h3 {
+      margin: 0;
+      margin-bottom: 8px;
+    }
+    
+    & p {
+      margin: 0;
+    }
   }
 
-  & .demo > * {
-    scroll-snap-align: start;
+  & .tab-content {
+    display: flex;
+    min-height: var(--content-height);
   }
 
   @media (min-width: 668px) {
-    display: flex;
-    gap: 16px;
+    --content-height: 600px;
 
-    & .tablist {
-      display: block;
+    & .tab-title {
+      min-height: var(--content-height);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: right;
+      padding: 0 20px;
+      opacity: 0.6;
+      position: relative;
+      transition: opacity 300ms;
       width: 33vw;
-      flex-shrink: 0;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      
-      & li {
-        height: var(--demo-height);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-align: right;
-        padding: 0 20px;
-        margin: 0;
-        opacity: 0.6;
-        transform-origin: center right;
-        position: relative;
+
+      &::after {
+        position: absolute;
+        z-index: 1;
+        opacity: 0;
         transition: opacity 300ms;
-        scroll-snap-align: start;
-        cursor: pointer;
+        top: calc(50% - 32px);
+        right: 0;
+        background: #58e;
+        content: '';
+        height: 64px;
+        width: 8px;
+        border-radius: 4px;
+        display: inline-block;
         
-        & h3 {
-          margin: 0;
-          margin-bottom: 8px;
-        }
+      }
         
-        & p {
-          margin: 0;
-        }
+      &.selected {
+        opacity: 1;
         
-          &::after {
-            position: absolute;
-            z-index: 1;
-            opacity: 0;
-            transition: opacity 300ms;
-            top: calc(50% - 32px);
-            right: 0;
-            background: #58e;
-            content: '';
-            height: 64px;
-            width: 8px;
-            border-radius: 4px;
-            display: inline-block;
-            
-          }
-        
-        &.selected {
+        &::after {
           opacity: 1;
-          
-          &::after {
-            opacity: 1;
-          }
         }
       }
     }
 
-    & .demo {
+    & .tab-content:not(.selected) {
+      display: none;
+    }
+    
+    & .tab-content.selected {
       position: sticky;
       top: var(--header-height);
+      margin-left: calc(33vw + 16px);
+      margin-top: calc(-1 * var(--content-height));
       background: #f7f7f7;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: var(--demo-height);
 
       & > * {
-        scroll-snap-align: none;
-      }
-      
-      & > *:not(.selected) {
-        display: none;
-      }
-
-      & > .selected {
-        animation: fadeIn 600ms;
+        animation: fadeIn 300ms;
       }
     }
   }

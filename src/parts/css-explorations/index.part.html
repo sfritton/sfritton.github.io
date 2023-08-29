@@ -1,43 +1,66 @@
 <section id="css-exploration">
-  <ul class="tablist">
-    <li class="selected">
-      <h3>Bouncing Block</h3>
-      <p>A pure CSS animation, packed full of character.</p>
-    </li>
-    <li>
-      <h3>Folded Note</h3>
-      <p>Click the note to read the secret message.</p>
-    </li>
-    <li>
-      <h3>Confetti</h3>
-      <p>Physics-based, generated in real-time.</p>
-    </li>
-    <li>
-      <h3>Slot Machine</h3>
-      <p>Error, quisquam repudiandae! Dolore, soluta?</p>
-    </li>
-    <li>
-      <h3>Theme Toggle</h3>
-      <p>Deserunt iure laborum officia autem!</p>
-    </li>
-    <li>
-      <h3>Keyboard</h3>
-      <p>Start typing, and watch it keep up.</p>
-    </li>
-    <li>
-      <h3>Parallax</h3>
-      <p>Itaque cumque a rem doloribus.</p>
-    </li>
-  </ul>
-  <div class="demo">
-    <div class="bouncing-block-container selected">
+  <!-- Bouncing Block -->
+  <div class="tab-title">
+    <h3>Bouncing Block</h3>
+    <p>A pure CSS animation, packed full of character.</p>
+  </div>
+  <div class="tab-content">
+    <div class="bouncing-block-container">
       <div class="block"></div>
     </div>
+  </div>
+
+  <!-- Folded Note -->
+  <div class="tab-title folded-note-title">
+    <h3>Folded Note</h3>
+    <p>Click the note to read the secret message.</p>
+  </div>
+  <div class="tab-content">
     <include src="./src/parts/css-explorations/folded-note.part.html"></include>
+  </div>
+
+  <!-- Confetti -->
+  <div class="tab-title">
+    <h3>Confetti</h3>
+    <p>Physics-based, generated in real-time.</p>
+  </div>
+  <div class="tab-content">
     <canvas class="confetti"></canvas>
+  </div>
+
+  <!-- Slot Machine -->
+  <div class="tab-title slot-machine-title">
+    <h3>Slot Machine</h3>
+    <p>Error, quisquam repudiandae! Dolore, soluta?</p>
+  </div>
+  <div class="tab-content slot-machine-content">
     <include src="./src/parts/css-explorations/slot-machine.part.html"></include>
+  </div>
+
+  <!-- Theme Toggle -->
+  <div class="tab-title theme-toggle-title">
+    <h3>Theme Toggle</h3>
+    <p>Deserunt iure laborum officia autem!</p>
+  </div>
+  <div class="tab-content">
     <include src="./src/parts/css-explorations/theme-toggle.part.html"></include>
+  </div>
+
+  <!-- Keyboard -->
+  <div class="tab-title">
+    <h3>Keyboard</h3>
+    <p>Start typing, and watch it keep up.</p>
+  </div>
+  <div class="tab-content">
     <include src="./src/parts/css-explorations/keyboard.part.html"></include>
+  </div>
+
+  <!-- Parallax -->
+  <div class="tab-title parallax-title">
+    <h3>Parallax</h3>
+    <p>Itaque cumque a rem doloribus.</p>
+  </div>
+  <div class="tab-content parallax-content">
     <include src="./src/parts/css-explorations/parallax.part.html"></include>
   </div>
 </section>

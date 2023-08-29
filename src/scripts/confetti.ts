@@ -73,8 +73,7 @@ function randomFromTo(from: number, to: number) {
 
 export class ConfettiMaker {
   private context: CanvasRenderingContext2D | null;
-  private readonly width: number;
-  private readonly height: number;
+  private readonly canvas: HTMLCanvasElement;
   private readonly center?: Coordinates;
   private readonly duration = 3;
   private readonly maxParticles: number;
@@ -95,12 +94,18 @@ export class ConfettiMaker {
       center?: Coordinates;
     },
   ) {
+    this.canvas = canvas;
     this.context = canvas.getContext('2d');
-    this.width = canvas.width;
-    this.height = canvas.height;
     this.maxParticles = config?.maxParticles ?? 100;
     this.delay = config?.delay ?? 0;
     this.center = config?.center;
+  }
+
+  public get width() {
+    return this.canvas.width;
+  }
+  public get height() {
+    return this.canvas.height;
   }
 
   public createConfettis() {
@@ -251,11 +256,6 @@ export class ConfettiMaker {
 }
 
 export const canvas = document.querySelector<HTMLCanvasElement>('canvas.confetti');
-
-if (canvas) {
-  canvas.width = canvas.parentElement?.clientWidth ?? 300;
-  canvas.height = canvas.parentElement?.clientHeight ?? 600;
-}
 
 export const confetti = canvas
   ? new ConfettiMaker(canvas, {

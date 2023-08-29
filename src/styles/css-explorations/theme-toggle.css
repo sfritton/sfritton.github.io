@@ -1,24 +1,27 @@
-.theme-toggle-container {
-  --background-dark: #12314d;
-  --background-darker: #0b1f32;
-  --border: #666;
+:root {
+  --theme-toggle-bg-dark: #12314d;
+  --theme-toggle-bg-darker: #0b1f32;
+  --theme-toggle-border: #666;
+}
 
-  background: var(--background-dark);
+.theme-toggle-container {
+
+  background: var(--theme-toggle-bg-dark);
   width: 100%;
-  height: 100%;
+  height: var(--content-height);
   display: flex;
   justify-content: center;
   align-items: center;
 
   & .themeToggle {
     position: relative;
-    background: var(--background-darker);
+    background: var(--theme-toggle-bg-darker);
     border: none;
     cursor: pointer;
     height: 72px;
     width: 120px;
     border-radius: 40px;
-    border: 1px solid var(--border);
+    border: 1px solid var(--theme-toggle-border);
 
     & .label {
       color: #fff;
@@ -37,8 +40,8 @@
       position: absolute;
       display: inline-block;
       padding: 17px;
-      background: var(--background-dark);
-      border: 1px solid var(--border);
+      background: var(--theme-toggle-bg-dark);
+      border: 1px solid var(--theme-toggle-border);
       border-radius: 50%;
       top: var(--offset);
       left: var(--offset);
@@ -111,3 +114,9 @@
   }
 }
 
+@media (max-width: 667px) {
+  .theme-toggle-title {
+    background: var(--theme-toggle-bg-dark);
+    color: #fff;
+  }
+}

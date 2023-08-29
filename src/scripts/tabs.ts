@@ -1,8 +1,9 @@
-import { confetti } from './confetti';
+import { confetti, canvas } from './confetti';
 import { paperCleanup } from './folded-note';
 
-const tabList = document.querySelector<HTMLElement>('.tablist');
-const demo = document.querySelector<HTMLElement>('.demo');
+const tabs = document.getElementById('css-exploration');
+
+// TODO: mobile
 const TAB_HEIGHT = 600;
 const HEADER_HEIGHT = 64;
 const SELECTED_CLASS_NAME = 'selected';
@@ -20,6 +21,10 @@ const TABS: Record<string, Tab | undefined> = {
   // Confetti
   '2': {
     init: () => {
+      if (canvas) {
+        canvas.width = canvas.parentElement?.clientWidth ?? 300;
+        canvas.height = canvas.parentElement?.clientHeight ?? 400;
+      }
       confetti?.createConfettis();
       confetti?.start();
     },
@@ -30,41 +35,35 @@ const TABS: Record<string, Tab | undefined> = {
 let tabIndex = -1;
 
 export const updateSelectedTabBasedOnScrollPosition = (scrollPosition: number) => {
-  if (!tabList || !demo) return;
+  if (!tabs) return;
 
-  const areTabsVisible = window.getComputedStyle(tabList, null).display !== 'none';
-  if (!areTabsVisible) return;
+  const tabTitles = Array.from(tabs.querySelectorAll('.tab-title'));
+  const tabContents = Array.from(tabs.querySelectorAll('.tab-content'));
 
   const previousTabIndex = tabIndex;
 
-  const tabListStart = tabList.offsetTop;
-  const scrollDistance = scrollPosition - tabListStart + HEADER_HEIGHT + TAB_HEIGHT / 2;
+  const tabListStart = tabs.offsetTop;
+  // TODO: how can we get this transition to happen between tabs?
+  const scrollDistance = scrollPosition - tabListStart + HEADER_HEIGHT; // + TAB_HEIGHT / 2;
   tabIndex = Math.floor(scrollDistance / TAB_HEIGHT);
 
-  const selectedTab = tabList.children.item(tabIndex);
-  const selectedDemo = demo.children.item(tabIndex);
+  const selectedTabTitle = tabTitles[tabIndex];
+  const selectedTabContent = tabContents[tabIndex];
 
   // If we can't find the tab, or if it's already selected, do nothing
   if (
-    !selectedTab ||
-    selectedTab.classList.contains(SELECTED_CLASS_NAME) ||
+    !selectedTabTitle ||
+    selectedTabTitle.classList.contains(SELECTED_CLASS_NAME) ||
     tabIndex === previousTabIndex
   )
     return;
 
-  // Update the tab
-  Array.from(tabList.children).forEach((tab) => tab.classList.remove(SELECTED_CLASS_NAME));
-  selectedTab.classList.add(SELECTED_CLASS_NAME);
+  // Update the tab & content
+  Array.from(tabs.children).forEach((tab) => tab.classList.remove(SELECTED_CLASS_NAME));
+  selectedTabTitle.classList.add(SELECTED_CLASS_NAME);
+  selectedTabContent.classList.add(SELECTED_CLASS_NAME);
 
-  // Update the content
-  Array.from(demo.children).forEach((child, index) => {
-    child.classList.remove(SELECTED_CLASS_NAME);
-
-    if (index === previousTabIndex) {
-      TABS[String(index)]?.cleanup?.();
-    }
-  });
-
-  selectedDemo?.classList.add(SELECTED_CLASS_NAME);
+  // Run init & cleanup
+  TABS[String(previousTabIndex)]?.cleanup?.();
   TABS[String(tabIndex)]?.init?.();
 };

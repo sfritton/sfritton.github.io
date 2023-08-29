@@ -1,16 +1,18 @@
 .bouncing-block-container {
   --cycle: 700ms;
-  --bounces-per-side: 8;
+  --bounces-per-side: 4;
   --time-across: calc(var(--cycle) * var(--bounces-per-side));
   --path-length: calc(100cqw + 80px);
 
   container-type: inline-size;
-  background: #f7f7f7;
   position: relative;
-  height: 400px;
   width: 100%;
-  min-height: var(--demo-height);
+  min-height: var(--content-height);
   overflow: hidden;
+
+  @media (min-width: 668px) {
+    bounces-per-side: 8;
+  }
 
   & .block {
     position: absolute;
