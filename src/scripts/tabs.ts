@@ -1,9 +1,9 @@
+import debounce from 'debounce';
+
 import { confetti, canvas } from './confetti';
 import { paperCleanup } from './folded-note';
 
-const tabs = document.getElementById('css-exploration');
-
-// TODO: mobile
+const MIN_WIDTH = 668;
 const TAB_HEIGHT = 600;
 const HEADER_HEIGHT = 64;
 const SELECTED_CLASS_NAME = 'selected';
@@ -33,9 +33,23 @@ const TABS: Record<string, Tab | undefined> = {
 };
 
 let tabIndex = -1;
+let observer: IntersectionObserver | undefined;
+
+const tabs = document.getElementById('css-exploration');
+const tabContents = Array.from(tabs?.querySelectorAll<HTMLDivElement & Tab>('.tab-content') ?? []);
+
+tabContents?.forEach((tab, index) => {
+  tab.init = TABS[String(index)]?.init;
+  tab.cleanup = TABS[String(index)]?.cleanup;
+});
+
+const getIsMobile = () => {
+  const viewportWidth = Math.max(document.documentElement.clientWidth ?? 0, window.innerWidth ?? 0);
+  return viewportWidth < MIN_WIDTH;
+};
 
 export const updateSelectedTabBasedOnScrollPosition = (scrollPosition: number) => {
-  if (!tabs) return;
+  if (!tabs || getIsMobile()) return;
 
   const tabTitles = Array.from(tabs.querySelectorAll('.tab-title'));
   const tabContents = Array.from(tabs.querySelectorAll('.tab-content'));
@@ -67,3 +81,39 @@ export const updateSelectedTabBasedOnScrollPosition = (scrollPosition: number) =
   TABS[String(previousTabIndex)]?.cleanup?.();
   TABS[String(tabIndex)]?.init?.();
 };
+
+const setupIntersectionObserver = () => {
+  if (observer || !getIsMobile()) return;
+
+  observer = new IntersectionObserver(
+    (entries: IntersectionObserverEntry[]) => {
+      if (!getIsMobile()) return;
+
+      entries.forEach((entry) => {
+        const tab = entry.target as Element & Tab;
+
+        const isTabVisible = tab.classList.contains(SELECTED_CLASS_NAME);
+
+        // tab is visible for the first time
+        if (entry.isIntersecting && !isTabVisible) {
+          tab.classList.add(SELECTED_CLASS_NAME);
+          tab.init?.();
+        }
+
+        // tab is invisible for the first time
+        else if (!entry.isIntersecting && isTabVisible) {
+          tab.classList.remove(SELECTED_CLASS_NAME);
+          tab.cleanup?.();
+        }
+      });
+    },
+    { threshold: 0.75 },
+  );
+
+  tabContents?.forEach((tab) => {
+    observer?.observe(tab);
+  });
+};
+
+setupIntersectionObserver();
+window.addEventListener('resize', debounce(setupIntersectionObserver, 200));

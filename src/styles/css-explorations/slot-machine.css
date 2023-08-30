@@ -55,14 +55,21 @@
       position: absolute;
       top: 0;
       left: 0;
-      animation: spin 400ms linear var(--digit);
       opacity: 0;
     }
-
-    & > span {
-      animation: hideMe calc(400ms * var(--digit)) linear;
-    }
   }
+}
+
+.selected .slot-machine .digit {
+
+  &::after {
+    animation: spin 400ms linear var(--digit);
+  }
+
+  & > span {
+    animation: hideMe calc(400ms * var(--digit)) linear;
+  }
+
 }
 
 @media (max-width: 667px) {

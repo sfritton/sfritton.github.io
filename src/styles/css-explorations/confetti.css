@@ -1,0 +1,8 @@
+.confetti-container {
+  min-height: var(--demo-height);
+  width: 100%;
+
+  & .confetti {
+    display: block;
+  }
+}
