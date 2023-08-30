@@ -40,6 +40,12 @@
   }
 }
 
+.parallax-content {
+  background: linear-gradient(#091c2a 50%, #85969f 50%);
+  display: flex;
+  align-items: center;
+}
+
 @media (max-width: 667px) {
   .parallax-title {
     background: #091c2a;

@@ -11,7 +11,9 @@
   overflow: hidden;
 
   @media (min-width: 668px) {
-    bounces-per-side: 8;
+    --bounces-per-side: 8;
+
+    background: #f7f7f7;
   }
 
   & .block {

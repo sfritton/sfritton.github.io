@@ -1,5 +1,6 @@
 @import 'css-explorations/folded-note.css';
 @import 'css-explorations/bouncing-block.css';
+@import 'css-explorations/confetti.css';
 @import 'css-explorations/slot-machine.css';
 @import 'css-explorations/theme-toggle.css';
 @import 'css-explorations/keyboard.css';
@@ -80,7 +81,7 @@
       top: var(--header-height);
       margin-left: calc(33vw + 16px);
       margin-top: calc(-1 * var(--content-height));
-      background: #f7f7f7;
+      /* background: #f7f7f7; */
 
       & > * {
         animation: fadeIn 300ms;

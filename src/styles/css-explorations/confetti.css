@@ -1,8 +1,5 @@
-.confetti-container {
-  min-height: var(--demo-height);
-  width: 100%;
-
-  & .confetti {
-    display: block;
+@media (min-width: 668px) {
+  .confetti-content {
+    background: #f7f7f7;
   }
 }

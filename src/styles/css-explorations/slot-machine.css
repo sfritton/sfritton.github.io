@@ -72,16 +72,16 @@
 
 }
 
+.slot-machine-content {
+  background: #f7f7f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media (max-width: 667px) {
   .slot-machine-title {
     background: #f7f7f7;
-  }
-
-  .slot-machine-content {
-    background: #f7f7f7;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 }
 

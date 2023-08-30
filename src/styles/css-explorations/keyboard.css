@@ -1,37 +1,44 @@
-.keyboard {
-  --width: 1;
+.keyboard-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f7f7f7;
 
-  box-shadow: 0 0 4px #0005;
-  padding: 8px;
-  padding-top: 4px;
-  width: 671px;
-  border-radius: 4px;
-  background: #fff;
+  & .keyboard {
+    --width: 1;
 
-  & div {
-    margin-top: 8px;
-  }
-
-  & .key {
+    box-shadow: 0 0 4px #0005;
+    padding: 8px;
+    padding-top: 4px;
+    width: 671px;
+    border-radius: 4px;
     background: #fff;
-    border: 1px solid #0001;
-    display: inline-block;
-    padding: 8px 0;
-    width: calc(var(--width) * 36px);
-    text-align: center;
-    margin-left: 4px;
-    box-shadow: 0 4px 4px #0005;
-    transition: 100ms all;
-    cursor: pointer;
-    position: relative;
-    border-radius: 3px;
-    margin-bottom: 4px;
 
-    &.pressed,
-    &:active {
-      box-shadow: 0 0 1px 1px #0002;
-      transform: translateY(4px);
-      background: #f7f7f7;
+    & div {
+      margin-top: 8px;
+    }
+
+    & .key {
+      background: #fff;
+      border: 1px solid #0001;
+      display: inline-block;
+      padding: 8px 0;
+      width: calc(var(--width) * 36px);
+      text-align: center;
+      margin-left: 4px;
+      box-shadow: 0 4px 4px #0005;
+      transition: 100ms all;
+      cursor: pointer;
+      position: relative;
+      border-radius: 3px;
+      margin-bottom: 4px;
+
+      &.pressed,
+      &:active {
+        box-shadow: 0 0 1px 1px #0002;
+        transform: translateY(4px);
+        background: #f7f7f7;
+      }
     }
   }
 }
