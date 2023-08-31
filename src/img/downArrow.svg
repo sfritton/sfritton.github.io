@@ -6,8 +6,10 @@
   </defs>
   <style>
     path {
+      --base-delay: 3s;
+
       animation-duration: 300ms, 3s;
-      animation-delay: 1.1s, 1.4s;
+      animation-delay: var(--base-delay), calc(var(--base-delay) + 300ms);
       animation-fill-mode: both;
       animation-timing-function: ease-out, ease;
       animation-name: fadeIn, bounce;

@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/sfritton/sfritton.github.io#readme",
   "devDependencies": {
+    "@parcel/transformer-inline-string": "^2.9.3",
     "@types/debounce": "^1.2.1",
     "parcel": "^2.9.3",
     "posthtml-doctype": "^1.1.1",

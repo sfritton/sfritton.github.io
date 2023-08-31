@@ -3,6 +3,8 @@
 }
 
 header {
+  --center: calc(min(1282px, 100vw) / 2);
+
   background: #000;
   color: #fff;
   width: 100vw;
@@ -22,12 +24,13 @@ header {
   margin: 0 auto;
 
   & .logo {
-    --center: calc(min(1282px, 100vw) / 2);
+    --x: calc(var(--center) - 50% - 16px);
+    --y: -12vh;
     max-width: 60vw;
     max-height: 512px;
     height: 100%;
     transition: transform 300ms;
-    transform: translateX(calc(var(--center) - 50% - 16px));
+    transform: translate(var(--x), var(--y));
   }
 
   & .down-arrow {
@@ -56,6 +59,29 @@ header {
       margin: 0;
       padding-bottom: 2px;
       font-weight: normal;
+    }
+
+    & .tagline {
+      position: absolute;
+      left: 0;
+      right: 0;
+      width: 300px;
+      margin: 0 auto;
+      text-align: center;
+      top: 72%;
+      font-family: var(--serif);
+      font-size: 20px;
+      line-height: 1.6;
+      transition: opacity 300ms;
+
+      & > div {
+        animation: fadeIn 900ms 1.1s both;
+      }
+
+      @media (min-width: 668px) {
+        font-size: 24px;
+        width: 400px;
+      }
     }
 
     & nav {
@@ -98,11 +124,23 @@ header {
     }
   }
 
+  &.has-scrolled {
+    & .logo {
+      --y: 0;
+    }
+
+    & .tagline,
+    & .down-arrow {
+      opacity: 0;
+    }
+  }
+
   &.as-nav {
     & .logo {
       transform: none;
     }
 
+    & .tagline,
     & .down-arrow {
       display: none;
     }
@@ -123,13 +161,15 @@ header {
       }
     }
   }
-
-  &.has-scrolled .down-arrow {
-    opacity: 0;
-  }
 }
 
 .header-placeholder {
   height: 100vh;
   background: #000;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
 }
