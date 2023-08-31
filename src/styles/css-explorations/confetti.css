@@ -4,4 +4,8 @@
   @media (min-width: 668px) {
     background: #f7f7f7;
   }
+
+  .confetti {
+    max-width: 100%;
+  }
 }

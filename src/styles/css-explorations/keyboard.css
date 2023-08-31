@@ -1,29 +1,35 @@
 .keyboard-content {
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  padding-bottom: 8px;
-  background: #d1d4dc;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
   overflow: hidden;
 
   & .keyboard {
     --width: 1;
 
+    width: 100%;
+    padding: 32px 1% 8px;
+    background: #d1d4dc;
 
     & div {
       display: flex;
       justify-content: center;
       margin-top: 20px;
-      gap: 1.5vw;
+      gap: 1.5%;
+
+      &:nth-child(2) {
+        margin-top: 0;
+      }
     }
 
     & .key {
-      width: calc(var(--width) * 8.2vw);
-      font-size: 6vw;
+      width: calc(var(--width) * 8.2%);
+      font-size: min(6vw, 32px);
       background: #fff;
       display: inline-block;
       padding: 10px 0 6px;
-      height: 12vw;
+      height: min(12vw, 64px);
       text-align: center;
       box-shadow: 0 2px #0005;
       border: none;
@@ -41,7 +47,7 @@
 
       &.hidden-on-medium {
         background: #abb5bd;
-        font-size: 4vw;
+        font-size: min(4vw, 20px);
       }
 
       &.shift-left {
@@ -57,16 +63,16 @@
 
       &.smiley {
         padding: 6px 0 10px;
-        font-size: 7vw;
+        font-size: min(7vw, 32px);
       }
 
       &.spacebar {
         flex-grow: 1;
-        font-size: 4vw;
+        font-size: min(4vw, 20px);
       }
     }
 
-    @media (max-width: 667px) {
+    @media (max-width: 1065px) {
       & .hidden-on-small {
         display: none;
       }
@@ -78,8 +84,11 @@
   }
 
   @media (min-width: 668px) {
-    background: #f7f7f7;
-    align-items: center;
+    background: #f7f7fa;
+  }
+
+  @media (min-width: 1066px) {
+    justify-content: center;
 
     & .keyboard {
       box-shadow: 0 0 4px #0005;
@@ -93,6 +102,10 @@
         margin-top: 8px;
         gap: 2px;
         justify-content: space-between;
+
+        &:nth-child(2) {
+          margin-top: 8px;
+        }
       }
 
       & .key {
@@ -118,6 +131,22 @@
       & .hidden-on-medium {
         display: none;
       }
+    }
+  }
+
+  & .skip-keyboard {
+    display: block;
+    margin: 8px 0;
+    opacity: 0;
+
+    @media(min-width: 1066px) {
+      margin-bottom: 16px;
+      margin-top: -34px;
+    }
+
+    &:focus {
+      outline: none;
+      opacity: 1;
     }
   }
 }

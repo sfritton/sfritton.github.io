@@ -12,6 +12,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background 300ms 200ms;
 
   & .themeToggle {
     position: relative;
@@ -22,6 +23,7 @@
     width: 120px;
     border-radius: 40px;
     border: 1px solid var(--theme-toggle-border);
+    transition: background 300ms, border-color 300ms;
 
     & .label {
       color: #fff;
@@ -32,7 +34,7 @@
       right: 0;
       text-align: center;
       opacity: 0;
-      transition: opacity 300ms;
+      transition: opacity 300ms, color 300ms 200ms;
     }
 
     & .icon {
@@ -86,8 +88,20 @@
   }
 
   &[data-theme="light"] {
+    background: #f7f7f7;
+
+    & .themeToggle {
+      background: #d6d6d6;
+      border-color: transparent;
+    }
+
     & .icon {
       background: #fff;
+      border-color: #d6d6d6;
+    }
+
+    & .label {
+      color: #333;
     }
 
     & #shadow-circle {

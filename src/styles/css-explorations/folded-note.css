@@ -54,6 +54,11 @@
       transition: transform var(--duration) var(--delay) var(--timing-function);
       cursor: pointer;
 
+      &:focus {
+        outline: none;
+      }
+
+      &:focus-visible,
       &:hover {
         text-decoration: underline;
       }
