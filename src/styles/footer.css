@@ -1,10 +1,8 @@
 footer {
+  scroll-snap-align: start;
   background: #000;
   color: #fff;
-  min-height: 100vh;
-  position: sticky;
-  bottom: 0;
-  z-index: -1;
+  min-height: calc(100vh - var(--header-height));
   display: flex;
   flex-direction: column;
   justify-content: center;

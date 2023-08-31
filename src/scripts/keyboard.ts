@@ -10,7 +10,7 @@ const specialCharacters: Record<string, string> = {
   Comma: ',',
   Period: '.',
   Slash: '/',
-  Space: '_',
+  Space: 'space',
 };
 
 const getKeyLabel = (code: string) => {
@@ -30,6 +30,7 @@ const buttons = document.querySelectorAll<HTMLButtonElement>('.keyboard button')
 
 const findButton = (code: string) => {
   const keyLabel = getKeyLabel(code);
+  console.log({ code, keyLabel });
   for (let button of buttons) {
     if (button.innerText.toLowerCase().replace(/\s/, '') === keyLabel.toLowerCase()) return button;
   }

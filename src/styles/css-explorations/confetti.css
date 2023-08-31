@@ -1,5 +1,7 @@
-@media (min-width: 668px) {
-  .confetti-content {
+.confetti-content {
+  height: var(--content-height);
+
+  @media (min-width: 668px) {
     background: #f7f7f7;
   }
 }

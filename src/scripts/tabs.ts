@@ -57,8 +57,7 @@ export const updateSelectedTabBasedOnScrollPosition = (scrollPosition: number) =
   const previousTabIndex = tabIndex;
 
   const tabListStart = tabs.offsetTop;
-  // TODO: how can we get this transition to happen between tabs?
-  const scrollDistance = scrollPosition - tabListStart + HEADER_HEIGHT; // + TAB_HEIGHT / 2;
+  const scrollDistance = scrollPosition - tabListStart + HEADER_HEIGHT + TAB_HEIGHT / 2;
   tabIndex = Math.floor(scrollDistance / TAB_HEIGHT);
 
   const selectedTabTitle = tabTitles[tabIndex];

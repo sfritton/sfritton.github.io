@@ -35,6 +35,15 @@
   @media (min-width: 668px) {
     --content-height: 600px;
 
+    &:after {
+      content: '';
+      background: #000;
+      z-index: -3;
+      height: calc(var(--content-height) / 2);
+      display: block;
+      margin-bottom: calc(var(--content-height) / -2);
+    }
+
     & .tab-title {
       min-height: var(--content-height);
       display: flex;
@@ -81,11 +90,16 @@
       top: var(--header-height);
       margin-left: calc(33vw + 16px);
       margin-top: calc(-1 * var(--content-height));
-      /* background: #f7f7f7; */
 
       & > * {
         animation: fadeIn 300ms;
       }
+    }
+
+    /* all tab-contents, except the first */
+    & .tab-content ~ .tab-content.selected {
+      margin-top: calc(-1.5 * var(--content-height));
+      margin-bottom: calc(0.5 * var(--content-height));
     }
   }
 }

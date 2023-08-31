@@ -1,5 +1,5 @@
 <div class="keyboard">
-  <div>
+  <div class="hidden-on-small">
     <button class="key">`</button>
     <button class="key">1</button>
     <button class="key">2</button>
@@ -15,8 +15,8 @@
     <button class="key">=</button>
     <button class="key" style="--width: 2">backspace</button>
   </div>
-  <div>
-    <button class="key" style="--width: 1.5">tab</button>
+  <div style="justify-content: space-between">
+    <button class="key hidden-on-small" style="--width: 1.5">tab</button>
     <button class="key">Q</button>
     <button class="key">W</button>
     <button class="key">E</button>
@@ -27,12 +27,12 @@
     <button class="key">I</button>
     <button class="key">O</button>
     <button class="key">P</button>
-    <button class="key">[</button>
-    <button class="key">]</button>
-    <button class="key" style="--width: 1.5">\</button>
+    <button class="key hidden-on-small">[</button>
+    <button class="key hidden-on-small">]</button>
+    <button class="key hidden-on-small" style="--width: 1.5">\</button>
   </div>
   <div>
-    <button class="key" style="--width: 2">caps lock</button>
+    <button class="key hidden-on-small" style="--width: 2">caps lock</button>
     <button class="key">A</button>
     <button class="key">S</button>
     <button class="key">D</button>
@@ -42,13 +42,14 @@
     <button class="key">J</button>
     <button class="key">K</button>
     <button class="key">L</button>
-    <button class="key">;</button>
-    <button class="key">'</button>
-    <button class="key" style="--width: 2.25">enter</button>
+    <button class="key hidden-on-small">;</button>
+    <button class="key hidden-on-small">'</button>
+    <button class="key hidden-on-small" style="--width: 2.25">enter</button>
   </div>
   <div>
-    <button class="key" style="--width: 2.75">
-      shift<span class="hidden" aria-hidden="true">left</span>
+    <button class="key shift-left">
+      <span class="hidden-on-small">shift<span class="hidden" aria-hidden="true">left</span></span
+      ><span class="hidden-on-medium">⇪</span>
     </button>
     <button class="key">Z</button>
     <button class="key">X</button>
@@ -57,21 +58,25 @@
     <button class="key">B</button>
     <button class="key">N</button>
     <button class="key">M</button>
-    <button class="key">,</button>
-    <button class="key">.</button>
-    <button class="key">/</button>
-    <button class="key" style="--width: 2.7">
+    <button class="key hidden-on-medium backspace">⌫</button>
+    <button class="key hidden-on-small">,</button>
+    <button class="key hidden-on-small">.</button>
+    <button class="key hidden-on-small">/</button>
+    <button class="key hidden-on-small" style="--width: 2.7">
       shift<span class="hidden" aria-hidden="true">right</span>
     </button>
   </div>
   <div style="--width: 1.5">
-    <button class="key">ctrl</button>
-    <button class="key">opt</button>
-    <button class="key">cmd</button>
-    <button class="key" style="--width: 7.55; color: transparent">_</button>
-    <button class="key">cmd</button>
-    <button class="key">fn</button>
-    <button class="key">ctrl</button>
+    <button class="key hidden-on-small">ctrl</button>
+    <button class="key hidden-on-small">opt</button>
+    <button class="key hidden-on-small">cmd</button>
+    <button class="key hidden-on-medium">123</button>
+    <button class="key hidden-on-medium smiley">☺</button>
+    <button class="key spacebar">space</button>
+    <button class="key hidden-on-medium" style="--width: 3">return</button>
+    <button class="key hidden-on-small">cmd</button>
+    <button class="key hidden-on-small">fn</button>
+    <button class="key hidden-on-small">ctrl</button>
   </div>
   <script type="module" src="./scripts/keyboard.ts"></script>
 </div>
