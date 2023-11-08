@@ -34,13 +34,13 @@ const findButton = (code: string) => {
   for (let button of buttons) {
     if (button.innerText.toLowerCase().replace(/\s/, '') === keyLabel.toLowerCase()) return button;
   }
+
+  return undefined;
 };
 
 document.addEventListener('keydown', (e) => findButton(e.code)?.classList.add('pressed'));
 document.addEventListener('keyup', (e) => {
   findButton(e.code)?.classList.remove('pressed');
-  // TODO: remove
-  console.log(document.activeElement);
 });
 
 document.querySelector('.skip-keyboard')?.addEventListener('click', (e) => {
