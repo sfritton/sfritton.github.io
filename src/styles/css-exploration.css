@@ -43,7 +43,7 @@
   @media (min-width: 668px) {
     --content-height: 600px;
 
-    /* TODO: remove white-space between parallax and footer */
+    /* TODO: last demo overlaps footer in Chrome */
     &:after {
       content: '';
       /* background: #000; */

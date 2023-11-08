@@ -95,7 +95,8 @@
     & .paper-bottom-left,
     & .paper-bottom-right {
       transform-origin: top;
-      transform: rotateX(180deg);
+      /* Safari rotates the wrong direction if set to 180deg */
+      transform: rotateX(179deg);
       opacity: 0;
       transition-property: transform, opacity, background-position;
       transition-duration: var(--duration), 0s, 0s;
