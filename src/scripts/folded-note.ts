@@ -18,13 +18,6 @@ button?.addEventListener('click', () => {
   paper?.classList.add('open');
 });
 
-paper?.addEventListener('transitionend', (a) => {
-  transitionCount++;
-  if (transitionCount >= 16) {
-    paper.style.setProperty('--background-image', 'none');
-  }
-});
-
 export const paperCleanup = () => {
   paper?.classList.remove('open');
 };
