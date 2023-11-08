@@ -43,14 +43,14 @@
   @media (min-width: 668px) {
     --content-height: 600px;
 
-    /* TODO: last demo overlaps footer in Chrome */
+    /* TODO: last demo overlaps footer in Chrome: only on work computer? */
     &:after {
       content: '';
-      /* background: #000; */
+      background: #000;
       z-index: -3;
       height: calc(var(--content-height) / 2);
       display: block;
-      /* margin-bottom: calc(var(--content-height) / -2); */
+      margin-bottom: calc(var(--content-height) / -2);
     }
 
     & .tab-title {
