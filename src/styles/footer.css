@@ -11,6 +11,9 @@ footer {
   gap: 8vh;
   text-align: center;
 
+  /* This fixes the Chrome bug where the selected tab obscures the footer */
+  position: relative;
+
   & div {
     display: flex;
     flex-direction: column;

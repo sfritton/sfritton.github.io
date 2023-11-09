@@ -43,7 +43,6 @@
   @media (min-width: 668px) {
     --content-height: 600px;
 
-    /* TODO: last demo overlaps footer in Chrome: only on work computer? */
     &:after {
       content: '';
       background: #000;
