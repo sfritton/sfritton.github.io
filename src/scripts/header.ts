@@ -1,6 +1,12 @@
 const header = document.querySelector<HTMLElement>('header');
 
-const setHeaderHeight = (height: number) => (header ? (header.style.height = `${height}vh`) : '');
+const setHeaderHeight = (height: number) => {
+  if (!header) return;
+
+  const unit = CSS.supports('height', '100svh') ? 'svh' : 'vh';
+
+  header.style.height = `${height}${unit}`;
+};
 
 export const updateHeaderBasedOnScrollPosition = (scrollPosition: number) => {
   const windowHeight = window.innerHeight;

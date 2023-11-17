@@ -10,7 +10,9 @@ header {
   width: 100vw;
   min-height: var(--header-height);
   max-height: 100vh;
+  max-height: 100svh;
   height: 100vh;
+  height: 100svh;
   display: flex;
   align-items: center;
   gap: 16px;
@@ -26,6 +28,7 @@ header {
   & .logo {
     --x: calc(var(--center) - 50% - 16px);
     --y: -12vh;
+    --y: -12svh;
     max-width: 60vw;
     max-height: 512px;
     height: 100%;
@@ -36,6 +39,7 @@ header {
   & .down-arrow {
     position: absolute;
     bottom: 1vh;
+    bottom: 1svh;
     width: 5vw;
     max-width: 64px;
     max-height: 64px;
@@ -165,6 +169,7 @@ header {
 
 .header-placeholder {
   height: 100vh;
+  height: 100svh;
   background: #000;
 }
 
