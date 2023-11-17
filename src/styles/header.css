@@ -26,7 +26,7 @@ header {
   margin: 0 auto;
 
   & .logo {
-    --x: calc(var(--center) - 50% - 16px);
+    --x: calc(var(--center) - 46% - 16px);
     --y: -12vh;
     --y: -12svh;
     max-width: 60vw;
@@ -36,18 +36,22 @@ header {
     transform: translate(var(--x), var(--y));
   }
 
+  & .down-arrow-wrapper {
+    transition: opacity 300ms;
+  }
+
   & .down-arrow {
     position: absolute;
     bottom: 1vh;
     bottom: 1svh;
-    width: 5vw;
-    max-width: 64px;
-    max-height: 64px;
-    height: 5vw;
+    width: 8vw;
+    height: 8vw;
+    max-width: 40px;
+    max-height: 40px;
     margin: 0 auto;
     left: 0;
     right: 0;
-    transition: opacity 300ms;
+    animation: slideDown 900ms 2.2s both;
   }
 
   & .title-and-nav {
@@ -72,17 +76,19 @@ header {
       width: 300px;
       margin: 0 auto;
       text-align: center;
-      top: 72%;
+      top: 54%;
       font-family: var(--serif);
       font-size: 20px;
       line-height: 1.6;
       transition: opacity 300ms;
 
       & > div {
-        animation: fadeIn 900ms 1.1s both;
+        transform: translateY(0);
+        animation: slideDown 900ms 1.3s both;
       }
 
-      @media (min-width: 668px) {
+      @media (min-width: 500px) {
+        top: 62%;
         font-size: 24px;
         width: 400px;
       }
@@ -134,7 +140,7 @@ header {
     }
 
     & .tagline,
-    & .down-arrow {
+    & .down-arrow-wrapper {
       opacity: 0;
     }
   }
@@ -145,7 +151,7 @@ header {
     }
 
     & .tagline,
-    & .down-arrow {
+    & .down-arrow-wrapper {
       display: none;
     }
 
@@ -172,8 +178,9 @@ header {
   background: #000;
 }
 
-@keyframes fadeIn {
+@keyframes slideDown {
   from {
+    transform: translateY(-20px);
     opacity: 0;
   }
 }

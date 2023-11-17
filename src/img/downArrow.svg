@@ -6,28 +6,21 @@
   </defs>
   <style>
     path {
-      --base-delay: 3s;
-
-      animation-duration: 300ms, 3s;
-      animation-delay: var(--base-delay), calc(var(--base-delay) + 300ms);
+      animation-duration: 6s;
+      animation-delay: 2.3s;
       animation-fill-mode: both;
-      animation-timing-function: ease-out, ease;
-      animation-name: fadeIn, bounce;
+      animation-timing-function: ease;
+      animation-name: bounce;
+      animation-iteration-count: infinite;
       filter: url(#shadow);
     }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-    }
-
     @keyframes bounce {
-      0%, 20%, 40%, 100% {
+      0%, 10%, 20%, 100% {
         transform: translateY(0);
       }
 
-      10%, 30% {
+      5%, 15% {
         transform: translateY(20%);
       }
     }
