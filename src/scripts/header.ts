@@ -1,4 +1,5 @@
 const header = document.querySelector<HTMLElement>('header');
+const logo = document.querySelector<HTMLElement>('.logo');
 
 const setHeaderHeight = (height: number) => {
   if (!header) return;
@@ -6,6 +7,8 @@ const setHeaderHeight = (height: number) => {
   const unit = CSS.supports('height', '100svh') ? 'svh' : 'vh';
 
   header.style.height = `${height}${unit}`;
+
+  logo?.style.setProperty('--y', `-${(12 / 100) * height}${unit}`);
 };
 
 export const updateHeaderBasedOnScrollPosition = (scrollPosition: number) => {
