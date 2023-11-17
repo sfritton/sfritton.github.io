@@ -9,7 +9,7 @@ const setHeaderHeight = (height: number) => {
 };
 
 export const updateHeaderBasedOnScrollPosition = (scrollPosition: number) => {
-  const windowHeight = window.innerHeight;
+  const windowHeight = document.documentElement.clientHeight;
   const percentOfHeight = Math.max(1 - scrollPosition / windowHeight, 0) * 100;
   const distanceToHeaderBottom = windowHeight - scrollPosition;
 

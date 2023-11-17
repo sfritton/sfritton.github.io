@@ -44,6 +44,14 @@
   background: linear-gradient(#091c2a 50%, #85969f 50%);
   display: flex;
   align-items: center;
+
+  @media (min-width: 668px) {
+    animation: fadeIn 300ms;
+
+    &.selected > * {
+      animation: none !important;
+    }
+  }
 }
 
 @media (max-width: 667px) {
@@ -60,5 +68,11 @@
 @keyframes roll {
   100% {
     background-position: -1600px 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
 }
