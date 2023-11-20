@@ -6,6 +6,7 @@ export class WaveFunctionCollapse {
   startTime: number = 0;
   draw: () => void;
   cells: Cell[];
+  uncollapsedCells: Cell[];
 
   constructor(draw: (cells: Cell[]) => void, gridWidth: number, gridHeight = gridWidth) {
     this.draw = () => draw(this.cells);
@@ -15,9 +16,15 @@ export class WaveFunctionCollapse {
       (_, i) => new Cell(i % gridWidth, Math.floor(i / gridWidth)),
     );
     this.cells.forEach((cell) => cell.setNeighbors(this.cells, gridWidth, gridHeight));
+    this.uncollapsedCells = [...this.cells];
   }
 
   run = (drawSteps = false) => {
+    console.log(
+      `Generating a ${this.gridWidth}x${this.gridHeight} grid (${
+        this.gridWidth * this.gridHeight
+      } cells) ...`,
+    );
     this.startTime = new Date().getTime();
     // choose random cell and collapse
     const cell = this.cells[Math.floor(Math.random() * this.cells.length)];
@@ -47,15 +54,20 @@ export class WaveFunctionCollapse {
   };
 
   findLowestEntropyCell = () => {
-    const uncollapsedCells = this.cells.filter((cell) => !cell.isCollapsed);
+    this.uncollapsedCells = this.uncollapsedCells.filter((cell) => !cell.isCollapsed);
 
-    if (uncollapsedCells.length === 0) return undefined;
+    if (this.uncollapsedCells.length === 0) return undefined;
 
-    return uncollapsedCells
-      .sort(() => Math.random())
-      .reduce<Cell>((minCell, c) => {
-        if (c.domain.length <= minCell.domain.length) return c;
-        return minCell;
-      }, uncollapsedCells[0]);
+    let lowestEntropyCell = this.uncollapsedCells[0];
+
+    for (let i = 0; i < this.uncollapsedCells.length && lowestEntropyCell.entropy > 2; i++) {
+      const cell = this.uncollapsedCells[i];
+
+      if (cell.entropy < lowestEntropyCell.entropy) {
+        lowestEntropyCell = cell;
+      }
+    }
+
+    return lowestEntropyCell;
   };
 }

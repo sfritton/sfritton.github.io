@@ -48,6 +48,8 @@ export class Cell {
   };
 
   updateDomain = (forceUpdateNeighbors = false) => {
+    if (this.isCollapsed && !forceUpdateNeighbors) return;
+
     const initialDomainSize = this.domain.length;
 
     const validTileSet = new Set(

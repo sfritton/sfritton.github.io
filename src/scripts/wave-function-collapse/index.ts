@@ -4,7 +4,7 @@ import { WaveFunctionCollapse } from './WaveFunctionCollapse';
 
 const CANVAS_SIZE = 1000;
 const CELL_SIZE = 40;
-const CELL_COUNT = CANVAS_SIZE / CELL_SIZE;
+const CELL_COUNT = Math.floor(CANVAS_SIZE / CELL_SIZE);
 const GRAYS = ['#fff', '#eee', '#ddd', '#ccc', '#bbb'].reverse();
 
 const canvas = document.querySelector<HTMLCanvasElement>('canvas.wfc');
@@ -40,4 +40,4 @@ const drawGrid = (cells: Cell[]) => {
 
 const wfc = new WaveFunctionCollapse(drawGrid, CELL_COUNT);
 
-wfc.run(true);
+wfc.run();
