@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Sam Fritton | Portfolio</title>
+    <title>Sam Fritton | Wave Function Collapse</title>
     <meta name="description" content="" />
     <meta
       name="viewport"
@@ -17,17 +17,15 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles/index.css" />
+    <link rel="stylesheet" href="./styles/wave-function-collapse.css" />
   </head>
   <body>
-    <include src="./src/parts/header.part.html"></include>
     <main>
-      <a href="./wave-function-collapse.html">Wave function collapse</a>
-      <include src="./src/parts/star-trek-puzzle.part.html"></include>
-      <include src="./src/parts/css-explorations/index.part.html"></include>
-      <!-- <include src="./src/parts/procedural-generation.part.html"></include>
-      <include src="./src/parts/physics-simulations.part.html"></include> -->
+      <h1 class="wfc-h1">Wave Function Collapse</h1>
+      <canvas class="wfc" width="1000" height="1000">hello</canvas>
     </main>
     <include src="./src/parts/footer.part.html"></include>
     <script type="module" src="./scripts/scroll-driver.ts"></script>
+    <script type="module" src="./scripts/wave-function-collapse/index.ts"></script>
   </body>
 </html>
