@@ -2,6 +2,24 @@ import { Cell } from './Cell';
 
 const ZONE_SIZE = 20;
 
+function shuffleArray(array: any[]) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+/**
+ * Approximate runtime:
+ * - 25x25: 90ms
+ * - 50x50: 380ms
+ * - 100x100: 1500ms
+ * - 200x200: 6000ms
+ * - 400x400: 25000ms
+ * - 800x800: 108000ms
+ *
+ * ~ 0.15ms per cell (or 6000 cells per second) with linear scaling
+ */
 export class WaveFunctionCollapse {
   gridWidth: number;
   gridHeight: number;
@@ -10,7 +28,7 @@ export class WaveFunctionCollapse {
   cells: Cell[];
   uncollapsedCells: Cell[];
   currentZone: Cell[];
-  drawSteps = false;
+  lowestEntropyCellIndex = 0;
 
   constructor(draw: (cells: Cell[]) => void, gridWidth: number, gridHeight = gridWidth) {
     this.draw = () => draw(this.cells);
@@ -29,11 +47,12 @@ export class WaveFunctionCollapse {
       [],
     );
     this.uncollapsedCells = this.currentZone.filter((cell) => !cell.isCollapsed);
+    shuffleArray(this.uncollapsedCells);
   }
 
-  // TODO: the asyc/await slows it down by 20-30%, but is only necessary for when `drawSteps` is true
-  run = async (drawSteps = false) => {
-    this.drawSteps = drawSteps;
+  run = (drawSteps = false) => {
+    if (drawSteps) return this.runAsync();
+
     console.log(
       `Generating a ${this.gridWidth}x${this.gridHeight} grid (${
         this.gridWidth * this.gridHeight
@@ -41,26 +60,47 @@ export class WaveFunctionCollapse {
     );
     this.startTime = new Date().getTime();
 
-    for (let y = 0; y < this.gridHeight; y += ZONE_SIZE - 1) {
-      for (let x = 0; x < this.gridWidth; x += ZONE_SIZE - 1) {
-        await this.runZone(x, y);
+    for (let y = 0; y < this.gridHeight; y += ZONE_SIZE) {
+      for (let x = 0; x < this.gridWidth; x += ZONE_SIZE) {
+        this.runZone(x, y);
       }
     }
     console.log(`Finished in ${new Date().getTime() - this.startTime}ms`);
     this.draw();
   };
 
-  runZone = async (x: number, y: number) => {
+  runAsync = async () => {
+    for (let y = 0; y < this.gridHeight; y += ZONE_SIZE) {
+      for (let x = 0; x < this.gridWidth; x += ZONE_SIZE) {
+        await this.runZoneAsync(x, y);
+      }
+    }
+    this.draw();
+  };
+
+  runZone = (x: number, y: number) => {
     this.setCurrentZone(x, y);
     // choose random cell and collapse
-    const cell = this.currentZone[Math.floor(Math.random() * this.currentZone.length)];
+    const index = Math.floor(Math.random() * this.uncollapsedCells.length);
+    const cell = this.uncollapsedCells[index];
     cell.collapse();
 
     // Step through the zone until all of its cells are collapsed
-    await this.step();
+    this.step();
   };
 
-  step = async () => {
+  runZoneAsync = async (x: number, y: number) => {
+    this.setCurrentZone(x, y);
+    // choose random cell and collapse
+    const index = Math.floor(Math.random() * this.uncollapsedCells.length);
+    const cell = this.uncollapsedCells[index];
+    cell.collapse();
+
+    // Step through the zone until all of its cells are collapsed
+    await this.stepAsync();
+  };
+
+  step = () => {
     const lowestEntropyCell = this.findLowestEntropyCell();
 
     // There are no more cells to collapse
@@ -68,28 +108,35 @@ export class WaveFunctionCollapse {
 
     lowestEntropyCell.collapse();
 
-    if (this.drawSteps) {
-      this.draw();
-      await new Promise((resolve) => requestAnimationFrame(() => resolve(this.step())));
-    } else {
-      await this.step();
-    }
+    this.step();
+  };
+
+  stepAsync = async () => {
+    const lowestEntropyCell = this.findLowestEntropyCell();
+
+    // There are no more cells to collapse
+    if (!lowestEntropyCell) return;
+
+    lowestEntropyCell.collapse();
+
+    this.draw();
+    await new Promise((resolve) => requestAnimationFrame(() => resolve(this.stepAsync())));
   };
 
   findLowestEntropyCell = () => {
-    this.uncollapsedCells = this.uncollapsedCells
-      .filter((cell) => !cell.isCollapsed)
-      .sort(() => Math.random() - 0.5); // add some randomness
+    this.uncollapsedCells = this.uncollapsedCells.filter((cell) => !cell.isCollapsed);
 
     if (this.uncollapsedCells.length === 0) return undefined;
 
     let lowestEntropyCell = this.uncollapsedCells[0];
+    this.lowestEntropyCellIndex = 0;
 
     for (let i = 0; i < this.uncollapsedCells.length && lowestEntropyCell.entropy > 2; i++) {
       const cell = this.uncollapsedCells[i];
 
       if (cell.entropy < lowestEntropyCell.entropy) {
         lowestEntropyCell = cell;
+        this.lowestEntropyCellIndex = i;
       }
     }
 
