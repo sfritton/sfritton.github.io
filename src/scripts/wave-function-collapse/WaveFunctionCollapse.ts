@@ -1,12 +1,16 @@
 import { Cell } from './Cell';
 
+const ZONE_SIZE = 20;
+
 export class WaveFunctionCollapse {
   gridWidth: number;
   gridHeight: number;
-  startTime: number = 0;
+  startTime = 0;
   draw: () => void;
   cells: Cell[];
   uncollapsedCells: Cell[];
+  currentZone: Cell[];
+  drawSteps = false;
 
   constructor(draw: (cells: Cell[]) => void, gridWidth: number, gridHeight = gridWidth) {
     this.draw = () => draw(this.cells);
@@ -16,45 +20,66 @@ export class WaveFunctionCollapse {
       (_, i) => new Cell(i % gridWidth, Math.floor(i / gridWidth)),
     );
     this.cells.forEach((cell) => cell.setNeighbors(this.cells, gridWidth, gridHeight));
-    this.uncollapsedCells = [...this.cells];
+    this.setCurrentZone(0, 0);
   }
 
-  run = (drawSteps = false) => {
+  setCurrentZone(x: number, y: number) {
+    this.currentZone = this.cells.filter(
+      (cell) => cell.x >= x && cell.x < x + ZONE_SIZE && cell.y >= y && cell.y < y + ZONE_SIZE,
+      [],
+    );
+    this.uncollapsedCells = this.currentZone.filter((cell) => !cell.isCollapsed);
+  }
+
+  // TODO: the asyc/await slows it down by 20-30%, but is only necessary for when `drawSteps` is true
+  run = async (drawSteps = false) => {
+    this.drawSteps = drawSteps;
     console.log(
       `Generating a ${this.gridWidth}x${this.gridHeight} grid (${
         this.gridWidth * this.gridHeight
       } cells) ...`,
     );
     this.startTime = new Date().getTime();
-    // choose random cell and collapse
-    const cell = this.cells[Math.floor(Math.random() * this.cells.length)];
-    cell.collapse();
 
-    // While there are still uncollapsed cells
-    this.step(drawSteps);
+    for (let y = 0; y < this.gridHeight; y += ZONE_SIZE - 1) {
+      for (let x = 0; x < this.gridWidth; x += ZONE_SIZE - 1) {
+        await this.runZone(x, y);
+      }
+    }
+    console.log(`Finished in ${new Date().getTime() - this.startTime}ms`);
+    this.draw();
   };
 
-  step = (drawSteps: boolean) => {
+  runZone = async (x: number, y: number) => {
+    this.setCurrentZone(x, y);
+    // choose random cell and collapse
+    const cell = this.currentZone[Math.floor(Math.random() * this.currentZone.length)];
+    cell.collapse();
+
+    // Step through the zone until all of its cells are collapsed
+    await this.step();
+  };
+
+  step = async () => {
     const lowestEntropyCell = this.findLowestEntropyCell();
+
     // There are no more cells to collapse
-    if (!lowestEntropyCell) {
-      console.log(`finished in ${new Date().getTime() - this.startTime}ms`);
-      this.draw();
-      return;
-    }
+    if (!lowestEntropyCell) return;
 
     lowestEntropyCell.collapse();
 
-    if (drawSteps) {
+    if (this.drawSteps) {
       this.draw();
-      setTimeout(() => this.step(drawSteps), 0);
+      await new Promise((resolve) => requestAnimationFrame(() => resolve(this.step())));
     } else {
-      this.step(drawSteps);
+      await this.step();
     }
   };
 
   findLowestEntropyCell = () => {
-    this.uncollapsedCells = this.uncollapsedCells.filter((cell) => !cell.isCollapsed);
+    this.uncollapsedCells = this.uncollapsedCells
+      .filter((cell) => !cell.isCollapsed)
+      .sort(() => Math.random() - 0.5); // add some randomness
 
     if (this.uncollapsedCells.length === 0) return undefined;
 

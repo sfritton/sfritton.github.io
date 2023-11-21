@@ -22,7 +22,7 @@ const drawCell = (cell: Cell) => {
   context.beginPath();
   context.rect(x, y, CELL_SIZE, CELL_SIZE);
   context.fill();
-  context.stroke();
+  // context.stroke();
 
   if (cell.isCollapsed) return;
 
