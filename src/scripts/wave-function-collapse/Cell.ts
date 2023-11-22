@@ -1,9 +1,9 @@
-import { TILES, TileName } from './Tile';
+import { CAVE_TILES, SocketTileName } from './Tile';
 
 export class Cell {
   x: number;
   y: number;
-  domain: TileName[];
+  domain: string[];
   top?: Cell;
   bottom?: Cell;
   left?: Cell;
@@ -12,7 +12,7 @@ export class Cell {
   constructor(x: number, y: number) {
     this.x = x;
     this.y = y;
-    this.domain = Object.keys(TILES) as TileName[];
+    this.domain = Object.keys(CAVE_TILES) as string[];
   }
 
   get isCollapsed() {
@@ -29,15 +29,11 @@ export class Cell {
     ) as Cell[];
   }
 
-  get validNeighbors() {
-    const thing = [
-      // Use the set to remove duplicate
-      ...new Set(
-        this.domain.reduce<TileName[]>((acc, tile) => [...acc, ...TILES[tile].validNeighbors], []),
-      ),
-    ];
-
-    return thing;
+  getPotentialSockets(direction: 'top' | 'bottom' | 'left' | 'right') {
+    return this.domain.reduce<string[]>(
+      (acc, tile) => [...acc, CAVE_TILES[tile].sockets[direction]],
+      [],
+    );
   }
 
   setNeighbors = (cells: Cell[], gridWidth: number, gridHeight = gridWidth) => {
@@ -52,15 +48,21 @@ export class Cell {
 
     const initialDomainSize = this.domain.length;
 
-    const validTileSet = new Set(
-      this.neighbors.reduce<TileName[]>(
-        (validTiles, neighbor) =>
-          validTiles.filter((tile) => neighbor.validNeighbors.includes(tile)),
-        this.neighbors[0].validNeighbors,
-      ),
-    );
+    this.domain = this.domain.filter((tileName) => {
+      const tile = CAVE_TILES[tileName as SocketTileName];
 
-    this.domain = this.domain.filter((tile) => validTileSet.has(tile));
+      if (this.top && !this.top?.getPotentialSockets('bottom').includes(tile.sockets.top))
+        return false;
+      if (this.bottom && !this.bottom?.getPotentialSockets('top').includes(tile.sockets.bottom))
+        return false;
+      if (this.left && !this.left?.getPotentialSockets('right').includes(tile.sockets.left))
+        return false;
+      if (this.right && !this.right?.getPotentialSockets('left').includes(tile.sockets.right))
+        return false;
+      return true;
+    });
+
+    if (this.domain.length === 0) throw new Error('Cell domain is empty!');
 
     // update neighbors if this cell changed
     if (forceUpdateNeighbors || this.domain.length !== initialDomainSize)
@@ -70,13 +72,13 @@ export class Cell {
   collapse = () => {
     // Choose a random tile from the domain, based on the weight of each tile
     const randomNumber = Math.random();
-    const totalWeight = this.domain.reduce((sum, tile) => sum + TILES[tile].weight, 0);
-    let chosenTile: TileName | undefined = undefined;
+    const totalWeight = this.domain.reduce((sum, tile) => sum + CAVE_TILES[tile].weight, 0);
+    let chosenTile: string | undefined = undefined;
     let runningSum = 0;
 
     this.domain.forEach((tile) => {
       if (chosenTile) return;
-      runningSum += TILES[tile].weight;
+      runningSum += CAVE_TILES[tile].weight;
       if (randomNumber < runningSum / totalWeight) chosenTile = tile;
     });
     this.domain = [chosenTile ?? this.domain[0]];
