@@ -1,5 +1,5 @@
 import { Cell } from './Cell';
-import { CAVE_TILES, SocketTileName, TILES } from './Tile';
+import { CAVE_TILES, SocketTileName } from './Tile';
 import { WaveFunctionCollapse } from './WaveFunctionCollapse';
 
 const CANVAS_SIZE = 1000;
@@ -53,8 +53,6 @@ const drawCell = (cell: Cell) => {
 
   if (cell.isCollapsed) {
     context.drawImage(FILL_STYLES[CAVE_TILES[cell.domain[0]].name], x, y, CELL_SIZE, CELL_SIZE);
-    // context.strokeStyle = '#d6d6d6';
-    // context.strokeRect(x, y, CELL_SIZE, CELL_SIZE);
     return;
   }
 
@@ -75,11 +73,4 @@ const drawGrid = (cells: Cell[]) => {
 
 const wfc = new WaveFunctionCollapse(drawGrid, CELL_COUNT);
 
-// const cells: Cell[] = Object.values(CAVE_TILES).map(
-//   (tile, i) =>
-//     ({ x: i % 3, y: Math.floor(i / 3), domain: [tile.name], isCollapsed: true } as unknown as Cell),
-// );
-
-// drawGrid(cells);
-
-wfc.run(true);
+wfc.run();
