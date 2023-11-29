@@ -1,6 +1,6 @@
 import { Cell } from './Cell';
 
-const ZONE_SIZE = 20;
+const ZONE_SIZE = 16;
 
 function shuffleArray(array: any[]) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -51,22 +51,24 @@ export class WaveFunctionCollapse {
   }
 
   run = (drawSteps = false) => {
-    if (drawSteps) return this.runAsync();
+    try {
+      if (drawSteps) return this.runAsync();
+      console.log(
+        `Generating a ${this.gridWidth}x${this.gridHeight} grid (${
+          this.gridWidth * this.gridHeight
+        } cells) ...`,
+      );
+      this.startTime = new Date().getTime();
 
-    console.log(
-      `Generating a ${this.gridWidth}x${this.gridHeight} grid (${
-        this.gridWidth * this.gridHeight
-      } cells) ...`,
-    );
-    this.startTime = new Date().getTime();
-
-    for (let y = 0; y < this.gridHeight; y += ZONE_SIZE) {
-      for (let x = 0; x < this.gridWidth; x += ZONE_SIZE) {
-        this.runZone(x, y);
+      for (let y = 0; y < this.gridHeight; y += ZONE_SIZE) {
+        for (let x = 0; x < this.gridWidth; x += ZONE_SIZE) {
+          this.runZone(x, y);
+        }
       }
+      console.log(`Finished in ${new Date().getTime() - this.startTime}ms`);
+    } finally {
+      this.draw();
     }
-    console.log(`Finished in ${new Date().getTime() - this.startTime}ms`);
-    this.draw();
   };
 
   runAsync = async () => {

@@ -2,8 +2,8 @@ import { Cell } from './Cell';
 import { CAVE_TILES, SocketTileName } from './Tile';
 import { WaveFunctionCollapse } from './WaveFunctionCollapse';
 
-const CANVAS_SIZE = 1000;
-const CELL_SIZE = 40;
+const CANVAS_SIZE = 1024;
+const CELL_SIZE = 32;
 const CELL_COUNT = Math.floor(CANVAS_SIZE / CELL_SIZE);
 const GRAYS = Object.keys(CAVE_TILES).map((_, i) => {
   const brightness = 255 - i * 10;
@@ -60,7 +60,7 @@ const drawCell = (cell: Cell) => {
   context.fillRect(x, y, CELL_SIZE, CELL_SIZE);
 
   context.fillStyle = '#000';
-  context.fillText(`${cell.domain.length}`, x + CELL_SIZE / 2, y + CELL_SIZE / 2);
+  // context.fillText(`${cell.domain.length}`, x + CELL_SIZE / 2, y + CELL_SIZE / 2);
 };
 
 const drawGrid = (cells: Cell[]) => {
@@ -73,4 +73,4 @@ const drawGrid = (cells: Cell[]) => {
 
 const wfc = new WaveFunctionCollapse(drawGrid, CELL_COUNT);
 
-wfc.run();
+wfc.run(true);

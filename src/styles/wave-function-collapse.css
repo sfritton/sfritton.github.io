@@ -1,6 +1,6 @@
 .wfc-h1 {
   color: #fff;
-  max-width: 1000px;
+  max-width: 1024px;
   margin: 80px auto 0;
 }
 
@@ -9,7 +9,4 @@
   margin: 20px auto;
   display: block;
   background-size: 40px 40px;
-  background-image:
-    linear-gradient(to right, #d6d6d6 1px, transparent 1px),
-    linear-gradient(to bottom, #d6d6d6 1px, transparent 1px);
 }
