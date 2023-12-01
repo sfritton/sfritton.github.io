@@ -73,4 +73,4 @@ const drawGrid = (cells: Cell[]) => {
 
 const wfc = new WaveFunctionCollapse(drawGrid, CELL_COUNT);
 
-wfc.run(true);
+wfc.run();

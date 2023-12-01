@@ -112,7 +112,7 @@ export const CAVE_TILES: Record<SocketTileName, SocketTile> = {
   },
   FLOOR: {
     name: 'FLOOR',
-    weight: 10,
+    weight: 20,
     sockets: {
       top: 'FLOOR',
       bottom: 'FLOOR',
@@ -162,7 +162,7 @@ export const CAVE_TILES: Record<SocketTileName, SocketTile> = {
   },
   WALL: {
     name: 'WALL',
-    weight: 10,
+    weight: 5,
     sockets: {
       top: 'WALL',
       bottom: 'WALL',
