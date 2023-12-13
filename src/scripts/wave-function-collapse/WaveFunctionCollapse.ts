@@ -52,13 +52,13 @@ export class WaveFunctionCollapse {
 
   run = (drawSteps = false) => {
     try {
-      if (drawSteps) return this.runAsync();
       console.log(
         `Generating a ${this.gridWidth}x${this.gridHeight} grid (${
           this.gridWidth * this.gridHeight
         } cells) ...`,
       );
       this.startTime = new Date().getTime();
+      if (drawSteps) return this.runAsync();
 
       for (let y = 0; y < this.gridHeight; y += ZONE_SIZE) {
         for (let x = 0; x < this.gridWidth; x += ZONE_SIZE) {
@@ -78,6 +78,7 @@ export class WaveFunctionCollapse {
       }
     }
     this.draw();
+    console.log(`Finished in ${new Date().getTime() - this.startTime}ms`);
   };
 
   runZone = (x: number, y: number) => {
