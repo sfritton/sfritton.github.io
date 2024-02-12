@@ -1,14 +1,14 @@
 @import 'header.css';
 @import 'star-trek-puzzle.css';
 @import 'css-exploration.css';
-@import 'procedural-generation.css';
 @import 'footer.css';
 
 :root {
   --link-color: #155b98;
   --link-color-hover: #1c79ca;
-  --serif: "Zilla Slab", serif;
-  --sans: Helvetica, Arial, sans-serif;
+  --serif: Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif;
+  --sans: system-ui, sans-serif;
+  --sans: var(--serif);
 }
 
 *, *::after, *::before {
