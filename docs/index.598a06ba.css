@@ -33,7 +33,6 @@ header .logo {
   max-width: 60vw;
   height: 100%;
   max-height: 512px;
-  transition: transform .3s;
 }
 
 header .down-arrow-wrapper {
@@ -137,15 +136,12 @@ header .title-and-nav nav a:hover {
   }
 }
 
-header.has-scrolled .logo {
-  --y: 0;
-}
-
 header.has-scrolled .tagline, header.has-scrolled .down-arrow-wrapper {
   opacity: 0;
 }
 
 header.as-nav .logo {
+  transition: transform .3s;
   transform: none;
 }
 
@@ -216,35 +212,6 @@ header.as-nav .title-and-nav nav a {
   max-width: 430px;
 }
 
-#star-trek-puzzle a .call-to-action {
-  background: #99f;
-  justify-content: center;
-  align-items: center;
-  padding: 13px 32px 11px;
-  transition: background .3s;
-  display: inline-flex;
-  position: relative;
-}
-
-#star-trek-puzzle a .call-to-action:after {
-  content: "";
-  background: #77e;
-  width: 100%;
-  height: 4px;
-  transition: transform .3s;
-  position: absolute;
-  bottom: 0;
-  transform: scaleX(0);
-}
-
-#star-trek-puzzle a .call-to-action:hover {
-  background: #aaf;
-}
-
-#star-trek-puzzle a .call-to-action:hover:after {
-  transform: scaleX(1);
-}
-
 #star-trek-puzzle a:focus {
   outline: none;
 }
@@ -299,6 +266,84 @@ header.as-nav .title-and-nav nav a {
   }
 }
 
+#cave-generator {
+  --height: 440px;
+  padding: 0;
+}
+
+#cave-generator a {
+  min-height: var(--height);
+  color: #fff;
+  background-image: url("cave.819cbe06.png");
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 8px solid #935e4c;
+  border-right-width: 0;
+  text-decoration: none;
+  display: block;
+}
+
+#cave-generator a .gradient {
+  min-height: var(--height);
+  background: linear-gradient(#000a 50%, #0000);
+  margin: -8px 0 -8px -8px;
+  padding: 40px 20px 20px;
+  display: flex;
+}
+
+#cave-generator a .gradient .info {
+  max-width: 430px;
+  margin: 0 auto;
+}
+
+@media (min-width: 580px) {
+  #cave-generator a {
+    border-top-width: 0;
+    border-right-width: 8px;
+  }
+
+  #cave-generator a .gradient {
+    margin-top: 0;
+    margin-right: -8px;
+  }
+}
+
+@media (min-width: 668px) {
+  #cave-generator a .gradient {
+    background: radial-gradient(circle at 15% 0, #000a 40%, #0000);
+    padding-left: max(20px, 50vw - 500px);
+  }
+
+  #cave-generator a .gradient .info {
+    margin: 0;
+  }
+}
+
+@media (min-width: 992px) {
+  #cave-generator a {
+    --height: 600px;
+  }
+
+  #cave-generator a .gradient {
+    background: radial-gradient(circle at 15%, #000a 30%, #0000);
+    align-items: center;
+    padding-left: calc(25vw - 215px);
+  }
+
+  #cave-generator a .gradient .info {
+    max-width: 400px;
+  }
+}
+
+#cave-generator a:focus {
+  outline: none;
+}
+
+#cave-generator a:focus .call-to-action {
+  text-decoration: underline;
+}
+
 @media (max-width: 667px) {
   .folded-note-title {
     background: #f7f7f7;
@@ -318,7 +363,8 @@ header.as-nav .title-and-nav nav a {
 .paper-box .paper {
   --duration: .6s;
   --timing-function: cubic-bezier(.43, .28, .47, 1.2);
-  font-family: var(--serif);
+  --handwritten: "Segoe Print", "Bradley Hand", Chilanka, TSCu_Comic, casual, cursive;
+  font-family: var(--handwritten);
   perspective: 1000px;
   transition-property: transform;
   transition-duration: calc(var(--duration) * 2);
@@ -425,6 +471,7 @@ header.as-nav .title-and-nav nav a {
 }
 
 .paper-box .paper .paper-content h3 {
+  font-family: var(--handwritten);
   margin-bottom: 20px;
   font-size: min(50px, 12.5vw);
   font-weight: normal;
@@ -654,8 +701,9 @@ header.as-nav .title-and-nav nav a {
   justify-content: center;
   align-self: center;
   align-items: center;
+  font-family: Superclarendon, Bookman Old Style, URW Bookman, URW Bookman L, Georgia Pro, Georgia, serif;
   font-size: min(60px, 8vw);
-  font-weight: bold;
+  font-weight: 900;
   line-height: 1;
   display: flex;
 }
@@ -675,7 +723,7 @@ header.as-nav .title-and-nav nav a {
 .slot-machine .char, .slot-machine .digit {
   border-left: 2px solid #000;
   border-right: 2px solid #000;
-  height: 1.3em;
+  height: 1.4em;
   padding-top: .2em;
   display: inline-block;
   overflow: hidden;
@@ -1279,45 +1327,6 @@ header.as-nav .title-and-nav nav a {
   }
 }
 
-#procedural-generation {
-  background: #d4def3;
-  padding: 0;
-}
-
-.demos {
-  display: flex;
-}
-
-.demos button {
-  aspect-ratio: 4 / 3;
-  z-index: 1;
-  border: none;
-  width: 50%;
-  display: block;
-  position: relative;
-  overflow: hidden;
-}
-
-.demos button:before {
-  z-index: -1;
-  content: "";
-  filter: blur(4px);
-  opacity: .7;
-  position: absolute;
-  top: -8px;
-  bottom: -8px;
-  left: -8px;
-  right: -8px;
-}
-
-.demos button.landscape-btn:before {
-  background-image: url("landscape_sample.c505001c.png");
-}
-
-.demos button.dungeon-btn:before {
-  background-image: url("dungeon_sample.ee95c91b.png");
-}
-
 footer {
   scroll-snap-align: start;
   color: #fff;
@@ -1404,8 +1413,9 @@ footer div a:hover .label {
 :root {
   --link-color: #155b98;
   --link-color-hover: #1c79ca;
-  --serif: "Zilla Slab", serif;
-  --sans: Helvetica, Arial, sans-serif;
+  --serif: Seravek, "Gill Sans Nova", Ubuntu, Calibri, "DejaVu Sans", source-sans-pro, sans-serif;
+  --sans: system-ui, sans-serif;
+  --sans: var(--serif);
 }
 
 *, :after, :before {
@@ -1468,4 +1478,34 @@ a:hover {
   overflow: hidden;
 }
 
-/*# sourceMappingURL=index.3ec0da15.css.map */
+.call-to-action {
+  color: #333;
+  background: #99f;
+  justify-content: center;
+  align-items: center;
+  padding: 13px 32px 11px;
+  transition: background .3s;
+  display: inline-flex;
+  position: relative;
+}
+
+.call-to-action:after {
+  content: "";
+  background: #77e;
+  width: 100%;
+  height: 4px;
+  transition: transform .3s;
+  position: absolute;
+  bottom: 0;
+  transform: scaleX(0);
+}
+
+.call-to-action:hover {
+  background: #aaf;
+}
+
+.call-to-action:hover:after {
+  transform: scaleX(1);
+}
+
+/*# sourceMappingURL=index.598a06ba.css.map */
