@@ -1,3 +1,4 @@
+#light-speed,
 #cave-generator {
   --height: 440px;
   padding: 0;
@@ -71,5 +72,15 @@
         text-decoration: underline;
       }
     }
+  }
+}
+
+#light-speed a {
+  background-image: url('../img/stars.png');
+  border: none;
+  padding: 8px;
+
+  & .gradient {
+    background: transparent;
   }
 }

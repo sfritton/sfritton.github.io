@@ -24,7 +24,7 @@ html {
 
 body {
   font-family: var(--sans);
-  color: #333;
+  color: #000;
   background: #000;
   margin: 0;
 }
@@ -79,7 +79,7 @@ a:hover {
   justify-content: center;
   align-items: center;
   background: #99f;
-  color: #333;
+  color: #000;
   position: relative;
   transition: background 300ms;
 
