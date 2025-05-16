@@ -266,12 +266,12 @@ header.as-nav .title-and-nav nav a {
   }
 }
 
-#cave-generator {
+#light-speed, #cave-generator {
   --height: 440px;
   padding: 0;
 }
 
-#cave-generator a {
+:is(#light-speed, #cave-generator) a {
   min-height: var(--height);
   color: #fff;
   background-image: url("cave.819cbe06.png");
@@ -284,7 +284,7 @@ header.as-nav .title-and-nav nav a {
   display: block;
 }
 
-#cave-generator a .gradient {
+:is(#light-speed, #cave-generator) a .gradient {
   min-height: var(--height);
   background: linear-gradient(#000a 50%, #0000);
   margin: -8px 0 -8px -8px;
@@ -292,56 +292,66 @@ header.as-nav .title-and-nav nav a {
   display: flex;
 }
 
-#cave-generator a .gradient .info {
+:is(#light-speed, #cave-generator) a .gradient .info {
   max-width: 430px;
   margin: 0 auto;
 }
 
 @media (min-width: 580px) {
-  #cave-generator a {
+  :is(#light-speed, #cave-generator) a {
     border-top-width: 0;
     border-right-width: 8px;
   }
 
-  #cave-generator a .gradient {
+  :is(#light-speed, #cave-generator) a .gradient {
     margin-top: 0;
     margin-right: -8px;
   }
 }
 
 @media (min-width: 668px) {
-  #cave-generator a .gradient {
+  :is(#light-speed, #cave-generator) a .gradient {
     background: radial-gradient(circle at 15% 0, #000a 40%, #0000);
     padding-left: max(20px, 50vw - 500px);
   }
 
-  #cave-generator a .gradient .info {
+  :is(#light-speed, #cave-generator) a .gradient .info {
     margin: 0;
   }
 }
 
 @media (min-width: 992px) {
-  #cave-generator a {
+  :is(#light-speed, #cave-generator) a {
     --height: 600px;
   }
 
-  #cave-generator a .gradient {
+  :is(#light-speed, #cave-generator) a .gradient {
     background: radial-gradient(circle at 15%, #000a 30%, #0000);
     align-items: center;
     padding-left: calc(25vw - 215px);
   }
 
-  #cave-generator a .gradient .info {
+  :is(#light-speed, #cave-generator) a .gradient .info {
     max-width: 400px;
   }
 }
 
-#cave-generator a:focus {
+:is(#light-speed, #cave-generator) a:focus {
   outline: none;
 }
 
-#cave-generator a:focus .call-to-action {
+:is(#light-speed, #cave-generator) a:focus .call-to-action {
   text-decoration: underline;
+}
+
+#light-speed a {
+  background-image: url("stars.0b3ad9b9.png");
+  border: none;
+  padding: 8px;
+}
+
+#light-speed a .gradient {
+  background: none;
 }
 
 @media (max-width: 667px) {
@@ -1430,7 +1440,7 @@ html {
 
 body {
   font-family: var(--sans);
-  color: #333;
+  color: #000;
   background: #000;
   margin: 0;
 }
@@ -1479,7 +1489,7 @@ a:hover {
 }
 
 .call-to-action {
-  color: #333;
+  color: #000;
   background: #99f;
   justify-content: center;
   align-items: center;
@@ -1508,4 +1518,4 @@ a:hover {
   transform: scaleX(1);
 }
 
-/*# sourceMappingURL=index.598a06ba.css.map */
+/*# sourceMappingURL=index.7c188178.css.map */
