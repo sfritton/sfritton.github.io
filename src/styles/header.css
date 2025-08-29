@@ -3,8 +3,6 @@
 }
 
 header {
-  --center: calc(min(1282px, 100vw) / 2);
-
   background: #000;
   color: #fff;
   width: 100vw;
@@ -13,26 +11,42 @@ header {
   max-height: 100svh;
   height: 100vh;
   height: 100svh;
-  display: flex;
-  align-items: center;
-  gap: 16px;
   padding: 8px 16px;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 2;
-  max-width: 1282px;
-  margin: 0 auto;
 
-  & .logo {
-    --x: calc(var(--center) - 46% - 16px);
-    --y: -12vh;
-    --y: -12svh;
-    max-width: 60vw;
-    max-height: 512px;
+  & .logo-and-title {
+    display: flex;
     height: 100%;
-    transform: translate(var(--x), var(--y));
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
+    & .logo {
+      --y: -12vh;
+      --y: -12svh;
+
+      max-width: min(60vw, 60vh);
+      max-height: 512px;
+      height: 100%;
+      transform: translate(4%, calc(var(--y) + 8px));
+    }
+
+    & h1 {
+      opacity: 0;
+      transform: translateX(-16px);
+      margin: 0;
+      max-width: 0;
+      font-size: 36px;
+      padding-top: 4px;
+      flex-shrink: 0;
+      overflow-x: hidden;
+      white-space: nowrap;
+      text-overflow: clip;
+    }
   }
 
   & .down-arrow-wrapper {
@@ -53,70 +67,28 @@ header {
     animation: slideDown 900ms 2.2s both;
   }
 
-  & .title-and-nav {
-    align-self: flex-end;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    flex-grow: 1;
+  & .tagline {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+    top: 54%;
+    font-family: var(--heading);
+    font-size: 20px;
+    line-height: 1.6;
+    transition: opacity 300ms;
 
-    & h1 {
-      opacity: 0;
-      transform: translateX(-16px);
-      grid-column: 1;
-      margin: 0;
-      padding-bottom: 2px;
-      font-weight: normal;
+    & > div {
+      transform: translateY(0);
+      animation: slideDown 900ms 1.3s both;
     }
 
-    & .tagline {
-      position: absolute;
-      left: 0;
-      right: 0;
-      width: 300px;
-      margin: 0 auto;
-      text-align: center;
-      top: 54%;
-      font-family: var(--serif);
-      font-size: 20px;
-      line-height: 1.6;
-      transition: opacity 300ms;
-
-      & > div {
-        transform: translateY(0);
-        animation: slideDown 900ms 1.3s both;
-      }
-
-      @media (min-width: 500px) {
-        top: 62%;
-        font-size: 24px;
-        width: 400px;
-      }
-    }
-
-    & nav {
-      display: none;
-      grid-column: 3;
-      align-items: flex-end;
-      gap: 16px;
-      padding-bottom: 5px;
-
-      @media (min-width: 992px) {
-        display: flex;
-      }
-
-      & a,
-      & a:visited {
-        font-family: var(--serif);
-        opacity: 0;
-        transform: translateX(16px);
-        font-size: 16px;
-        color: #fff;
-        text-decoration: none;
-      }
-
-      & a:hover {
-        text-decoration: underline;
-      }
+    @media (min-width: 500px) {
+      top: 62%;
+      font-size: 24px;
+      width: 400px;
     }
   }
 
@@ -142,7 +114,7 @@ header {
 
   &.as-nav {
     & .logo {
-      transition: transform 300ms;
+      transition: transform 300ms 300ms;
       transform: none;
     }
 
@@ -151,20 +123,13 @@ header {
       display: none;
     }
 
-    & .title-and-nav {
-      & h1 {
-        transition: all 300ms 300ms;
-        opacity: 1;
-        transform: none;
-      }
-
-      & nav a {
-        --index: 0;
-        transition: all 300ms;
-        transition-delay: calc(600ms + calc(var(--index) * 50ms));
-        transform: none;
-        opacity: 1;
-      }
+    & h1 {
+      transition-duration: 300ms;
+      transition-delay: 300ms;
+      transition-property: opacity, transform, max-width;
+      opacity: 1;
+      transform: translateX(8px);
+      max-width: 195px;
     }
   }
 }

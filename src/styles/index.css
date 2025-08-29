@@ -7,9 +7,8 @@
 :root {
   --link-color: #155b98;
   --link-color-hover: #1c79ca;
-  --serif: Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif;
-  --sans: system-ui, sans-serif;
-  --sans: var(--serif);
+  --heading: Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif;
+  --body: system-ui, sans-serif;
 }
 
 *, *::after, *::before {
@@ -23,14 +22,14 @@ html {
 }
 
 body {
-  font-family: var(--sans);
+  font-family: var(--body);
   color: #000;
   background: #000;
   margin: 0;
 }
 
 h1, h2, h3, h4, h5 {
-  font-family: var(--serif);
+  font-family: var(--heading);
 }
 
 h2 {
