@@ -1,90 +1,18 @@
 #star-trek-puzzle {
   background: #ffcc99;
-  padding: 0;
 
-  & a {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    padding: 40px 20px 0;
-    text-decoration: none;
-    justify-content: center;
-    align-items: center;
-    color: inherit;
-    cursor: pointer;
-    gap: 20px;
-    min-height: 300px;
+  & img {
+    --offset-top: 0;
 
-    & .preview {
-      --offset-left: max(20px, calc(calc(100vw - 430px) / 2));
-      --corner: min(8vw, 48px);
-
-      display: block;
-      max-width: calc(calc(100vw) - var(--offset-left));
-      align-self: flex-end;
-      margin-top: -16vw;
-      margin-right: -20px;
-      clip-path: inset(27.5% 0 0 0 round var(--corner) 0 0 0);
-      object-fit: cover;
-      object-position: left bottom;
-    }
-
-    & .info {
-      max-width: 430px;
-      flex-shrink: 0;
-    }
-
-    &:focus {
-      outline: none;
-
-      & .call-to-action {
-        text-decoration: underline;
-      }
-    }
-
-    @media (min-width: 470px) {
-      & .preview {
-        margin-top: -10vw;
-      }
-    }
+    margin-left: 40px;
+    margin-top: var(--offset-top);
+    height: calc(var(--height) - var(--offset-top));
+    object-position: bottom left;
 
     @media (min-width: 668px) {
-      padding-left: max(20px, calc(50vw - 500px));
+      --offset-top: 80px;
 
-      flex-direction: row;
-      justify-content: space-between;
-      padding-right: 0;
-      padding-top: 0;
-      height: 300px;
-
-      & .info {
-        margin-top: 40px;
-      }
-
-      & .preview {
-        --corner: 52px;
-
-        height: 370px;
-        margin-top: -70px;
-        margin-right: 0;
-        width: calc(100% - 450px);
-        max-width: 594px;
-      }
-    }
-
-    @media (min-width: 992px) {
-      height: 600px;
-      padding-left: calc(calc(50vw - 430px) / 2);
-
-      & .preview {
-        --corner: 104px;
-
-        height: 740px;
-        margin-top: -140px;
-        margin-right: 0;
-        width: calc(100% - 450px);
-        max-width: min(50vw, 1188px);
-      }
+      margin-left: 0;
     }
 
   }
