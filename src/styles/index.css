@@ -16,6 +16,12 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-snap-type: y proximity;
+  scroll-padding: var(--header-height);
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: var(--sans);
   color: #000;
@@ -106,6 +112,8 @@ a:hover {
 
 section.new {
   --height: 440px;
+
+  scroll-snap-align: start;
 
   & a {
     display: flex;
