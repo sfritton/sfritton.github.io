@@ -3,6 +3,7 @@
 }
 
 header {
+  view-transition-name: header;
   background: #000;
   color: #fff;
   width: 100vw;
