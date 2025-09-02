@@ -4,6 +4,10 @@
 @import 'css-exploration.css';
 @import 'footer.css';
 
+@view-transition {
+  navigation: auto;
+}
+
 :root {
   --link-color: #155b98;
   --link-color-hover: #1c79ca;
